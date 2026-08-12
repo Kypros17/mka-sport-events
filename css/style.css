@@ -173,6 +173,13 @@ h1, h2, h3, h4 {
   color: var(--white);
 }
 
+/* The site's main call to action — deliberately larger than a normal button */
+.btn--offer {
+  font-size: 1.05rem;
+  padding: 1rem 2.4rem;
+  box-shadow: 0 10px 26px rgba(201, 42, 55, 0.45);
+}
+
 .btn--ghost {
   background: transparent;
   color: var(--white);
@@ -221,6 +228,7 @@ h1, h2, h3, h4 {
 .logo {
   display: flex;
   align-items: baseline;
+  white-space: nowrap;
   gap: 0.45rem;
   font-family: var(--font-heading);
   line-height: 1;
@@ -259,6 +267,7 @@ h1, h2, h3, h4 {
 
 .site-nav a {
   display: inline-block;
+  white-space: nowrap;
   font-family: var(--font-heading);
   font-size: 0.9rem;
   font-weight: 600;
@@ -292,6 +301,79 @@ h1, h2, h3, h4 {
 .site-nav a.nav-cta:hover,
 .site-nav a.nav-cta.active {
   background: var(--red-deep);
+}
+
+/* ---------- Header tools: chat buttons + language switch ---------- */
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.chat-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.chat-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.chat-btn:hover,
+.chat-btn:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--white);
+}
+
+/* Brand-neutral tints so the buttons stay inside the site palette */
+.chat-btn--whatsapp:hover,
+.chat-btn--whatsapp:focus-visible {
+  background: rgba(42, 157, 143, 0.55);
+}
+
+.chat-btn--telegram:hover,
+.chat-btn--telegram:focus-visible {
+  background: rgba(29, 53, 87, 0.9);
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.lang-btn {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.42rem 0.65rem;
+  background: transparent;
+  border: 0;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.lang-btn:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lang-btn.is-active {
+  background: var(--red-dark);
+  color: var(--white);
 }
 
 .nav-toggle {
@@ -412,6 +494,35 @@ h1, h2, h3, h4 {
 
 .page-hero .kicker {
   color: var(--amber);
+}
+
+.page-hero .hero-actions {
+  justify-content: center;
+  margin-top: 1.8rem;
+}
+
+/* ---------- Coaches ---------- */
+.placeholder-badge {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red-dark);
+  background: rgba(230, 57, 70, 0.12);
+  border: 1px dashed rgba(230, 57, 70, 0.5);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  margin-bottom: 0.7rem;
+}
+
+.coach-card .coach-role {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--teal);
+  margin-bottom: 0.6rem;
 }
 
 /* ---------- Stats strip ---------- */
@@ -1245,6 +1356,23 @@ html.js .card.reveal.visible:hover {
 }
 
 /* ---------- Responsive ---------- */
+/* Seven nav items plus the header tools get tight before the mobile breakpoint */
+@media (max-width: 1280px) and (min-width: 1101px) {
+  .site-nav a {
+    font-size: 0.83rem;
+    padding: 0.5rem 0.55rem;
+  }
+
+  .site-nav a.nav-cta {
+    padding: 0.5rem 0.9rem;
+    margin-left: 0.2rem;
+  }
+
+  .header-tools {
+    gap: 0.35rem;
+  }
+}
+
 @media (max-width: 980px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
@@ -1264,7 +1392,9 @@ html.js .card.reveal.visible:hover {
   }
 }
 
-@media (max-width: 900px) {
+/* Seven nav items plus the chat buttons need the room, so the hamburger
+   takes over earlier than the usual tablet breakpoint */
+@media (max-width: 1100px) {
   .nav-toggle {
     display: flex;
   }
@@ -1341,5 +1471,43 @@ html.js .card.reveal.visible:hover {
 
   .contact-form {
     padding: 1.6rem;
+  }
+
+  /* Keep the logo, the chat buttons and the hamburger on one row */
+  .header-tools {
+    gap: 0.35rem;
+  }
+
+  .chat-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .chat-btn img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .lang-btn {
+    padding: 0.38rem 0.5rem;
+    font-size: 0.72rem;
+  }
+
+  .btn--offer {
+    font-size: 1rem;
+    padding: 0.9rem 1.8rem;
+  }
+}
+
+/* Below this the logo wordmark, both chat buttons, the language switch and the
+   hamburger no longer fit on one row, so the wordmark drops and the "MKA" mark
+   carries the branding */
+@media (max-width: 480px) {
+  .logo-text {
+    display: none;
+  }
+
+  .logo-mark {
+    font-size: 1.45rem;
   }
 }
