@@ -217,6 +217,12 @@ h1, h2, h3, h4 {
   box-shadow: var(--shadow-sm);
 }
 
+/* The logo, eight nav items and the header tools need more room than the
+   1160px content column, so the header bar alone runs wider. */
+.site-header .container {
+  width: min(1360px, 96%);
+}
+
 .header-inner {
   display: flex;
   align-items: center;
@@ -229,11 +235,38 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: baseline;
   white-space: nowrap;
+  /* Never let flex shrink the logo: with an <img> child the automatic minimum
+     size drops to the image width and the wordmark spills into the nav. */
+  flex: 0 0 auto;
   gap: 0.45rem;
   font-family: var(--font-heading);
   line-height: 1;
 }
 
+/* Header logo image. The artwork has its own turquoise background, so it is
+   rounded and given a translucent ring plus a soft shadow to lift it off the
+   navy bar instead of sitting flush against it. */
+.site-header .logo {
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-img {
+  height: 44px;
+  width: auto;
+  border-radius: 9px;
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.logo:hover .logo-img {
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.28),
+    0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* Still used by the footer wordmark */
 .logo-mark {
   font-size: 1.6rem;
   font-weight: 800;
@@ -307,6 +340,7 @@ h1, h2, h3, h4 {
 .header-tools {
   display: flex;
   align-items: center;
+  flex: 0 0 auto;
   gap: 0.5rem;
   margin-left: auto;
 }

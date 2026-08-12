@@ -49,22 +49,32 @@ Four services, each with its own page:
   Behaviour is feature-detected (`if (element)`) so one file can serve every page.
 - **Fully mobile-responsive.** Mobile-first; verify layouts hold at narrow widths. The header
   collapses into the `#nav-toggle` hamburger menu at ≤1100px (earlier than usual — seven nav
-  items plus the chat buttons need the room), and the logo wordmark hides at ≤480px.
+  items plus the chat buttons need the room), and the logo wordmark hides at ≤480px. The header
+  bar alone uses a wider container (`min(1360px, 96%)`) than the 1160px content column, because
+  the logo, eight nav items and the tools do not fit 1160px.
 - **Consistent header and footer on every page.** There is no templating, so the markup is
   duplicated by hand — when the header or footer changes, apply the identical change to
-  **all eight** pages: `index.html`, `camps.html`, `events.html`, `coaches.html`,
+  **all eight** pages: `index.html`, `about.html`, `camps.html`, `events.html`,
   `facilities.html`, `mat-rental.html`, `shop.html`, `contact.html`.
 - Keep the existing accessibility work: skip link, `aria-label`/`aria-expanded`/`aria-current`
   on navigation, `aria-pressed` on filter buttons, meaningful alt text.
-- Images are hand-written **SVG** files in `images/`. Prefer adding SVGs over binary assets.
+- Placeholder artwork is hand-written **SVG** in `images/`. Prefer adding SVGs over binary
+  assets — the exceptions are the two real brand files, `images/logo.png` and
+  `images/favicon.png`.
+- **Brand logo:** `images/logo.png` (189×169, the client's artwork with its black export
+  border trimmed off) is the header logo on every page — 44px tall, rounded, with a translucent
+  ring so its turquoise background lifts off the navy bar. `.logo` carries `flex: 0 0 auto`
+  because an `<img>` child lets flex shrink the anchor and push the wordmark into the nav.
+  The favicon is `images/favicon.png` (64×64, derived from the logo). The **footer** still uses
+  the "MKA" text wordmark.
 
 ## Repository layout
 
 ```
 index.html        Home — hero, stats strip, services overview
+about.html        About the company + coaching team (placeholder profiles)
 camps.html        Training camps
 events.html       Sports event / championship organisation
-coaches.html      Coaching team (placeholder profiles)
 facilities.html   "Where We Train" — venues (placeholders) + official KOA map link
 mat-rental.html   Judo, sambo & jiu-jitsu mat rental
 shop.html         Sports equipment showcase (filterable product grid)
@@ -72,7 +82,9 @@ contact.html      Contact details + validated enquiry form
 css/style.css     The single shared stylesheet (design tokens in :root)
 js/i18n.js        English → Russian dictionary (data only)
 js/main.js        The shared behaviour script
-images/*.svg      All artwork, including favicon.svg
+images/logo.png   Brand logo (header, all pages)
+images/favicon.png Favicon, derived from the logo
+images/*.svg      All placeholder artwork
 ```
 
 `js/main.js` provides: the language switch, mobile nav toggle, footer year injection (`#year`),
@@ -117,17 +129,17 @@ Treat these as unfinished, not as facts to preserve:
 
 - **Telegram is a placeholder:** every header links to `https://t.me/PLACEHOLDER`, marked in the
   markup by an HTML comment and in the UI by its `title`/`aria-label`. Replace the username in
-  all seven headers once the real one is supplied, and drop the "(placeholder…)" wording from
+  all eight headers once the real one is supplied, and drop the "(placeholder…)" wording from
   the labels and from `js/i18n.js`.
-- **The four coach profiles on `coaches.html` are placeholders** — names, photos (all use
+- **The four coach profiles on `about.html` are placeholders** — names, photos (all use
   `images/coach-placeholder.svg`), disciplines and biographies. Each card carries a
-  "Placeholder profile" badge and the page carries a placeholder notice.
+  "Placeholder profile" badge and the section carries a placeholder notice.
 - **The six venues on `facilities.html` are placeholders** — names, photos (all use
   `images/venue-placeholder.svg`) and descriptions. Cities (Nicosia, Limassol, Larnaca,
   Paphos) are real; each card carries a "Placeholder venue" badge and the page carries a
   placeholder notice.
-- The homepage stats (15+ years, 4,000+ athletes, 25+ events, 1,200 m² of mats) are
-  placeholders pending confirmed figures.
+- The stats strip (15+ years, 4,000+ athletes, 25+ events, 1,200 m² of mats), shown on both
+  `index.html` and `about.html`, is a placeholder pending confirmed figures.
 - Product descriptions on `shop.html` are illustrative. **Never invent prices** — the page is a
   showcase; every card says "Contact us to order" and real prices live at mkasport.com.
 - Office hours on `contact.html` (Mon–Fri 09:00–18:00 EET) are unconfirmed.
