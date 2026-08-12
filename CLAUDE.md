@@ -52,8 +52,8 @@ Four services, each with its own page:
   items plus the chat buttons need the room), and the logo wordmark hides at ≤480px.
 - **Consistent header and footer on every page.** There is no templating, so the markup is
   duplicated by hand — when the header or footer changes, apply the identical change to
-  **all seven** pages: `index.html`, `camps.html`, `events.html`, `coaches.html`,
-  `mat-rental.html`, `shop.html`, `contact.html`.
+  **all eight** pages: `index.html`, `camps.html`, `events.html`, `coaches.html`,
+  `facilities.html`, `mat-rental.html`, `shop.html`, `contact.html`.
 - Keep the existing accessibility work: skip link, `aria-label`/`aria-expanded`/`aria-current`
   on navigation, `aria-pressed` on filter buttons, meaningful alt text.
 - Images are hand-written **SVG** files in `images/`. Prefer adding SVGs over binary assets.
@@ -65,6 +65,7 @@ index.html        Home — hero, stats strip, services overview
 camps.html        Training camps
 events.html       Sports event / championship organisation
 coaches.html      Coaching team (placeholder profiles)
+facilities.html   "Where We Train" — venues (placeholders) + official KOA map link
 mat-rental.html   Judo, sambo & jiu-jitsu mat rental
 shop.html         Sports equipment showcase (filterable product grid)
 contact.html      Contact details + validated enquiry form
@@ -107,6 +108,8 @@ These are confirmed — use them everywhere, never invent alternatives:
 - **TikTok:** https://tiktok.com/@mizunocyprus
 - **Online store:** https://mkasport.com/ — always `target="_blank" rel="noopener"`
 - **WhatsApp:** https://wa.me/35796940622 — the one-touch chat button in every header
+- **Official KOA sport map:** https://cso.org.cy/sport-map/ — the Cyprus Sports Organisation's
+  public register of sports venues, linked from `facilities.html` in a new tab
 
 ## Known gaps / placeholders
 
@@ -119,6 +122,10 @@ Treat these as unfinished, not as facts to preserve:
 - **The four coach profiles on `coaches.html` are placeholders** — names, photos (all use
   `images/coach-placeholder.svg`), disciplines and biographies. Each card carries a
   "Placeholder profile" badge and the page carries a placeholder notice.
+- **The six venues on `facilities.html` are placeholders** — names, photos (all use
+  `images/venue-placeholder.svg`) and descriptions. Cities (Nicosia, Limassol, Larnaca,
+  Paphos) are real; each card carries a "Placeholder venue" badge and the page carries a
+  placeholder notice.
 - The homepage stats (15+ years, 4,000+ athletes, 25+ events, 1,200 m² of mats) are
   placeholders pending confirmed figures.
 - Product descriptions on `shop.html` are illustrative. **Never invent prices** — the page is a
