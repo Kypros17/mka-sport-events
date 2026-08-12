@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — MKA sport Events</title>
+  <meta name="description" content="Contact MKA sport Events in Cyprus for training camps, event organisation, mat rental and equipment orders. We reply within one working day.">
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add("js");</script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="MKA sport Events — home">
+        <span class="logo-mark">MKA</span>
+        <span class="logo-text">sport Events</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="camps.html">Training Camps</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="mat-rental.html">Mat Rental</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="contact.html" class="nav-cta active" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="kicker">Contact</span>
+        <h1>Let's talk sport</h1>
+        <p>Camps, championships, mats or equipment — send us a message and we will reply within one working day.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-layout">
+
+        <!-- Contact details -->
+        <div class="contact-info reveal">
+          <h2>Get in touch</h2>
+          <p>Prefer to talk directly? Call or email us — we speak English, Greek and Russian.</p>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-icon" aria-hidden="true">&#9906;</span>
+              <div>
+                <strong>Address</strong>
+                <span>12 Stadiou Street, 2571 Nisou<br>Nicosia, Cyprus</span>
+              </div>
+            </li>
+            <li>
+              <span class="contact-icon" aria-hidden="true">&#9990;</span>
+              <div>
+                <strong>Phone</strong>
+                <a href="tel:+35799123456">+357 99 123 456</a>
+              </div>
+            </li>
+            <li>
+              <span class="contact-icon" aria-hidden="true">&#9993;</span>
+              <div>
+                <strong>Email</strong>
+                <a href="mailto:info@mkasportevents.com">info@mkasportevents.com</a>
+              </div>
+            </li>
+            <li>
+              <span class="contact-icon" aria-hidden="true">&#9200;</span>
+              <div>
+                <strong>Office hours</strong>
+                <span>Monday – Friday, 09:00 – 18:00 (EET)</span>
+              </div>
+            </li>
+          </ul>
+          <p>For urgent event-day support, existing clients can use the emergency number in their event handbook.</p>
+        </div>
+
+        <!-- Contact form -->
+        <form class="contact-form reveal" id="contact-form" novalidate>
+          <div class="form-success" id="form-success" role="status" aria-live="polite"></div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full name <span class="required" aria-hidden="true">*</span></label>
+              <input type="text" id="name" name="name" autocomplete="name" required aria-describedby="name-error">
+              <p class="error-message" id="name-error">Please enter your name.</p>
+            </div>
+            <div class="form-group">
+              <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-error">
+              <p class="error-message" id="email-error">Please enter a valid email address.</p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone (optional)</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="service">I'm interested in <span class="required" aria-hidden="true">*</span></label>
+              <select id="service" name="service" required aria-describedby="service-error">
+                <option value="">Please choose…</option>
+                <option value="camps">Training camps</option>
+                <option value="events">Event organisation</option>
+                <option value="mats">Mat rental</option>
+                <option value="shop">Equipment order</option>
+                <option value="other">Something else</option>
+              </select>
+              <p class="error-message" id="service-error">Please choose a service.</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your message <span class="required" aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" required aria-describedby="message-error" placeholder="Tell us about your dates, group size, event or order…"></textarea>
+            <p class="error-message" id="message-error">Please write a short message.</p>
+          </div>
+
+          <button type="submit" class="btn btn--primary">Send message</button>
+          <p class="form-note">Sending this form opens your email app with the message ready to send — nothing is sent until you press Send there. You can also email us directly at <a href="mailto:info@mkasportevents.com">info@mkasportevents.com</a>.</p>
+        </form>
+
+      </div>
+
+      <!-- Map placeholder -->
+      <div class="container map-placeholder reveal">
+        <img src="images/map-cyprus.svg" alt="Map placeholder showing the MKA sport Events location in Nicosia, Cyprus" loading="lazy">
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-about">
+        <a href="index.html" class="logo footer-logo" aria-label="MKA sport Events — home">
+          <span class="logo-mark">MKA</span>
+          <span class="logo-text">sport Events</span>
+        </a>
+        <p>Cyprus-based specialists in sports training camps, international championship organisation, combat sports mat rental and quality sports equipment.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="camps.html">Training Camps</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="mat-rental.html">Mat Rental</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="camps.html">Sports training camps</a></li>
+          <li><a href="events.html">International championships</a></li>
+          <li><a href="mat-rental.html">Judo, sambo &amp; jiu-jitsu mats</a></li>
+          <li><a href="shop.html">Sports equipment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <ul>
+          <li>12 Stadiou Street, 2571 Nisou<br>Nicosia, Cyprus</li>
+          <li><a href="tel:+35799123456">+357 99 123 456</a></li>
+          <li><a href="mailto:info@mkasportevents.com">info@mkasportevents.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year">2026</span> MKA sport Events. All rights reserved.</p>
+        <p>Based in Cyprus &middot; Serving athletes across Europe</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
