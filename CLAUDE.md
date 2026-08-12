@@ -67,16 +67,26 @@ images/*.svg      All artwork, including favicon.svg
 `js/main.js` provides: mobile nav toggle, footer year injection (`#year`), reveal-on-scroll via
 `IntersectionObserver`, the shop category filter, and contact form validation + `mailto:` submit.
 
+## Real contact details
+
+These are confirmed — use them everywhere, never invent alternatives:
+
+- **Email:** mkasport.cyp@gmail.com (also the `mailto:` target in `js/main.js`)
+- **Phones:** +357 96 940622 and +357 99 513619 (both shown, both linked as `tel:`)
+- **Address:** Chilis 28, Nicosia, Cyprus
+- **Instagram:** https://instagram.com/mizunocyprus
+- **TikTok:** https://tiktok.com/@mizunocyprus
+- **Online store:** https://mkasport.com/ — always `target="_blank" rel="noopener"`
+
 ## Known gaps / placeholders
 
 Treat these as unfinished, not as facts to preserve:
 
-- Contact details in the footers and on `contact.html` (12 Stadiou Street, 2571 Nisou; phone
-  +357 99 123 456) are **placeholders** awaiting the real address and number.
-- `shop.html` does **not yet** mention Mizuno or link out to **mkasport.com** — product cards
-  currently point at `contact.html`. Wiring that up is expected work.
 - The homepage stats (15+ years, 4,000+ athletes, 25+ events, 1,200 m² of mats) are
   placeholders pending confirmed figures.
+- Product descriptions on `shop.html` are illustrative. **Never invent prices** — the page is a
+  showcase; every card says "Contact us to order" and real prices live at mkasport.com.
+- Office hours on `contact.html` (Mon–Fri 09:00–18:00 EET) are unconfirmed.
 
 ## Workflow
 

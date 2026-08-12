@@ -778,6 +778,18 @@ tbody td {
   color: var(--text);
 }
 
+.shop-note-action {
+  margin-top: 1.1rem;
+}
+
+/* Two side-by-side calls to action that stack on narrow screens */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: center;
+}
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -871,18 +883,14 @@ tbody td {
   flex-grow: 1;
 }
 
-.product-price {
+/* Sizes / variants only — this is a showcase catalogue, prices come by enquiry */
+.product-spec {
   font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 1.15rem;
-  color: var(--navy);
-  margin-bottom: 1rem;
-}
-
-.product-price span {
-  font-size: 0.8rem;
-  font-weight: 400;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
   color: var(--muted);
+  margin-bottom: 1rem;
 }
 
 /* ---------- Forms ---------- */
@@ -945,6 +953,12 @@ tbody td {
 .contact-list a {
   font-size: 0.95rem;
   color: var(--muted);
+}
+
+/* Block-level so the two phone numbers sit on separate lines */
+.contact-list a {
+  display: block;
+  width: fit-content;
 }
 
 .contact-list a:hover {
@@ -1128,6 +1142,46 @@ tbody td {
 .footer-about p {
   font-size: 0.92rem;
   max-width: 300px;
+}
+
+.footer-social-head {
+  margin-top: 1.6rem;
+}
+
+.footer-social {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
+}
+
+.footer-social li {
+  margin-bottom: 0;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.92rem;
+}
+
+.social-link img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  color: var(--white);
+}
+
+.social-link:hover img,
+.social-link:focus-visible img {
+  opacity: 1;
 }
 
 .footer-bottom {

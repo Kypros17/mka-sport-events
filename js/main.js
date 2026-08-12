@@ -175,14 +175,14 @@
         message;
 
       window.location.href =
-        "mailto:info@mkasportevents.com" +
+        "mailto:mkasport.cyp@gmail.com" +
         "?subject=" + encodeURIComponent(subject) +
         "&body=" + encodeURIComponent(body);
 
       if (success) {
         success.textContent =
           "Thank you, " + name + "! Your email app should now open with your message ready to send. " +
-          "If it does not, please email us directly at info@mkasportevents.com.";
+          "If it does not, please email us directly at mkasport.cyp@gmail.com.";
         success.classList.add("visible");
         success.scrollIntoView({ behavior: "smooth", block: "center" });
       }
