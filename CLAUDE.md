@@ -24,7 +24,7 @@ Four services, each with its own page:
 - Always position the company as **Cyprus-based**. Never use "worldwide", "global" or similar
   framing.
 - Sambo is the specialism for events; camps and equipment are broader.
-- Contact enquiries go to `mkasport.cyp@gmail.com`. The contact form has no backend — it
+- Contact enquiries go to `mka.sport.cyp@gmail.com`. The contact form has no backend — it
   validates client-side and opens the visitor's own email app via a `mailto:` link. Keep it
   that way unless the hosting gains a server-side handler.
 - **No "worldwide", "global" or international-reach claims about the company.** Naming the
@@ -117,7 +117,7 @@ Russian lives only in `js/i18n.js`.
 
 These are confirmed — use them everywhere, never invent alternatives:
 
-- **Email:** mkasport.cyp@gmail.com (also the `mailto:` target in `js/main.js`)
+- **Email:** mka.sport.cyp@gmail.com (also the `mailto:` target in `js/main.js`)
 - **Phones:** +357 96 940622 and +357 99 513619 (both shown, both linked as `tel:`)
 - **Address:** Chilis 28, Nicosia, Cyprus
 - **Instagram:** https://instagram.com/mizunocyprus

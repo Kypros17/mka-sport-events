@@ -331,7 +331,7 @@
         message;
 
       window.location.href =
-        "mailto:mkasport.cyp@gmail.com" +
+        "mailto:mka.sport.cyp@gmail.com" +
         "?subject=" + encodeURIComponent(subject) +
         "&body=" + encodeURIComponent(body);
 
@@ -339,7 +339,7 @@
         success.textContent =
           t("Thank you") + ", " + name + "! " +
           t("Your email app should now open with your message ready to send. If it does not, please email us directly at") +
-          " mkasport.cyp@gmail.com.";
+          " mka.sport.cyp@gmail.com.";
         success.classList.add("visible");
         success.scrollIntoView({ behavior: "smooth", block: "center" });
       }
