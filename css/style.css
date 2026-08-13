@@ -929,53 +929,6 @@ tbody td {
   font-size: 0.95rem;
 }
 
-/* ---------- Testimonials ---------- */
-.quote-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.8rem;
-}
-
-.quote {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.8rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.quote blockquote {
-  font-size: 0.98rem;
-  color: var(--text);
-  margin-bottom: 1.2rem;
-}
-
-.quote blockquote::before {
-  content: "\201C";
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 2.6rem;
-  line-height: 1;
-  color: var(--red);
-}
-
-.quote cite {
-  display: block;
-  font-style: normal;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: var(--navy);
-}
-
-.quote cite span {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 0.82rem;
-  color: var(--muted);
-}
-
 /* ---------- Shop ---------- */
 .shop-note {
   background: rgba(244, 162, 97, 0.14);
