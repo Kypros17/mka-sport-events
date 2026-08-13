@@ -85,6 +85,10 @@ js/main.js        The shared behaviour script
 images/logo.png   Brand logo (header, all pages)
 images/favicon.png Favicon, derived from the logo
 images/*.svg      All placeholder artwork
+images/*.jpg      Real sambo championship photos (events, mat rental, home hero)
+images/*.jpeg     Real football training camp photos (camps page)
+sitemap.xml       Lists all eight pages
+robots.txt        Allows everything, points at the sitemap
 ```
 
 `js/main.js` provides: the language switch, mobile nav toggle, footer year injection (`#year`),
@@ -127,6 +131,12 @@ These are confirmed — use them everywhere, never invent alternatives:
 
 Treat these as unfinished, not as facts to preserve:
 
+- **The site's own domain is a placeholder:** every absolute URL uses the literal host
+  `PLACEHOLDER-DOMAIN`. It appears in the canonical link, the `og:`/`twitter:` tags and the
+  JSON-LD of each page, plus `sitemap.xml` and `robots.txt`. Once the real domain is confirmed,
+  `grep -rl PLACEHOLDER-DOMAIN .` and replace it everywhere — nothing else needs to change.
+  **`og:image` must stay an absolute URL**: WhatsApp, Facebook and Twitter will not fetch a
+  relative one, so link previews stay broken until this is replaced.
 - **Telegram is a placeholder:** every header links to `https://t.me/PLACEHOLDER`, marked in the
   markup by an HTML comment and in the UI by its `title`/`aria-label`. Replace the username in
   all eight headers once the real one is supplied, and drop the "(placeholder…)" wording from

@@ -1,0 +1,8 @@
+# MKA sport Events — https://PLACEHOLDER-DOMAIN/
+# SITE URL IS A PLACEHOLDER until the real domain is confirmed.
+# Replace PLACEHOLDER-DOMAIN below, in sitemap.xml and across the eight pages.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://PLACEHOLDER-DOMAIN/sitemap.xml

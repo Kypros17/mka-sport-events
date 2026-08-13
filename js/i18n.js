@@ -45,13 +45,13 @@ window.MKA_RU = {
   "Request an Offer": "Запросить предложение",
 
   /* ---------- Page titles ---------- */
-  "MKA sport Events — Training Camps, Championship Organisation & Sports Equipment in Cyprus": "MKA sport Events — тренировочные сборы, организация чемпионатов и спортивная экипировка на Кипре",
-  "Sports Training Camps in Cyprus — MKA sport Events": "Спортивные тренировочные сборы на Кипре — MKA sport Events",
-  "Sports Event Organisation in Cyprus — MKA sport Events": "Организация спортивных мероприятий на Кипре — MKA sport Events",
-  "About Us & Our Team — MKA sport Events": "О нас и наша команда — MKA sport Events",
-  "Combat Sports Mat Rental — Judo, Sambo & Jiu-Jitsu Mats in Cyprus | MKA sport Events": "Аренда матов для единоборств — татами для дзюдо, самбо и джиу-джитсу на Кипре | MKA sport Events",
-  "Sports Equipment Shop — MKA sport Events": "Магазин спортивной экипировки — MKA sport Events",
-  "Contact Us — MKA sport Events": "Контакты — MKA sport Events",
+  "MKA sport Events — Training Camps & Sambo Events in Cyprus": "MKA sport Events — сборы и соревнования по самбо на Кипре",
+  "Sambo, Judo & Football Training Camps in Cyprus": "Сборы по самбо, дзюдо и футболу на Кипре",
+  "Sambo Championship Organisation in Cyprus — MKA sport Events": "Организация чемпионатов по самбо на Кипре — MKA sport Events",
+  "About MKA sport Events — Sports Company in Nicosia, Cyprus": "О компании MKA sport Events — спортивная компания в Никосии, Кипр",
+  "Judo, Sambo & Jiu-Jitsu Mat Rental in Nicosia, Cyprus": "Аренда матов для дзюдо, самбо и джиу-джитсу в Никосии, Кипр",
+  "Sports Equipment in Cyprus — Official Mizuno Retailer": "Спортивная экипировка на Кипре — официальный дилер Mizuno",
+  "Contact MKA sport Events — Sports Company in Nicosia, Cyprus": "Контакты MKA sport Events — спортивная компания в Никосии, Кипр",
 
   /* ---------- Home page ---------- */
   "Cyprus · Sports without limits": "Кипр · Спорт без границ",
@@ -281,7 +281,10 @@ window.MKA_RU = {
   "Every camp is built around your own coaching staff — ours add mat hours, sparring and local know-how.": "Каждые сборы строятся вокруг вашего тренерского штаба — наши тренеры добавляют часы на татами, спарринги и знание местных условий.",
   "Placeholder profiles:": "Профили-заглушки:",
   "the four coaches below are examples only. Names, photos, disciplines and biographies are placeholders and will be replaced with the real coaching team.": "четыре тренера ниже — только примеры. Имена, фотографии, дисциплины и биографии являются заглушками и будут заменены данными реального тренерского состава.",
-  "Coach photo placeholder": "Заглушка фотографии тренера",
+  "Placeholder portrait for the head coach profile — sambo and judo": "Заглушка портрета для профиля главного тренера — самбо и дзюдо",
+  "Placeholder portrait for the jiu-jitsu and grappling coach profile": "Заглушка портрета для профиля тренера по джиу-джитсу и грэпплингу",
+  "Placeholder portrait for the strength and conditioning coach profile": "Заглушка портрета для профиля тренера по физической подготовке",
+  "Placeholder portrait for the youth development coach profile": "Заглушка портрета для профиля тренера по детско-юношескому развитию",
   "Placeholder profile": "Профиль-заглушка",
   "Coach Name One": "Тренер Имя Один",
   "Head Coach · Sambo & Judo": "Главный тренер · Самбо и дзюдо",
@@ -304,7 +307,7 @@ window.MKA_RU = {
   "Strength, conditioning and recovery blocks built around mat time": "Силовые, физические и восстановительные блоки вокруг работы на татами",
 
   /* ---------- Facilities ---------- */
-  "Where We Train — Venues Across Cyprus | MKA sport Events": "Где мы тренируемся — площадки по всему Кипру | MKA sport Events",
+  "Where We Train — Sports Venues Across Cyprus | MKA sport Events": "Где мы тренируемся — спортивные площадки по всему Кипру | MKA sport Events",
   "Where We Train": "Где мы тренируемся",
   "Halls, pitches and competition venues across Nicosia, Limassol, Larnaca and Paphos — every one of them within a short transfer of your accommodation.": "Залы, поля и соревновательные площадки в Никосии, Лимасоле, Ларнаке и Пафосе — до каждой из них короткий трансфер от вашего размещения.",
   "Our venues": "Наши площадки",
@@ -312,7 +315,10 @@ window.MKA_RU = {
   "We book the venue that fits your sport, your group size and your dates — and handle the paperwork with it.": "Мы бронируем площадку, которая подходит вашему виду спорта, размеру группы и датам, и берём на себя все формальности.",
   "Placeholder venues:": "Площадки-заглушки:",
   "the six venues below are examples only. Venue names, photos and descriptions are placeholders and will be replaced with the real facilities we work with.": "шесть площадок ниже — только примеры. Названия, фотографии и описания являются заглушками и будут заменены реальными площадками, с которыми мы работаем.",
-  "Venue photo placeholder": "Заглушка фотографии площадки",
+  "Placeholder photo for a training and competition venue in Nicosia": "Заглушка фотографии тренировочной и соревновательной площадки в Никосии",
+  "Placeholder photo for a training and competition venue in Limassol": "Заглушка фотографии тренировочной и соревновательной площадки в Лимасоле",
+  "Placeholder photo for a training and competition venue in Larnaca": "Заглушка фотографии тренировочной и соревновательной площадки в Ларнаке",
+  "Placeholder photo for a training and competition venue in Paphos": "Заглушка фотографии тренировочной и соревновательной площадки в Пафосе",
   "Placeholder venue": "Площадка-заглушка",
   "Venue Name One": "Название площадки Один",
   "Venue Name Two": "Название площадки Два",
