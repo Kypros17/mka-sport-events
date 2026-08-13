@@ -71,7 +71,7 @@ Four services, each with its own page:
 ## Repository layout
 
 ```
-index.html        Home — hero, stats strip, services overview
+index.html        Home — hero, services overview
 about.html        About the company + coaching team (placeholder profiles)
 camps.html        Training camps
 events.html       Sports event / championship organisation
@@ -148,8 +148,12 @@ Treat these as unfinished, not as facts to preserve:
   `images/venue-placeholder.svg`) and descriptions. Cities (Nicosia, Limassol, Larnaca,
   Paphos) are real; each card carries a "Placeholder venue" badge and the page carries a
   placeholder notice.
-- The stats strip (15+ years, 4,000+ athletes, 25+ events, 1,200 m² of mats), shown on both
-  `index.html` and `about.html`, is a placeholder pending confirmed figures.
+- **The stats strip has been removed.** It carried invented figures (15+ years, 4,000+ athletes,
+  25+ championships organised, 1,200 m² of mats) that the client could not verify, and
+  "championships organised" falsely asserted MKA's role in FIAS/ESF events. **Do not
+  reintroduce any of those numbers.** The `.stats` / `.stat-*` rules are still in `css/style.css`
+  so the band can be restored quickly — but only once real, confirmed figures are supplied.
+  **Never put an unverified number on the site**; if a figure cannot be confirmed, leave it out.
 - Product descriptions on `shop.html` are illustrative. **Never invent prices** — the page is a
   showcase; every card says "Contact us to order" and real prices live at mkasport.com.
 - Office hours on `contact.html` (Mon–Fri 09:00–18:00 EET) are unconfirmed.
