@@ -510,6 +510,13 @@ h1, h2, h3, h4 {
   gap: 1rem;
 }
 
+/* One-line credibility note under the home hero buttons */
+.hero .hero-trust {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 1.6rem 0 0;
+}
+
 /* ---------- Page hero (inner pages) ---------- */
 .page-hero {
   background:
@@ -751,6 +758,15 @@ h1, h2, h3, h4 {
 
 .feature-body .btn {
   margin-top: 0.5rem;
+}
+
+/* Small clarifying note at the end of a feature block */
+.feature-note {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--muted);
+  border-left: 3px solid rgba(42, 157, 143, 0.4);
+  padding-left: 0.9rem;
 }
 
 /* Checklist */
