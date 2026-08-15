@@ -221,30 +221,6 @@
     }
   }
 
-  /* ---------- Shop category filter ---------- */
-  var filterButtons = document.querySelectorAll(".filter-btn");
-  var productCards = document.querySelectorAll(".product-card");
-
-  if (filterButtons.length > 0 && productCards.length > 0) {
-    filterButtons.forEach(function (button) {
-      button.addEventListener("click", function () {
-        var filter = button.getAttribute("data-filter");
-
-        filterButtons.forEach(function (other) {
-          var isActive = other === button;
-          other.classList.toggle("active", isActive);
-          other.setAttribute("aria-pressed", isActive ? "true" : "false");
-        });
-
-        productCards.forEach(function (card) {
-          var category = card.getAttribute("data-category");
-          var show = filter === "all" || category === filter;
-          card.classList.toggle("hidden", !show);
-        });
-      });
-    });
-  }
-
   /* ---------- Contact form validation ---------- */
   var contactForm = document.getElementById("contact-form");
 

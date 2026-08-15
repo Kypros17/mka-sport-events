@@ -1,39 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   SITE URL IS A PLACEHOLDER until the real domain is confirmed.
-  Replace every PLACEHOLDER-DOMAIN below, in robots.txt and across the eight pages.
+  Replace every PLACEHOLDER-DOMAIN below, in robots.txt and across the six pages.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://PLACEHOLDER-DOMAIN/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-15</lastmod>
   </url>
   <url>
     <loc>https://PLACEHOLDER-DOMAIN/about.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-15</lastmod>
   </url>
   <url>
     <loc>https://PLACEHOLDER-DOMAIN/camps.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-15</lastmod>
   </url>
   <url>
     <loc>https://PLACEHOLDER-DOMAIN/events.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-15</lastmod>
   </url>
   <url>
     <loc>https://PLACEHOLDER-DOMAIN/facilities.html</loc>
-    <lastmod>2026-08-13</lastmod>
-  </url>
-  <url>
-    <loc>https://PLACEHOLDER-DOMAIN/mat-rental.html</loc>
-    <lastmod>2026-08-13</lastmod>
-  </url>
-  <url>
-    <loc>https://PLACEHOLDER-DOMAIN/shop.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-15</lastmod>
   </url>
   <url>
     <loc>https://PLACEHOLDER-DOMAIN/contact.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-15</lastmod>
   </url>
 </urlset>

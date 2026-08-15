@@ -7,30 +7,34 @@ Permanent brief for this repository. Read and follow it in every session.
 MKA sport Events is a **Cyprus-based** sports company operating out of **Nicosia**. This
 repository is its business website — a marketing and enquiry site, not an e-commerce platform.
 
-Four services, each with its own page:
+Three services:
 
 1. **Sports training camps** (`camps.html`) — training camps hosted in Cyprus for a variety of
    sports, not only combat sports.
-2. **International sports events** (`events.html`) — organising major international
-   competitions, mostly **sambo**, including World and European Championships.
-3. **Combat sports mat rental** (`mat-rental.html`) — renting competition-grade mats for
-   **judo, sambo and jiu-jitsu**.
-4. **Sports equipment** (`shop.html`) — official **Mizuno** retailer. The real online store
-   already exists at **mkasport.com**. This site only showcases products and links out to that
-   store; **there is no checkout, cart or payment flow here, and none should be added.**
+2. **International sports events** (`events.html`) — supporting international competitions in
+   Cyprus, mostly **sambo**.
+3. **Sports event organisation** (also `events.html`) — organising and delivering sports
+   events and tournaments in Cyprus.
+
+**Removed services — do not reintroduce.** The site previously offered combat sports mat
+rental (`mat-rental.html`) and a sports equipment showcase (`shop.html`, Mizuno/mkasport.com).
+Both were removed in August 2026 when the client refocused on the three services above. Do not
+re-add pages, nav items, links or copy for them unless the client asks.
 
 ## Tone and content rules
 
 - Always position the company as **Cyprus-based**. Never use "worldwide", "global" or similar
   framing.
-- Sambo is the specialism for events; camps and equipment are broader.
+- Sambo is the specialism for events; camps are broader.
 - Contact enquiries go to `mka.sport.cyp@gmail.com`. The contact form has no backend — it
   validates client-side and opens the visitor's own email app via a `mailto:` link. Keep it
   that way unless the hosting gains a server-side handler.
 - **No "worldwide", "global" or international-reach claims about the company.** Naming the
-  championships actually organised (World and European Sambo Championships) is fine — they are
+  championships hosted in Cyprus (World and European Sambo Championships) is fine — they are
   event titles, not a claim that MKA operates outside Cyprus. Anything describing the company's
-  own reach must stay Cyprus-based.
+  own reach must stay Cyprus-based. **Never claim MKA organised the FIAS/ESF World or European
+  championships** — they are cited only as events Cyprus has hosted (see the disclaimer on
+  `about.html`).
 - The main call to action everywhere is **"Request an Offer"** (`.btn--primary.btn--offer`)
   linking to `contact.html` — in every page hero and every `.cta-band`.
 
@@ -48,16 +52,16 @@ Four services, each with its own page:
   the Russian dictionary) then `js/main.js` (all behaviour, an IIFE in `"use strict"` mode).
   Behaviour is feature-detected (`if (element)`) so one file can serve every page.
 - **Fully mobile-responsive.** Mobile-first; verify layouts hold at narrow widths. The header
-  collapses into the `#nav-toggle` hamburger menu at ≤1100px (earlier than usual — seven nav
-  items plus the chat buttons need the room), and the logo wordmark hides at ≤480px. The header
-  bar alone uses a wider container (`min(1360px, 96%)`) than the 1160px content column, because
-  the logo, eight nav items and the tools do not fit 1160px.
+  collapses into the `#nav-toggle` hamburger menu at ≤1100px (a breakpoint chosen when the nav
+  held eight items; the six-item nav keeps it for headroom), and the logo wordmark hides at
+  ≤480px. The header bar alone uses a wider container (`min(1360px, 96%)`) than the 1160px
+  content column so the logo, nav and tools have room.
 - **Consistent header and footer on every page.** There is no templating, so the markup is
   duplicated by hand — when the header or footer changes, apply the identical change to
-  **all eight** pages: `index.html`, `about.html`, `camps.html`, `events.html`,
-  `facilities.html`, `mat-rental.html`, `shop.html`, `contact.html`.
+  **all six** pages: `index.html`, `about.html`, `camps.html`, `events.html`,
+  `facilities.html`, `contact.html`.
 - Keep the existing accessibility work: skip link, `aria-label`/`aria-expanded`/`aria-current`
-  on navigation, `aria-pressed` on filter buttons, meaningful alt text.
+  on navigation, `aria-pressed` on the language switch buttons, meaningful alt text.
 - Placeholder artwork is hand-written **SVG** in `images/`. Prefer adding SVGs over binary
   assets — the exceptions are the two real brand files, `images/logo.png` and
   `images/favicon.png`.
@@ -74,10 +78,8 @@ Four services, each with its own page:
 index.html        Home — hero, services overview
 about.html        About the company + coaching team (placeholder profiles)
 camps.html        Training camps
-events.html       Sports event / championship organisation
+events.html       Sports events / championship organisation
 facilities.html   "Where We Train" — venues (placeholders) + official KOA map link
-mat-rental.html   Judo, sambo & jiu-jitsu mat rental
-shop.html         Sports equipment showcase (filterable product grid)
 contact.html      Contact details + validated enquiry form
 css/style.css     The single shared stylesheet (design tokens in :root)
 js/i18n.js        English → Russian dictionary (data only)
@@ -85,15 +87,14 @@ js/main.js        The shared behaviour script
 images/logo.png   Brand logo (header, all pages)
 images/favicon.png Favicon, derived from the logo
 images/*.svg      All placeholder artwork
-images/*.jpg      Real sambo championship photos (events, mat rental, home hero)
+images/*.jpg      Real sambo championship photos (events page, home/about cards, home hero)
 images/*.jpeg     Real football training camp photos (camps page)
-sitemap.xml       Lists all eight pages
+sitemap.xml       Lists all six pages
 robots.txt        Allows everything, points at the sitemap
 ```
 
 `js/main.js` provides: the language switch, mobile nav toggle, footer year injection (`#year`),
-reveal-on-scroll via `IntersectionObserver`, the shop category filter, and contact form
-validation + `mailto:` submit.
+reveal-on-scroll via `IntersectionObserver`, and contact form validation + `mailto:` submit.
 
 ## Bilingual site (English / Russian)
 
@@ -106,10 +107,10 @@ Russian lives only in `js/i18n.js`.
 - **Whenever you add or change any visible English text, add or update its key in
   `js/i18n.js`.** Anything without a key silently stays English.
 - Text split by inline markup arrives as separate text nodes, so each fragment needs its own
-  key (e.g. `"Where champions"`, `"train, compete"`, `"and gear up"`) and the Russian
-  fragments must read correctly when joined.
-- Deliberately untranslated: brand names, the address, phone numbers, the email address, size
-  codes, and text baked into the SVG artwork.
+  key (e.g. `"Where champions"`, `"train and compete"`) and the Russian fragments must read
+  correctly when joined.
+- Deliberately untranslated: brand names, the address, phone numbers, the email address, and
+  text baked into the SVG artwork.
 - The choice is stored in `localStorage` under `mka-lang` and re-applied on every page. It also
   sets `<html lang>`. Note `localStorage` is blocked on `file://` — test over http.
 
@@ -122,7 +123,8 @@ These are confirmed — use them everywhere, never invent alternatives:
 - **Address:** Chilis 28, Nicosia, Cyprus
 - **Instagram:** https://instagram.com/mizunocyprus
 - **TikTok:** https://tiktok.com/@mizunocyprus
-- **Online store:** https://mkasport.com/ — always `target="_blank" rel="noopener"`
+  (both handles are named after the client's Mizuno retail business, but they are the
+  company's real social accounts — keep them despite the shop's removal from this site)
 - **WhatsApp:** https://wa.me/35796940622 — the one-touch chat button in every header
 - **Official KOA sport map:** https://cso.org.cy/sport-map/ — the Cyprus Sports Organisation's
   public register of sports venues, linked from `facilities.html` in a new tab
@@ -139,7 +141,7 @@ Treat these as unfinished, not as facts to preserve:
   relative one, so link previews stay broken until this is replaced.
 - **Telegram is a placeholder:** every header links to `https://t.me/PLACEHOLDER`, marked in the
   markup by an HTML comment and in the UI by its `title`/`aria-label`. Replace the username in
-  all eight headers once the real one is supplied, and drop the "(placeholder…)" wording from
+  all six headers once the real one is supplied, and drop the "(placeholder…)" wording from
   the labels and from `js/i18n.js`.
 - **The four coach profiles on `about.html` are placeholders** — names, photos (all use
   `images/coach-placeholder.svg`), disciplines and biographies. Each card carries a
@@ -154,8 +156,6 @@ Treat these as unfinished, not as facts to preserve:
   reintroduce any of those numbers.** The `.stats` / `.stat-*` rules are still in `css/style.css`
   so the band can be restored quickly — but only once real, confirmed figures are supplied.
   **Never put an unverified number on the site**; if a figure cannot be confirmed, leave it out.
-- Product descriptions on `shop.html` are illustrative. **Never invent prices** — the page is a
-  showcase; every card says "Contact us to order" and real prices live at mkasport.com.
 - Office hours on `contact.html` (Mon–Fri 09:00–18:00 EET) are unconfirmed.
 
 ## Workflow
