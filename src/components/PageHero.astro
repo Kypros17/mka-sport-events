@@ -1,0 +1,92 @@
+---
+/**
+ * Inner-page hero: an editorial split with the title on the left and a
+ * photograph on the right. With no image it renders as a compact title block.
+ * The photo is the page's above-the-fold image, so it loads eagerly.
+ */
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  kicker: string;
+  title: string;
+  text: string;
+  image?: ImageMetadata;
+  alt?: string;
+  credit?: string;
+}
+
+const { kicker, title, text, image, alt = "", credit } = Astro.props;
+---
+
+<section class:list={["page-hero", { "page-hero--with-image": !!image }]}>
+  <div class="container container--wide page-hero__inner">
+    <div class="page-hero__copy">
+      <p class="kicker">{kicker}</p>
+      <h1 class="page-hero__title">{title}</h1>
+      <p class="lead">{text}</p>
+      <slot />
+    </div>
+    {
+      image && (
+        <div class="page-hero__media">
+          <div class="frame frame--4x3">
+            <Picture
+              src={image}
+              alt={alt}
+              widths={[600, 900, 1200, 1600].filter((w) => w <= image.width)}
+              sizes="(min-width: 1024px) 46vw, 100vw"
+              formats={["avif", "webp"]}
+              fallbackFormat="jpg"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+            {credit && <span class="credit">{credit}</span>}
+          </div>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    padding-block: clamp(3rem, 7vw, 6rem) clamp(2.5rem, 6vw, 5rem);
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .page-hero__inner {
+    display: grid;
+    gap: var(--s-6);
+  }
+
+  .page-hero--with-image .page-hero__inner {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: end;
+  }
+
+  .page-hero__copy {
+    display: grid;
+    gap: var(--s-4);
+    max-width: 44rem;
+  }
+
+  .page-hero__title {
+    font-size: var(--fs-h1);
+  }
+
+  .page-hero__copy :global(.actions) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-top: var(--s-2);
+  }
+
+  @media (max-width: 860px) {
+    .page-hero--with-image .page-hero__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

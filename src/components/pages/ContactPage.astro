@@ -1,0 +1,64 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import ContactChannels from "@/components/ContactChannels.astro";
+import ContactForm from "@/components/ContactForm.astro";
+import { getDictionary, type Locale } from "@/i18n";
+import { siteUrl } from "../../../site.config.mjs";
+import { localePath } from "@/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const c = t.contact;
+
+const contactSchema = {
+  "@type": "ContactPage",
+  "@id": new URL(localePath(locale, "contact"), siteUrl).href + "#contact",
+  url: new URL(localePath(locale, "contact"), siteUrl).href,
+  name: c.hero.title,
+  about: { "@id": new URL("/#organization", siteUrl).href },
+};
+---
+
+<BaseLayout locale={locale} current="contact" title={c.seo.title} description={c.seo.description} schema={[contactSchema]} hideMobileBar>
+  <PageHero kicker={c.hero.kicker} title={c.hero.title} text={c.hero.text} />
+
+  <section class="section">
+    <div class="container container--wide contact-layout">
+      <div class="contact-layout__aside reveal">
+        <ContactChannels locale={locale} />
+      </div>
+      <div class="contact-layout__form reveal" data-delay="1">
+        <ContactForm locale={locale} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .contact-layout__aside {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+  }
+
+  @media (max-width: 960px) {
+    .contact-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-layout__aside {
+      position: static;
+    }
+  }
+</style>

@@ -1,0 +1,270 @@
+---
+/**
+ * Enquiry form. Static hosting, no backend: on submit, src/scripts/main.js
+ * validates the fields and opens the visitor's email app with a prepared
+ * message (mailto). The WhatsApp link below the button carries the same
+ * details and updates live as the visitor types.
+ */
+import Button from "./Button.astro";
+import Icon from "./Icon.astro";
+import { contact } from "../../site.config.mjs";
+import { getDictionary, type Locale } from "@/i18n";
+import { whatsappLink } from "@/lib/links";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dict = getDictionary(locale);
+const f = dict.contact.form;
+
+const config = {
+  email: contact.email,
+  whatsapp: contact.whatsapp,
+  subject: f.subject,
+  labels: f.bodyLabels,
+  successText: f.success,
+  whatsappPrefix: f.whatsappPrefix,
+};
+---
+
+<form class="form" id="contact-form" novalidate data-config={JSON.stringify(config)} action={`mailto:${contact.email}`} method="get">
+  <div class="form__head">
+    <h2 class="form__title">{f.title}</h2>
+    <p class="form__intro">{f.intro}</p>
+  </div>
+
+  <div class="form__status" id="form-success" role="status" aria-live="polite"></div>
+
+  <div class="form__grid">
+    <div class="field">
+      <label for="name">{f.name} <span class="field__req" aria-hidden="true">*</span><span class="sr-only"> ({f.required})</span></label>
+      <input type="text" id="name" name="name" autocomplete="name" required aria-describedby="name-error" />
+      <p class="field__error" id="name-error">{f.errors.name}</p>
+    </div>
+
+    <div class="field">
+      <label for="organisation">{f.organisation} <span class="field__opt">({f.optional})</span></label>
+      <input type="text" id="organisation" name="organisation" autocomplete="organization" />
+    </div>
+
+    <div class="field">
+      <label for="email">{f.email} <span class="field__req" aria-hidden="true">*</span><span class="sr-only"> ({f.required})</span></label>
+      <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-error" />
+      <p class="field__error" id="email-error">{f.errors.email}</p>
+    </div>
+
+    <div class="field">
+      <label for="phone">{f.phone} <span class="field__opt">({f.optional})</span></label>
+      <input type="tel" id="phone" name="phone" autocomplete="tel" />
+    </div>
+
+    <div class="field">
+      <label for="sport">{f.sport} <span class="field__opt">({f.optional})</span></label>
+      <input type="text" id="sport" name="sport" placeholder={f.sportPlaceholder} />
+    </div>
+
+    <div class="field">
+      <label for="service">{f.service} <span class="field__req" aria-hidden="true">*</span><span class="sr-only"> ({f.required})</span></label>
+      <select id="service" name="service" required aria-describedby="service-error">
+        <option value="">{f.servicePlaceholder}</option>
+        {f.serviceOptions.map((o) => <option value={o.value}>{o.label}</option>)}
+      </select>
+      <p class="field__error" id="service-error">{f.errors.service}</p>
+    </div>
+
+    <div class="field">
+      <label for="participants">{f.participants} <span class="field__opt">({f.optional})</span></label>
+      <input type="text" id="participants" name="participants" inputmode="numeric" />
+    </div>
+
+    <div class="field">
+      <label for="dates">{f.dates} <span class="field__opt">({f.optional})</span></label>
+      <input type="text" id="dates" name="dates" placeholder={f.datesPlaceholder} />
+    </div>
+
+    <div class="field">
+      <label for="duration">{f.duration} <span class="field__opt">({f.optional})</span></label>
+      <input type="text" id="duration" name="duration" placeholder={f.durationPlaceholder} />
+    </div>
+
+    <div class="field field--full">
+      <label for="message">{f.message} <span class="field__req" aria-hidden="true">*</span><span class="sr-only"> ({f.required})</span></label>
+      <textarea id="message" name="message" rows="6" required aria-describedby="message-error" placeholder={f.messagePlaceholder}></textarea>
+      <p class="field__error" id="message-error">{f.errors.message}</p>
+    </div>
+  </div>
+
+  <div class="form__actions">
+    <Button type="submit" variant="primary" size="lg" icon="arrow" track="form">
+      {f.submit}
+    </Button>
+    <a class="form__whatsapp" id="form-whatsapp" href={whatsappLink(locale)} target="_blank" rel="noopener" data-track="whatsapp">
+      <Icon name="whatsapp" />
+      <span>{f.whatsappAlt}</span>
+    </a>
+  </div>
+
+  <p class="form__note">
+    {f.note} <a href={`mailto:${contact.email}`} data-track="email">{contact.email}</a>.
+  </p>
+</form>
+
+<style>
+  .form {
+    display: grid;
+    gap: var(--s-5);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    background: #fff;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .form__head {
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  .form__title {
+    font-size: var(--fs-h3);
+  }
+
+  .form__intro {
+    color: var(--c-muted);
+  }
+
+  .form__status {
+    color: #0f5f52;
+    font-size: var(--fs-small);
+  }
+
+  .form__status.is-visible {
+    padding: var(--s-4);
+    background: var(--c-turq-100);
+    border-left: 3px solid var(--c-turq-600);
+    border-radius: var(--radius-sm);
+  }
+
+  .form__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-4) var(--s-5);
+  }
+
+  .field {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .field--full {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-ink);
+  }
+
+  .field__req {
+    color: var(--c-red);
+  }
+
+  .field__opt {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--c-muted);
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.9rem;
+    font-size: 1rem; /* 16px minimum stops iOS Safari zooming on focus */
+    color: var(--c-text);
+    background: var(--c-surface);
+    border: 1px solid var(--c-line-strong);
+    border-radius: var(--radius-sm);
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background var(--dur) var(--ease);
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 9rem;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    background: #fff;
+    border-color: var(--c-turq-600);
+    box-shadow: 0 0 0 3px var(--c-turq-100);
+  }
+
+  .field__error {
+    display: none;
+    font-size: var(--fs-small);
+    color: var(--c-red-700);
+  }
+
+  .field.has-error input,
+  .field.has-error select,
+  .field.has-error textarea {
+    border-color: var(--c-red);
+  }
+
+  .field.has-error .field__error {
+    display: block;
+  }
+
+  .form__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-4) var(--s-5);
+  }
+
+  .form__whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    font-weight: 600;
+    color: var(--c-navy-700);
+    transition: color var(--dur) var(--ease);
+  }
+
+  .form__whatsapp svg {
+    width: 20px;
+    height: 20px;
+    color: var(--c-turq-700);
+  }
+
+  .form__whatsapp:hover {
+    color: var(--c-turq-700);
+  }
+
+  .form__note {
+    font-size: var(--fs-small);
+    color: var(--c-muted);
+  }
+
+  @media (max-width: 640px) {
+    .form__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form__actions :global(.btn) {
+      width: 100%;
+    }
+  }
+</style>

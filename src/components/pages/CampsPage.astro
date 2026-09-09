@@ -1,0 +1,344 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHead from "@/components/SectionHead.astro";
+import FeatureGrid from "@/components/FeatureGrid.astro";
+import PhotoGallery from "@/components/PhotoGallery.astro";
+import Faq from "@/components/Faq.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Button from "@/components/Button.astro";
+import { getDictionary, localePath, type Locale } from "@/i18n";
+import { siteUrl } from "../../../site.config.mjs";
+import heroImg from "@/assets/images/camp-football-3.jpeg";
+import g1 from "@/assets/images/camp-banner-2.jpeg";
+import g2 from "@/assets/images/camp-football-2.jpeg";
+import g3 from "@/assets/images/camp-football-3.jpeg";
+import g4 from "@/assets/images/camp-team-1.jpeg";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const c = t.camps;
+
+const gallery = [g1, g2, g3, g4].map((image, i) => ({ image, ...c.gallery.items[i] }));
+
+const serviceSchema = {
+  "@type": "Service",
+  "@id": new URL(localePath(locale, "camps"), siteUrl).href + "#service",
+  name: t.services.camps.title,
+  serviceType: "Sports training camp organisation",
+  description: c.seo.description,
+  provider: { "@id": new URL("/#organization", siteUrl).href },
+  areaServed: { "@type": "Country", name: "Cyprus" },
+  offers: {
+    "@type": "Offer",
+    priceCurrency: "EUR",
+    price: "80",
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      priceCurrency: "EUR",
+      price: "80",
+      unitText: "per athlete per night, full board (indicative starting price)",
+    },
+  },
+};
+
+const faqSchema = {
+  "@type": "FAQPage",
+  mainEntity: c.faq.items.map((i) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: i.a } })),
+};
+---
+
+<BaseLayout
+  locale={locale}
+  current="camps"
+  title={c.seo.title}
+  description={c.seo.description}
+  ogImage={heroImg}
+  ogImageAlt={c.hero.imageAlt}
+  schema={[serviceSchema, faqSchema]}
+>
+  <PageHero kicker={c.hero.kicker} title={c.hero.title} text={c.hero.text} image={heroImg} alt={c.hero.imageAlt}>
+    <p class="price">
+      <span class="price__label">{c.hero.priceLabel}</span>
+      <span class="price__value">{c.hero.price}</span>
+      <span class="price__unit">{c.hero.priceUnit}</span>
+    </p>
+    <div class="actions">
+      <Button href={localePath(locale, "contact")} variant="primary" size="lg" icon="arrow" track="offer">{t.common.requestOffer}</Button>
+      <Button href="#included" variant="outline" size="lg">{c.included.kicker}</Button>
+    </div>
+  </PageHero>
+
+  <!-- Who -->
+  <section class="section">
+    <div class="container">
+      <SectionHead kicker={c.who.kicker} title={c.who.title} />
+      <FeatureGrid items={c.who.items} columns={2} />
+    </div>
+  </section>
+
+  <!-- Included / pricing -->
+  <section class="section section--sand" id="included">
+    <div class="container">
+      <SectionHead kicker={c.included.kicker} title={c.included.title} text={c.included.text} />
+      <div class="included">
+        <div class="included__col reveal">
+          <ul class="checklist checklist--lg">
+            {c.included.items.map((i) => <li>{i}</li>)}
+          </ul>
+        </div>
+        <div class="included__col included__col--aside reveal" data-delay="1">
+          <h3 class="included__title">{c.included.onRequestTitle}</h3>
+          <p class="muted">{c.included.onRequestText}</p>
+          <ul class="checklist">
+            {c.included.onRequest.map((i) => <li>{i}</li>)}
+          </ul>
+        </div>
+      </div>
+      <div class="price-note reveal">
+        <p class="price-note__text">{c.included.priceNote}</p>
+        <Button href={localePath(locale, "contact")} variant="primary" icon="arrow" track="offer">{t.common.requestOffer}</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logistics -->
+  <section class="section">
+    <div class="container">
+      <SectionHead kicker={c.logistics.kicker} title={c.logistics.title} />
+      <FeatureGrid items={c.logistics.items} columns={2} />
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section section--surface">
+    <div class="container container--wide">
+      <SectionHead kicker={c.gallery.kicker} title={c.gallery.title} text={c.gallery.text} />
+      <PhotoGallery items={gallery} columns={2} />
+    </div>
+  </section>
+
+  <!-- Sample day -->
+  <section class="section">
+    <div class="container">
+      <SectionHead kicker={c.sample.kicker} title={c.sample.title} text={c.sample.text} />
+      <div class="days">
+        {
+          [c.sample.football, c.sample.combat].map((day, d) => (
+            <div class="day reveal" data-delay={String(d)}>
+              <h3 class="day__title">{day.title}</h3>
+              <div class="day__table">
+                <table>
+                  <thead>
+                    <tr>{c.sample.cols.map((col) => <th scope="col">{col}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {day.rows.map((row) => (
+                      <tr>
+                        <td class="day__time">{row[0]}</td>
+                        <td class="day__session">{row[1]}</td>
+                        <td class="day__detail">{row[2]}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Cyprus -->
+  <section class="section section--dark">
+    <div class="container">
+      <SectionHead kicker={c.cyprus.kicker} title={c.cyprus.title} />
+      <FeatureGrid items={c.cyprus.items} columns={4} tone="dark" />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container faq-layout">
+      <SectionHead kicker={c.faq.kicker} title={c.faq.title} class="faq-layout__head" />
+      <Faq items={c.faq.items} />
+    </div>
+  </section>
+
+  <CtaBand locale={locale} title={c.finalCta.title} text={c.finalCta.text} />
+</BaseLayout>
+
+<style>
+  .price {
+    display: grid;
+    gap: 0.15rem;
+    padding: var(--s-4) var(--s-5);
+    border-left: 3px solid var(--c-turq);
+    background: var(--c-surface);
+    width: fit-content;
+    margin-top: var(--s-2);
+  }
+
+  .price__label {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--c-turq-700);
+  }
+
+  .price__value {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--c-ink);
+  }
+
+  .price__unit {
+    font-size: var(--fs-small);
+    color: var(--c-muted);
+  }
+
+  .included {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--s-7);
+    align-items: start;
+  }
+
+  .included__col--aside {
+    padding: var(--s-5);
+    background: #fff;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    display: grid;
+    gap: var(--s-3);
+  }
+
+  .included__title {
+    font-size: 1.4rem;
+  }
+
+  :global(.checklist--lg li) {
+    font-size: 1.05rem;
+    padding-block: 0.35rem;
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .price-note {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--s-5);
+    align-items: center;
+    margin-top: var(--s-7);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--c-line-strong);
+  }
+
+  .price-note__text {
+    color: var(--c-muted);
+    max-width: 70ch;
+  }
+
+  .days {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-6);
+  }
+
+  .day {
+    display: grid;
+    gap: var(--s-4);
+  }
+
+  .day__title {
+    font-size: 1.4rem;
+  }
+
+  .day__table {
+    overflow-x: auto;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 420px;
+  }
+
+  thead th {
+    text-align: left;
+    padding: 0.75rem 0.9rem;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--c-navy-900);
+    color: #fff;
+  }
+
+  tbody td {
+    padding: 0.8rem 0.9rem;
+    vertical-align: top;
+    border-top: 1px solid var(--c-line);
+    font-size: var(--fs-small);
+  }
+
+  .day__time {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    white-space: nowrap;
+    color: var(--c-turq-700);
+  }
+
+  .day__session {
+    font-weight: 600;
+    color: var(--c-ink);
+  }
+
+  .day__detail {
+    color: var(--c-muted);
+  }
+
+  .faq-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--s-7);
+    align-items: start;
+  }
+
+  .faq-layout :global(.faq-layout__head) {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 960px) {
+    .included,
+    .days {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .faq-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .faq-layout :global(.faq-layout__head) {
+      position: static;
+    }
+
+    .price-note {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

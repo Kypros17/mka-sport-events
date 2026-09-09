@@ -1,0 +1,35 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import { localePath } from "@/i18n";
+---
+
+<BaseLayout locale="en" current="home" title="Page not found — MKA sport Events" description="The page you were looking for does not exist.">
+  <section class="section not-found">
+    <div class="container container--narrow">
+      <p class="kicker">404</p>
+      <h1>Page not found</h1>
+      <p class="lead">The page you were looking for does not exist or has moved. The site's pages are listed in the menu above.</p>
+      <p class="lead" lang="ru">Страница не найдена. Русская версия сайта: <a href={localePath("ru", "home")}>главная страница</a>.</p>
+      <div class="actions">
+        <Button href={localePath("en", "home")} variant="secondary" icon="arrow">Go to the home page</Button>
+        <Button href={localePath("en", "contact")} variant="primary" track="offer">Request an Offer</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found .container {
+    display: grid;
+    gap: var(--s-4);
+    min-height: 40vh;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-top: var(--s-3);
+  }
+</style>

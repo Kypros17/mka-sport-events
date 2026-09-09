@@ -1,0 +1,100 @@
+---
+/**
+ * Asymmetric photo + content split. The image column is narrower than the
+ * text column (5/7) and can sit on either side; on phones it stacks.
+ */
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  imageSide?: "left" | "right";
+  ratio?: "4x3" | "3x2" | "portrait";
+  credit?: string;
+  /** Load the image eagerly (only for the first split on a page). */
+  eager?: boolean;
+  /** CSS object-position for the crop, e.g. "20% 50%" to keep a subject on the left. */
+  position?: string;
+}
+
+const { image, alt, imageSide = "left", ratio = "4x3", credit, eager = false, position = "50% 50%" } = Astro.props;
+---
+
+<div class:list={["split", `split--${imageSide}`]}>
+  <div class="split__media reveal">
+    <div class:list={["frame", `frame--${ratio}`]} style={`--pos: ${position}`}>
+      <Picture
+        src={image}
+        alt={alt}
+        widths={[480, 720, 960, 1200].filter((w) => w <= image.width)}
+        sizes="(min-width: 1024px) 520px, 100vw"
+        formats={["avif", "webp"]}
+        fallbackFormat="jpg"
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+      />
+      {credit && <span class="credit">{credit}</span>}
+    </div>
+  </div>
+  <div class="split__body reveal" data-delay="1">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .split--right {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+
+  .split--right .split__media {
+    order: 2;
+  }
+
+  .split__media img {
+    object-position: var(--pos, 50% 50%);
+  }
+
+  .split__body {
+    display: grid;
+    gap: var(--s-4);
+  }
+
+  .split__body :global(h2) {
+    margin-bottom: var(--s-2);
+  }
+
+  .split__body :global(p) {
+    color: var(--c-muted);
+    max-width: 60ch;
+  }
+
+  :global(.section--dark) .split__body :global(p) {
+    color: var(--c-on-dark-muted);
+  }
+
+  .split__body :global(.actions) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-top: var(--s-3);
+  }
+
+  @media (max-width: 860px) {
+    .split,
+    .split--right {
+      grid-template-columns: 1fr;
+    }
+
+    .split--right .split__media {
+      order: 0;
+    }
+  }
+</style>

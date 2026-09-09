@@ -1,0 +1,53 @@
+---
+/**
+ * Section heading: kicker, title and optional intro. Left-aligned by default
+ * so sections do not all read as the same centred block; pass align="center"
+ * where a centred head genuinely fits.
+ */
+interface Props {
+  kicker?: string;
+  title: string;
+  text?: string;
+  align?: "left" | "center";
+  level?: "h1" | "h2" | "h3";
+  size?: "md" | "lg";
+  class?: string;
+}
+
+const { kicker, title, text, align = "left", level = "h2", size = "md", class: className } = Astro.props;
+const Heading = level;
+---
+
+<div class:list={["section-head", `section-head--${align}`, `section-head--${size}`, className, "reveal"]}>
+  {kicker && <p class="kicker">{kicker}</p>}
+  <Heading class="section-head__title">{title}</Heading>
+  {text && <p class="lead section-head__text">{text}</p>}
+  <slot />
+</div>
+
+<style>
+  .section-head {
+    display: grid;
+    gap: var(--s-4);
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .section-head--left {
+    max-width: 44rem;
+  }
+
+  .section-head--center {
+    max-width: 46rem;
+    margin-inline: auto;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .section-head--lg .section-head__title {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+  }
+
+  .section-head__text {
+    margin-top: var(--s-1);
+  }
+</style>

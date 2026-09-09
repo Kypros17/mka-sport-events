@@ -1,0 +1,187 @@
+---
+/**
+ * Cinematic home hero: full-bleed owned photograph, dark gradient, large
+ * display headline, two calls to action and a three-item fact strip. The
+ * image is the page's LCP element and loads eagerly with high priority.
+ */
+import { Picture } from "astro:assets";
+import Button from "./Button.astro";
+import { getDictionary, localePath, type Locale } from "@/i18n";
+import heroImg from "@/assets/images/camp-football-1.jpeg";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const h = t.home.hero;
+---
+
+<section class="hero">
+  <div class="hero__media">
+    <Picture
+      src={heroImg}
+      alt={h.imageAlt}
+      widths={[640, 960, 1280, 1600]}
+      sizes="100vw"
+      formats={["avif", "webp"]}
+      fallbackFormat="jpg"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </div>
+  <div class="container container--wide hero__inner">
+    <div class="hero__copy">
+      <p class="kicker kicker--on-dark">{h.kicker}</p>
+      <h1 class="hero__title">{h.title}</h1>
+      <p class="hero__text">{h.text}</p>
+      <div class="hero__actions">
+        <Button href={localePath(locale, "contact")} variant="primary" size="lg" icon="arrow" track="offer">
+          {t.common.requestOffer}
+        </Button>
+        <Button href="#services" variant="ghost" size="lg">
+          {t.common.exploreServices}
+        </Button>
+      </div>
+    </div>
+    <dl class="hero__facts">
+      {
+        h.facts.map((f) => (
+          <div class="hero__fact">
+            <dt>{f.label}</dt>
+            <dd>{f.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: min(88svh, 900px);
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+    background: var(--c-navy-900);
+    overflow: hidden;
+  }
+
+  .hero__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 62% 40%;
+    animation: hero-zoom 14s var(--ease) both;
+  }
+
+  .hero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10, 19, 34, 0.25) 0%, rgba(10, 19, 34, 0.15) 35%, rgba(10, 19, 34, 0.92) 100%),
+      linear-gradient(90deg, rgba(10, 19, 34, 0.75) 0%, rgba(10, 19, 34, 0.2) 55%, rgba(10, 19, 34, 0) 100%);
+  }
+
+  @keyframes hero-zoom {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: var(--s-7);
+    padding-block: clamp(4rem, 10vw, 7rem) clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .hero__copy {
+    display: grid;
+    gap: var(--s-5);
+    max-width: 52rem;
+  }
+
+  .hero__title {
+    font-size: var(--fs-display);
+    color: #fff;
+    max-width: 12ch;
+  }
+
+  .hero__text {
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 58ch;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-top: var(--s-2);
+  }
+
+  .hero__facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-5);
+    padding-top: var(--s-5);
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+    max-width: 60rem;
+  }
+
+  .hero__fact dt {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--c-turq);
+    margin-bottom: 0.3rem;
+  }
+
+  .hero__fact dd {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      min-height: 0;
+    }
+
+    .hero__media img {
+      object-position: 60% 30%;
+    }
+
+    .hero__facts {
+      grid-template-columns: 1fr;
+      gap: var(--s-4);
+    }
+
+    .hero__actions :global(.btn) {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__media img {
+      animation: none;
+    }
+  }
+</style>

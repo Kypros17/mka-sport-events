@@ -1,0 +1,72 @@
+---
+/**
+ * Button / link styled as a button. Renders an <a> when `href` is given,
+ * otherwise a <button>. `track` adds a data-track attribute picked up by
+ * src/scripts/track.js once an analytics provider is configured.
+ */
+import Icon from "./Icon.astro";
+
+interface Props {
+  href?: string;
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "whatsapp";
+  size?: "sm" | "md" | "lg";
+  type?: "button" | "submit";
+  icon?: "arrow" | "whatsapp" | "phone" | "mail" | "external";
+  iconPosition?: "start" | "end";
+  track?: string;
+  external?: boolean;
+  block?: boolean;
+  class?: string;
+  ariaLabel?: string;
+  id?: string;
+}
+
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  type = "button",
+  icon,
+  iconPosition = "end",
+  track,
+  external = false,
+  block = false,
+  class: className,
+  ariaLabel,
+  id,
+} = Astro.props;
+
+const classes = [
+  "btn",
+  `btn--${variant}`,
+  size !== "md" ? `btn--${size}` : null,
+  block ? "btn--block" : null,
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+{
+  href ? (
+    <a
+      id={id}
+      href={href}
+      class={classes}
+      data-track={track}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener" : undefined}
+      aria-label={ariaLabel}
+    >
+      {icon && iconPosition === "start" && <Icon name={icon} />}
+      <slot />
+      {icon && iconPosition === "end" && <Icon name={icon} />}
+    </a>
+  ) : (
+    <button id={id} type={type} class={classes} data-track={track} aria-label={ariaLabel}>
+      {icon && iconPosition === "start" && <Icon name={icon} />}
+      <slot />
+      {icon && iconPosition === "end" && <Icon name={icon} />}
+    </button>
+  )
+}

@@ -1,0 +1,88 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHead from "@/components/SectionHead.astro";
+import FeatureSplit from "@/components/FeatureSplit.astro";
+import FeatureGrid from "@/components/FeatureGrid.astro";
+import HostedEvents from "@/components/HostedEvents.astro";
+import ServiceCards from "@/components/ServiceCards.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Button from "@/components/Button.astro";
+import { getDictionary, localePath, type Locale } from "@/i18n";
+import heroImg from "@/assets/images/camp-team-1.jpeg";
+import storyImg from "@/assets/images/camp-banner-2.jpeg";
+import founderImg from "@/assets/images/camp-banner-1.jpeg";
+import hostingImg from "@/assets/images/event-larnaca-2024-team.jpg";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const a = t.about;
+---
+
+<BaseLayout locale={locale} current="about" title={a.seo.title} description={a.seo.description} ogImage={heroImg} ogImageAlt={a.hero.imageAlt}>
+  <PageHero kicker={a.hero.kicker} title={a.hero.title} text={a.hero.text} image={heroImg} alt={a.hero.imageAlt}>
+    <div class="actions">
+      <Button href={localePath(locale, "contact")} variant="primary" icon="arrow" track="offer">{t.common.requestOffer}</Button>
+    </div>
+  </PageHero>
+
+  <!-- Story -->
+  <section class="section">
+    <div class="container container--wide">
+      <FeatureSplit image={storyImg} alt={t.home.proof.imageAlt} imageSide="left" ratio="4x3">
+        <p class="kicker">{a.story.kicker}</p>
+        <h2>{a.story.title}</h2>
+        <p>{a.story.p1}</p>
+        <p>{a.story.p2}</p>
+        <ul class="checklist">
+          {a.story.points.map((p) => <li>{p}</li>)}
+        </ul>
+      </FeatureSplit>
+    </div>
+  </section>
+
+  <!-- Founder -->
+  <section class="section section--sand">
+    <div class="container container--wide">
+      <FeatureSplit image={founderImg} alt={a.founder.imageAlt} imageSide="right" ratio="4x3" position="22% 50%">
+        <p class="kicker">{a.founder.kicker}</p>
+        <h2>{a.founder.title}</h2>
+        <p>{a.founder.p1}</p>
+        <p>{a.founder.p2}</p>
+      </FeatureSplit>
+    </div>
+  </section>
+
+  <!-- Cyprus as a host -->
+  <section class="section">
+    <div class="container container--wide">
+      <FeatureSplit image={hostingImg} alt={a.hosting.imageAlt} imageSide="left" ratio="3x2" credit={t.common.photoCredit}>
+        <p class="kicker">{a.hosting.kicker}</p>
+        <h2>{a.hosting.title}</h2>
+        <HostedEvents text={a.hosting.text} events={a.hosting.events} disclaimer={a.hosting.disclaimer} />
+      </FeatureSplit>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section class="section section--surface">
+    <div class="container">
+      <SectionHead kicker={a.approach.kicker} title={a.approach.title} text={a.approach.text} />
+      <FeatureGrid items={a.approach.items} columns={2} />
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section">
+    <div class="container container--wide">
+      <SectionHead kicker={a.servicesHead.kicker} title={a.servicesHead.title} />
+      <ServiceCards locale={locale} />
+    </div>
+  </section>
+
+  <CtaBand locale={locale} />
+</BaseLayout>

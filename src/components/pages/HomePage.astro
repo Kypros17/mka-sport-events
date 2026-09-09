@@ -1,0 +1,180 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HomeHero from "@/components/HomeHero.astro";
+import SectionHead from "@/components/SectionHead.astro";
+import FeatureGrid from "@/components/FeatureGrid.astro";
+import ServiceCards from "@/components/ServiceCards.astro";
+import FeatureSplit from "@/components/FeatureSplit.astro";
+import Steps from "@/components/Steps.astro";
+import Faq from "@/components/Faq.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Button from "@/components/Button.astro";
+import Icon from "@/components/Icon.astro";
+import { getDictionary, localePath, type Locale } from "@/i18n";
+import heroImg from "@/assets/images/camp-football-1.jpeg";
+import proofImg from "@/assets/images/camp-banner-2.jpeg";
+import campImg from "@/assets/images/camp-football-3.jpeg";
+import samboImg from "@/assets/images/event-arena-1.jpg";
+import founderImg from "@/assets/images/camp-banner-1.jpeg";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const h = t.home;
+
+const faqSchema = {
+  "@type": "FAQPage",
+  mainEntity: h.faq.items.map((i) => ({
+    "@type": "Question",
+    name: i.q,
+    acceptedAnswer: { "@type": "Answer", text: i.a },
+  })),
+};
+---
+
+<BaseLayout
+  locale={locale}
+  current="home"
+  title={h.seo.title}
+  description={h.seo.description}
+  ogImage={heroImg}
+  ogImageAlt={h.hero.imageAlt}
+  schema={[faqSchema]}
+>
+  <HomeHero locale={locale} />
+
+  <!-- Who we serve -->
+  <section class="section">
+    <div class="container">
+      <SectionHead kicker={h.audience.kicker} title={h.audience.title} />
+      <FeatureGrid items={h.audience.items} columns={3} />
+    </div>
+  </section>
+
+  <!-- Three services -->
+  <section class="section section--surface" id="services">
+    <div class="container container--wide">
+      <SectionHead kicker={h.servicesHead.kicker} title={h.servicesHead.title} text={h.servicesHead.text} />
+      <ServiceCards locale={locale} />
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section">
+    <div class="container container--wide">
+      <FeatureSplit image={proofImg} alt={h.proof.imageAlt} imageSide="left" ratio="4x3">
+        <p class="kicker">{h.proof.kicker}</p>
+        <h2>{h.proof.title}</h2>
+        <p>{h.proof.text}</p>
+        <ul class="checklist">
+          {h.proof.points.map((p) => <li>{p}</li>)}
+        </ul>
+        <div class="actions">
+          <a href={localePath(locale, "camps")} class="arrow-link">{h.proof.cta}<Icon name="arrow" /></a>
+        </div>
+      </FeatureSplit>
+    </div>
+  </section>
+
+  <!-- Featured camp package -->
+  <section class="section section--sand">
+    <div class="container container--wide">
+      <FeatureSplit image={campImg} alt={h.featuredCamp.imageAlt} imageSide="right" ratio="4x3">
+        <p class="kicker">{h.featuredCamp.kicker}</p>
+        <h2>{h.featuredCamp.title}</h2>
+        <p>{h.featuredCamp.text}</p>
+        <ul class="checklist">
+          {h.featuredCamp.included.map((p) => <li>{p}</li>)}
+        </ul>
+        <p class="small">{h.featuredCamp.onRequest}</p>
+        <div class="actions">
+          <Button href={localePath(locale, "camps")} variant="secondary" icon="arrow">{h.featuredCamp.cta}</Button>
+          <Button href={localePath(locale, "contact")} variant="primary" track="offer">{t.common.requestOffer}</Button>
+        </div>
+      </FeatureSplit>
+    </div>
+  </section>
+
+  <!-- Sambo expertise -->
+  <section class="section section--dark">
+    <div class="container container--wide">
+      <FeatureSplit image={samboImg} alt={h.sambo.imageAlt} imageSide="left" ratio="3x2" credit={t.common.photoCredit}>
+        <p class="kicker">{h.sambo.kicker}</p>
+        <h2>{h.sambo.title}</h2>
+        <p>{h.sambo.text}</p>
+        <p>{h.sambo.text2}</p>
+        <div class="actions">
+          <a href={localePath(locale, "events")} class="arrow-link">{h.sambo.cta}<Icon name="arrow" /></a>
+        </div>
+      </FeatureSplit>
+    </div>
+  </section>
+
+  <!-- Why Cyprus -->
+  <section class="section">
+    <div class="container">
+      <SectionHead kicker={h.cyprus.kicker} title={h.cyprus.title} />
+      <FeatureGrid items={h.cyprus.items} columns={4} />
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section section--surface">
+    <div class="container">
+      <SectionHead kicker={h.how.kicker} title={h.how.title} />
+      <Steps steps={h.how.steps} />
+    </div>
+  </section>
+
+  <!-- Founder -->
+  <section class="section">
+    <div class="container container--wide">
+      <FeatureSplit image={founderImg} alt={h.founder.imageAlt} imageSide="right" ratio="4x3" position="22% 50%">
+        <p class="kicker">{h.founder.kicker}</p>
+        <h2>{h.founder.title}</h2>
+        <p>{h.founder.text}</p>
+        <div class="actions">
+          <a href={localePath(locale, "about")} class="arrow-link">{h.founder.cta}<Icon name="arrow" /></a>
+        </div>
+      </FeatureSplit>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--line-top">
+    <div class="container faq-layout">
+      <SectionHead kicker={h.faq.kicker} title={h.faq.title} class="faq-layout__head" />
+      <Faq items={h.faq.items} />
+    </div>
+  </section>
+
+  <CtaBand locale={locale} title={h.finalCta.title} text={h.finalCta.text} />
+</BaseLayout>
+
+<style>
+  .faq-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--s-7);
+    align-items: start;
+  }
+
+  .faq-layout :global(.faq-layout__head) {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 860px) {
+    .faq-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .faq-layout :global(.faq-layout__head) {
+      position: static;
+    }
+  }
+</style>

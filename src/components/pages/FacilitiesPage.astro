@@ -1,0 +1,175 @@
+---
+import { Picture } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHead from "@/components/SectionHead.astro";
+import FeatureGrid from "@/components/FeatureGrid.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Button from "@/components/Button.astro";
+import { getDictionary, localePath, type Locale } from "@/i18n";
+import { contact } from "../../../site.config.mjs";
+import { venues } from "@/data/venues";
+import heroImg from "@/assets/images/camp-football-2.jpeg";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const f = t.facilities;
+---
+
+<BaseLayout locale={locale} current="facilities" title={f.seo.title} description={f.seo.description} ogImage={heroImg} ogImageAlt={f.hero.imageAlt}>
+  <PageHero kicker={f.hero.kicker} title={f.hero.title} text={f.hero.text} image={heroImg} alt={f.hero.imageAlt}>
+    <div class="actions">
+      <Button href={localePath(locale, "contact")} variant="primary" icon="arrow" track="offer">{t.common.requestOffer}</Button>
+    </div>
+  </PageHero>
+
+  <!-- Regions -->
+  <section class="section">
+    <div class="container">
+      <SectionHead kicker={f.regions.kicker} title={f.regions.title} text={f.regions.text} />
+      <FeatureGrid items={f.regions.items} columns={2} />
+    </div>
+  </section>
+
+  <!-- Climate and access -->
+  <section class="section section--sand">
+    <div class="container">
+      <SectionHead kicker={f.climate.kicker} title={f.climate.title} />
+      <FeatureGrid items={f.climate.items} columns={4} numbered={false} />
+    </div>
+  </section>
+
+  <!-- Facility types -->
+  <section class="section">
+    <div class="container">
+      <SectionHead kicker={f.types.kicker} title={f.types.title} text={f.types.text} />
+      <FeatureGrid items={f.types.items} columns={2} />
+    </div>
+  </section>
+
+  <!-- Venues: data-driven, rendered only when real venues exist in src/data/venues.ts -->
+  <section class="section section--surface">
+    <div class="container">
+      <SectionHead kicker={f.venues.kicker} title={f.venues.title} text={venues.length ? undefined : f.venues.text} />
+      {
+        venues.length > 0 && (
+          <ul class="venues">
+            {venues.map((v) => (
+              <li class="venue reveal">
+                {v.image && (
+                  <div class="frame frame--4x3">
+                    <Picture
+                      src={v.image}
+                      alt={v.imageAlt?.[locale] ?? ""}
+                      widths={[420, 640, 850].filter((w) => w <= v.image!.width)}
+                      sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+                      formats={["avif", "webp"]}
+                      fallbackFormat="jpg"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                )}
+                <div class="venue__body">
+                  <p class="kicker">{v.city}</p>
+                  <h3>{v.name}</h3>
+                  <p class="muted">{v.description[locale]}</p>
+                  <p class="small">
+                    <strong>{f.venues.sportsLabel}:</strong> {v.sports[locale].join(", ")}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      <div class="reveal">
+        <Button href={localePath(locale, "contact")} variant="secondary" icon="arrow" track="offer">{t.common.requestOffer}</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- KOA map -->
+  <section class="section section--dark">
+    <div class="container koa">
+      <div class="koa__copy reveal">
+        <p class="kicker">{f.koa.kicker}</p>
+        <h2>{f.koa.title}</h2>
+        <p class="lead">{f.koa.text}</p>
+      </div>
+      <div class="koa__action reveal" data-delay="1">
+        <Button href={contact.koaSportMap} variant="whatsapp" size="lg" icon="external" external>
+          {f.koa.cta}
+        </Button>
+        <p class="small muted-on-dark">cso.org.cy · {t.common.opensNewTab}</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand locale={locale} title={f.finalCta.title} text={f.finalCta.text} />
+</BaseLayout>
+
+<style>
+  .venues {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-6) var(--s-5);
+    margin-bottom: var(--s-6);
+  }
+
+  .venue {
+    display: grid;
+    gap: var(--s-4);
+  }
+
+  .venue__body {
+    display: grid;
+    gap: var(--s-2);
+    padding-top: var(--s-3);
+    border-top: 1px solid var(--c-line);
+  }
+
+  .koa {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--s-7);
+    align-items: center;
+  }
+
+  .koa__copy {
+    display: grid;
+    gap: var(--s-4);
+  }
+
+  .koa__action {
+    display: grid;
+    gap: var(--s-3);
+    justify-items: start;
+  }
+
+  .muted-on-dark {
+    color: var(--c-on-dark-muted);
+  }
+
+  @media (max-width: 960px) {
+    .venues {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 860px) {
+    .koa {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .venues {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

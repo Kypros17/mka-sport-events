@@ -1,0 +1,257 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import logo from "@/assets/images/logo-mark.png";
+import { brandName, contact } from "../../site.config.mjs";
+import { getDictionary, localePath, localeNames, locales, type Locale, type RouteKey } from "@/i18n";
+import { whatsappLink, telLink, mailLink } from "@/lib/links";
+
+interface Props {
+  locale: Locale;
+  current: RouteKey;
+}
+
+const { locale, current } = Astro.props;
+const t = getDictionary(locale);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container container--wide">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href={localePath(locale, "home")} class="footer-brand__link" aria-label={`${brandName} — ${t.common.home}`}>
+          <Image src={logo} alt="" width="96" height="96" class="footer-brand__mark" loading="lazy" />
+          <span class="footer-brand__name" aria-hidden="true"><strong>MKA</strong> sport Events</span>
+        </a>
+        <p class="footer-brand__text">{t.footer.about}</p>
+        <p class="footer-brand__based">{t.footer.basedLine}</p>
+      </div>
+
+      <div class="footer-col">
+        <h2 class="footer-col__title">{t.footer.services}</h2>
+        <ul class="footer-list">
+          <li><a href={localePath(locale, "camps")}>{t.footer.serviceCamps}</a></li>
+          <li><a href={localePath(locale, "events")}>{t.footer.serviceEvents}</a></li>
+          <li><a href={localePath(locale, "events")}>{t.footer.serviceOrganisation}</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2 class="footer-col__title">{t.footer.company}</h2>
+        <ul class="footer-list">
+          <li><a href={localePath(locale, "about")}>{t.nav.about}</a></li>
+          <li><a href={localePath(locale, "facilities")}>{t.nav.facilities}</a></li>
+          <li><a href={localePath(locale, "contact")}>{t.nav.contact}</a></li>
+        </ul>
+        <h2 class="footer-col__title footer-col__title--gap">{t.footer.languages}</h2>
+        <ul class="footer-list footer-list--inline">
+          {
+            locales.map((l) => (
+              <li>
+                <a
+                  href={localePath(l, current)}
+                  hreflang={l}
+                  lang={l}
+                  aria-current={l === locale ? "true" : undefined}
+                  class:list={{ "is-current": l === locale }}
+                >
+                  {localeNames[l]}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2 class="footer-col__title">{t.footer.contact}</h2>
+        <ul class="footer-list footer-list--contact">
+          <li>
+            <Icon name="pin" />
+            <span>{t.footer.address}</span>
+          </li>
+          {
+            contact.phones.map((p) => (
+              <li>
+                <Icon name="phone" />
+                <a href={telLink(p.e164)} data-track="phone">
+                  {p.display}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <Icon name="mail" />
+            <a href={mailLink()} data-track="email">{contact.email}</a>
+          </li>
+          <li>
+            <Icon name="whatsapp" />
+            <a href={whatsappLink(locale)} target="_blank" rel="noopener" data-track="whatsapp">
+              {t.common.chatOnWhatsapp}
+            </a>
+          </li>
+        </ul>
+        <h2 class="footer-col__title footer-col__title--gap">{t.footer.follow}</h2>
+        <ul class="footer-list footer-list--inline">
+          <li>
+            <a href={contact.social.instagram} target="_blank" rel="noopener" class="footer-social">
+              <Icon name="instagram" /><span>Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href={contact.social.tiktok} target="_blank" rel="noopener" class="footer-social">
+              <Icon name="tiktok" /><span>TikTok</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {year} {brandName}. {t.footer.rights}</p>
+      <p>{contact.address.city}, {contact.address.country}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--c-navy-900);
+    color: var(--c-on-dark-muted);
+    padding-top: var(--s-9);
+    border-top: 4px solid var(--c-turq);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+    gap: var(--s-7) var(--s-6);
+    padding-bottom: var(--s-8);
+  }
+
+  .footer-brand__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 44px;
+    color: #fff;
+  }
+
+  .footer-brand__mark {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+  }
+
+  .footer-brand__name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .footer-brand__text {
+    margin-top: var(--s-4);
+    max-width: 38ch;
+  }
+
+  .footer-brand__based {
+    margin-top: var(--s-3);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--c-turq);
+  }
+
+  .footer-col__title {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: var(--s-4);
+  }
+
+  .footer-col__title--gap {
+    margin-top: var(--s-6);
+  }
+
+  .footer-list {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .footer-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    color: var(--c-on-dark-muted);
+    transition: color var(--dur) var(--ease);
+  }
+
+  .footer-list a:hover,
+  .footer-list a.is-current {
+    color: #fff;
+  }
+
+  .footer-list a.is-current {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-color: var(--c-turq);
+  }
+
+  .footer-list--inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;
+  }
+
+  .footer-list--contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .footer-list--contact svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    margin-top: 0.45rem;
+    color: var(--c-turq);
+  }
+
+  .footer-social {
+    gap: 0.45rem;
+  }
+
+  .footer-social svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--s-3);
+    padding: var(--s-5) 0;
+    border-top: 1px solid var(--c-line-on-dark);
+    font-size: var(--fs-small);
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  @media (max-width: 960px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: var(--s-6);
+    }
+  }
+</style>

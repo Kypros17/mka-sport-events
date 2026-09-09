@@ -1,0 +1,87 @@
+---
+/**
+ * Numbered list of short features in an editorial grid: thin rules instead
+ * of cards, large numerals, generous whitespace. Used for audiences,
+ * "why Cyprus", deliverables and similar lists.
+ */
+interface Props {
+  items: { title: string; text: string }[];
+  columns?: 2 | 3 | 4;
+  numbered?: boolean;
+  tone?: "light" | "dark";
+}
+
+const { items, columns = 3, numbered = true, tone = "light" } = Astro.props;
+---
+
+<ul class:list={["feature-grid", `feature-grid--${columns}`, `feature-grid--${tone}`]}>
+  {
+    items.map((item, i) => (
+      <li class="feature-grid__item reveal" data-delay={String(Math.min(i % columns, 3))}>
+        {numbered && <span class="num">{String(i + 1).padStart(2, "0")}</span>}
+        <h3 class="feature-grid__title">{item.title}</h3>
+        <p class="feature-grid__text">{item.text}</p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .feature-grid {
+    display: grid;
+    gap: 0 var(--s-6);
+    border-top: 1px solid var(--c-line);
+  }
+
+  .feature-grid--dark {
+    border-top-color: var(--c-line-on-dark);
+  }
+
+  .feature-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .feature-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .feature-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  .feature-grid__item {
+    display: grid;
+    gap: var(--s-3);
+    align-content: start;
+    padding: var(--s-6) 0;
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .feature-grid--dark .feature-grid__item {
+    border-bottom-color: var(--c-line-on-dark);
+  }
+
+  .feature-grid__title {
+    font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+  }
+
+  .feature-grid__text {
+    color: var(--c-muted);
+    max-width: 38ch;
+  }
+
+  .feature-grid--dark .feature-grid__text {
+    color: var(--c-on-dark-muted);
+  }
+
+  @media (max-width: 960px) {
+    .feature-grid--3,
+    .feature-grid--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .feature-grid--2,
+    .feature-grid--3,
+    .feature-grid--4 {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-grid__item {
+      padding: var(--s-5) 0;
+    }
+  }
+</style>

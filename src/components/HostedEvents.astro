@@ -1,0 +1,114 @@
+---
+/**
+ * The FIAS/ESF championships Cyprus has hosted, always paired with the
+ * disclaimer that MKA sport Events did not organise them (CLAUDE.md rule).
+ */
+interface Props {
+  title?: string;
+  text?: string;
+  events: { year: string; title: string; place: string }[];
+  disclaimer: string;
+}
+
+const { title, text, events, disclaimer } = Astro.props;
+---
+
+<div class="hosted">
+  {title && <h3 class="hosted__title">{title}</h3>}
+  {text && <p class="hosted__text">{text}</p>}
+  <ol class="hosted__list">
+    {
+      events.map((e) => (
+        <li class="hosted__item">
+          <span class="hosted__year">{e.year}</span>
+          <span class="hosted__name">{e.title}</span>
+          <span class="hosted__place">{e.place}</span>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="hosted__disclaimer">{disclaimer}</p>
+</div>
+
+<style>
+  .hosted {
+    display: grid;
+    gap: var(--s-4);
+  }
+
+  .hosted__title {
+    font-size: 1.4rem;
+  }
+
+  .hosted__text {
+    color: var(--c-muted);
+  }
+
+  .hosted__list {
+    border-top: 1px solid var(--c-line);
+  }
+
+  .hosted__item {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr auto;
+    gap: var(--s-4);
+    align-items: baseline;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .hosted__year {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--c-turq-700);
+  }
+
+  .hosted__name {
+    font-weight: 600;
+    color: var(--c-ink);
+  }
+
+  .hosted__place {
+    font-size: var(--fs-small);
+    color: var(--c-muted);
+  }
+
+  .hosted__disclaimer {
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    color: var(--c-muted);
+    padding-left: var(--s-4);
+    border-left: 3px solid var(--c-turq);
+    max-width: 62ch;
+  }
+
+  :global(.section--dark) .hosted__list,
+  :global(.section--dark) .hosted__item {
+    border-color: var(--c-line-on-dark);
+  }
+
+  :global(.section--dark) .hosted__year {
+    color: var(--c-turq);
+  }
+
+  :global(.section--dark) .hosted__name {
+    color: #fff;
+  }
+
+  :global(.section--dark) .hosted__place,
+  :global(.section--dark) .hosted__text,
+  :global(.section--dark) .hosted__disclaimer {
+    color: var(--c-on-dark-muted);
+  }
+
+  @media (max-width: 520px) {
+    .hosted__item {
+      grid-template-columns: 4rem 1fr;
+    }
+
+    .hosted__place {
+      grid-column: 2;
+    }
+  }
+</style>

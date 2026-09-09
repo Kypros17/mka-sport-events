@@ -1,0 +1,702 @@
+{
+  "meta": {
+    "siteName": "MKA sport Events",
+    "tagline": "Sports training camps and event organisation in Cyprus"
+  },
+  "common": {
+    "skipToContent": "Skip to main content",
+    "requestOffer": "Request an Offer",
+    "exploreServices": "Explore services",
+    "whatsapp": "WhatsApp",
+    "chatOnWhatsapp": "Chat on WhatsApp",
+    "callUs": "Call us",
+    "emailUs": "Email us",
+    "learnMore": "Learn more",
+    "readMore": "Read more",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNavigation": "Main navigation",
+    "language": "Language",
+    "switchTo": "Русская версия",
+    "switchToShort": "RU",
+    "currentLangShort": "EN",
+    "home": "Home",
+    "basedIn": "Nicosia, Cyprus",
+    "photoCredit": "Photo: FIAS / sambo.sport",
+    "opensNewTab": "opens in a new tab",
+    "whatsappMessage": "Hello MKA sport Events, I would like to request an offer for a training camp or sports event in Cyprus. Sport: … Group size: … Preferred dates: …"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "camps": "Training Camps",
+    "events": "Events",
+    "facilities": "Cyprus",
+    "contact": "Contact"
+  },
+  "footer": {
+    "about": "Cyprus-based organiser of sports training camps and sports events, working from Nicosia with specialist sambo expertise.",
+    "services": "Services",
+    "serviceCamps": "Sports training camps",
+    "serviceEvents": "International sports events",
+    "serviceOrganisation": "Sports event organisation",
+    "company": "Company",
+    "contact": "Contact",
+    "follow": "Follow",
+    "languages": "Language",
+    "address": "Chilis 28, Nicosia, Cyprus",
+    "rights": "All rights reserved.",
+    "basedLine": "Based in Nicosia · Working across Cyprus"
+  },
+  "mobileBar": {
+    "whatsapp": "WhatsApp",
+    "offer": "Request an Offer"
+  },
+  "services": {
+    "camps": {
+      "title": "Sports Training Camps",
+      "short": "Football and combat-sports camps in Cyprus with accommodation, pitches, halls, meals and transport arranged by one team.",
+      "cta": "Discover our camps"
+    },
+    "events": {
+      "title": "International Sports Events",
+      "short": "Support for international competitions held in Cyprus, with sambo as our specialist discipline: mats, delegations, referees and operations.",
+      "cta": "See what we deliver"
+    },
+    "organisation": {
+      "title": "Sports Event Organisation",
+      "short": "Planning and delivery of tournaments and sports events in Cyprus, from venue and competition setup to logistics on the day.",
+      "cta": "Plan an event with us"
+    }
+  },
+  "cta": {
+    "title": "Planning a camp or an event in Cyprus?",
+    "text": "Tell us the sport, the dates and the size of your group. We reply within one working day with a tailored proposal.",
+    "button": "Request an Offer",
+    "secondary": "Chat on WhatsApp"
+  },
+  "home": {
+    "seo": {
+      "title": "MKA sport Events — Sports Training Camps & Event Organisation in Cyprus",
+      "description": "Cyprus-based sports company in Nicosia. We organise sports training camps and deliver sports events in Cyprus, with specialist sambo expertise. Request an offer."
+    },
+    "hero": {
+      "kicker": "Nicosia, Cyprus",
+      "title": "Train, compete and host in Cyprus.",
+      "text": "MKA sport Events organises sports training camps and delivers sports events across Cyprus. Football squads, combat-sports teams and federations bring their programme; we arrange the pitches, halls, hotels, transport and competition setup around it.",
+      "imageAlt": "Two footballers competing for the ball during a friendly match at an MKA sport Events training camp in Cyprus",
+      "facts": [
+        { "label": "Based in", "value": "Nicosia, Cyprus" },
+        { "label": "Camps for", "value": "Football, sambo, judo and more" },
+        { "label": "Specialist discipline", "value": "Sambo" }
+      ]
+    },
+    "audience": {
+      "kicker": "Who we work with",
+      "title": "Built for teams that travel to train and compete",
+      "items": [
+        {
+          "title": "Clubs and academies",
+          "text": "Pre-season and mid-season camps with full board, training slots and friendly matches against local opposition."
+        },
+        {
+          "title": "National teams and federations",
+          "text": "Preparation camps and competition support in a country that regularly hosts international sambo."
+        },
+        {
+          "title": "Event organisers",
+          "text": "Tournaments and sports events in Cyprus, planned and run by a team that knows the halls, hotels and officials."
+        }
+      ]
+    },
+    "servicesHead": {
+      "kicker": "What we do",
+      "title": "Three services, one team on the ground",
+      "text": "Each service stands on its own, and they combine naturally: a camp can end with a tournament, and an event can bring a delegation back for a camp."
+    },
+    "proof": {
+      "kicker": "Real work, real photographs",
+      "title": "A football camp we organised in Cyprus",
+      "text": "Every camp photograph on this site is from a training camp run by MKA sport Events: our banner on the touchline, a visiting women's football team on a full-size grass pitch, and friendly matches arranged against local opposition.",
+      "points": [
+        "Full-size grass pitch and training slots booked for the visiting squad",
+        "Friendly fixtures arranged against local teams",
+        "Accommodation, meals and daily transport handled by us",
+        "Our own staff on site for the length of the camp"
+      ],
+      "cta": "See the camps page",
+      "imageAlt": "The MKA sport Events training camp banner beside the goal on a grass pitch in Cyprus, with football players warming up behind it"
+    },
+    "featuredCamp": {
+      "kicker": "Training camps",
+      "title": "Full-board camp packages from €80 per athlete per night",
+      "text": "One indicative starting price for football, combat-sports and team camps at our four-star beachfront hotel base in Agia Napa. The final price depends on room type, group size, sport and dates.",
+      "included": [
+        "Full board: breakfast, lunch and dinner buffet with soft drinks, juice, water and coffee",
+        "Pool, sauna, jacuzzi, steam room and a fully equipped gym",
+        "Floodlit artificial-grass training pitch",
+        "Free Wi-Fi, training water and access to a massage room"
+      ],
+      "onRequest": "On request: FIFA-standard training pitches, airport transfers, laundry and excursions.",
+      "cta": "Camp details and pricing",
+      "imageAlt": "A footballer in an orange shirt shielding the ball from a defender during a camp friendly in Cyprus"
+    },
+    "sambo": {
+      "kicker": "Specialist discipline",
+      "title": "Sambo expertise from inside the sport",
+      "text": "Our founder, Marios Andreou, is President of the Cyprus Sambo Federation, the national governing body for sambo and a member of the European Sambo Federation (ESF) and the International Sambo Federation (FIAS). That is his own role in the sport rather than a position held by the company, but it shapes how we work: competition rules, mat layouts, referee and delegation requirements are familiar ground.",
+      "text2": "Cyprus has hosted the European Sambo Championship in 2025, the World Cadet, Youth and Junior Sambo Championships in Larnaca in 2024 and the first World University Sambo Championships in Nicosia in 2016. Those FIAS and ESF championships were not organised by MKA sport Events; we cite them as the standard of competition the island is used to hosting.",
+      "cta": "Sports events and sambo",
+      "imageAlt": "Elevated view of a sports hall laid with three sambo competition mats, national flags overhead and spectators in the stands, Larnaca, Cyprus 2024"
+    },
+    "cyprus": {
+      "kicker": "Why Cyprus",
+      "title": "A Mediterranean base that works all year",
+      "items": [
+        {
+          "title": "Reliable weather",
+          "text": "More than 300 days of sunshine a year. Outdoor sessions run in January as well as July."
+        },
+        {
+          "title": "Easy to reach",
+          "text": "Direct flights into Larnaca and Paphos from across Europe, with short transfers to camp bases and venues."
+        },
+        {
+          "title": "The right facilities",
+          "text": "Grass and artificial pitches, indoor halls with competition mats, gyms and pools, booked for your group."
+        },
+        {
+          "title": "Value outside the peak",
+          "text": "Competitive package prices, especially in winter and spring when pitches and hotels have capacity."
+        }
+      ]
+    },
+    "how": {
+      "kicker": "How it works",
+      "title": "From first message to the last training session",
+      "steps": [
+        {
+          "title": "Tell us about your group",
+          "text": "Sport, level, number of athletes, preferred dates and what you want to get out of the trip."
+        },
+        {
+          "title": "We propose a package",
+          "text": "Accommodation, training slots, transport and any friendly matches, priced for your dates and group size."
+        },
+        {
+          "title": "Confirm the details",
+          "text": "We book the venues and hotel, agree the daily schedule with your coaching staff and share the plan."
+        },
+        {
+          "title": "We run it on site",
+          "text": "Our staff are on the ground from arrival to departure so your coaches can concentrate on the programme."
+        }
+      ]
+    },
+    "founder": {
+      "kicker": "Leadership",
+      "title": "Founded and led by Marios Andreou",
+      "text": "MKA sport Events was founded by Marios Andreou and is run by him today. He also serves as President of the Cyprus Sambo Federation. When a club asks about warm-up halls, mat thickness or transfer times, the answer comes from experience on the mat and in championship venues rather than from a brochure.",
+      "cta": "About MKA sport Events",
+      "imageAlt": "The MKA sport Events training camp banner set up beside the goal on a grass pitch, with a member of the camp team alongside it"
+    },
+    "faq": {
+      "kicker": "Questions",
+      "title": "Frequently asked",
+      "items": [
+        {
+          "q": "Which sports do you organise camps for?",
+          "a": "We have organised football camps in Cyprus and run combat-sports camps for sambo, judo, wrestling and jiu-jitsu. Other team sports can be arranged on request; tell us the sport and we will confirm what we can book."
+        },
+        {
+          "q": "Where do teams stay?",
+          "a": "Our camp base is a four-star beachfront hotel in Agia Napa with full board, a floodlit artificial-grass pitch, a gym, a pool and a massage room. Other options can be quoted for specific dates and group sizes."
+        },
+        {
+          "q": "How is the price calculated?",
+          "a": "Packages start from €80 per athlete per night on full board. The final price depends on room type, group size, sport, dates and any extras such as FIFA-standard pitches, transfers, laundry or excursions."
+        },
+        {
+          "q": "Do you arrange airport transfers and daily transport?",
+          "a": "Yes. Airport transfers are quoted individually, and daily transport between the hotel and the training venues is part of the camp plan."
+        },
+        {
+          "q": "Can you organise friendly matches?",
+          "a": "Yes. For football camps we arrange friendly fixtures against local opposition, and for combat sports we can arrange local sparring partners."
+        },
+        {
+          "q": "Which languages do you work in?",
+          "a": "English, Greek and Russian. Enquiries by email or WhatsApp are answered within one working day."
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "Bring your squad to Cyprus.",
+      "text": "Send us the sport, the dates and the size of your group. We come back within one working day with a proposal built around your programme."
+    }
+  },
+  "about": {
+    "seo": {
+      "title": "About MKA sport Events — Sports Company in Nicosia, Cyprus",
+      "description": "MKA sport Events is a Cyprus-based sports company in Nicosia, founded and led by Marios Andreou. Training camps, international sports events and event organisation in Cyprus."
+    },
+    "hero": {
+      "kicker": "About us",
+      "title": "A Cyprus sports company, from the mat to the medal ceremony",
+      "text": "MKA sport Events works out of Nicosia. We organise training camps, support international competitions and deliver sports events in Cyprus: three services, one team, one island.",
+      "imageAlt": "A visiting women's football team and their coaches gathered at the bench during a break in a camp match in Cyprus"
+    },
+    "story": {
+      "kicker": "Who we are",
+      "title": "Built by people who live and breathe sport",
+      "p1": "We started on the mat, not behind a desk. Our team has competed, coached, refereed finals and worked in championship venues, so when a club asks about warm-up halls, mat thickness or transfer times, the answer comes from experience rather than from a brochure.",
+      "p2": "Everything we do happens in Cyprus. That is deliberate. We know the halls, the hotels, the federations and the people who make an event run, and that local knowledge is what turns a booking into a camp that actually works.",
+      "points": [
+        "Based in Nicosia, working across the whole island",
+        "One point of contact for planning, logistics and delivery on the ground",
+        "Camps and events supported by our own staff on site"
+      ]
+    },
+    "founder": {
+      "kicker": "Leadership and affiliations",
+      "title": "Founded and led by Marios Andreou",
+      "p1": "MKA sport Events was founded by Marios Andreou and is run by him today. In the sport itself he serves as President of the Cyprus Sambo Federation, the national governing body for sambo on the island and a member of the European Sambo Federation (ESF) and the International Sambo Federation (FIAS).",
+      "p2": "That presidency is his own role in sambo rather than a position held by the company. It does shape how we work: competition rules, the fixture calendar, referee and officiating practice and the technical standards a championship hall has to meet are all familiar ground for our team.",
+      "imageAlt": "The MKA sport Events training camp banner beside the goal on a grass pitch, with a member of the camp team alongside it"
+    },
+    "hosting": {
+      "kicker": "Cyprus as a host",
+      "title": "World-level sambo has come to the island",
+      "text": "Cyprus keeps attracting international sambo. These FIAS and ESF championships are listed as background on the island's record as a host:",
+      "events": [
+        { "year": "2025", "title": "European Sambo Championship", "place": "Cyprus" },
+        { "year": "2024", "title": "World Cadet, Youth and Junior Sambo Championships", "place": "Larnaca" },
+        { "year": "2016", "title": "First World University Sambo Championships", "place": "Nicosia" }
+      ],
+      "disclaimer": "These championships were not organised by MKA sport Events, and no endorsement of the company by the Cyprus Sambo Federation, the ESF or FIAS is implied. They are cited only as events Cyprus has hosted.",
+      "imageAlt": "Medallists and coaches on the podium in front of the World Cadet, Youth and Junior Sambo Championships backdrop, Larnaca, Cyprus 2024"
+    },
+    "approach": {
+      "kicker": "Our approach",
+      "title": "Your programme, our support",
+      "text": "Your head coach keeps control of the training plan. We make sure the halls, pitches, partners and recovery slots are ready when your session starts.",
+      "items": [
+        {
+          "title": "Planned with your staff",
+          "text": "The session plan is agreed with your coaching staff before arrival, then adjusted on site as the week unfolds."
+        },
+        {
+          "title": "Local opposition and partners",
+          "text": "Friendly matches for football squads and local sparring partners for combat-sports teams, arranged on request."
+        },
+        {
+          "title": "One contact, on the ground",
+          "text": "One point of contact from the first message to the last transfer, dealing with hotels, venues and transport for you."
+        },
+        {
+          "title": "Recovery built in",
+          "text": "Pool, sauna, gym and massage-room access at the camp base, timed around training rather than squeezed in after it."
+        }
+      ]
+    },
+    "servicesHead": {
+      "kicker": "What we do",
+      "title": "Three services, one standard"
+    }
+  },
+  "camps": {
+    "seo": {
+      "title": "Sports Training Camps in Cyprus — Football, Sambo & Judo | MKA sport Events",
+      "description": "Training camps in Cyprus for football squads and combat-sports teams. Full-board packages from €80 per athlete per night at a four-star beachfront base, with pitches, halls, transport and friendly matches arranged."
+    },
+    "hero": {
+      "kicker": "Training camps",
+      "title": "Training camps in Cyprus, organised end to end",
+      "text": "We host visiting clubs, academies and national squads in Cyprus: full board at a beachfront hotel base, pitches and halls booked for your sessions, transport arranged and friendly matches lined up. You bring the programme; we take care of everything around it.",
+      "priceLabel": "Indicative packages from",
+      "price": "€80",
+      "priceUnit": "per athlete per night, full board",
+      "imageAlt": "View through the goal net of a footballer in orange on the ball as opposing players close in, during a camp friendly in Cyprus"
+    },
+    "who": {
+      "kicker": "Who the camps are for",
+      "title": "Squads that come to Cyprus to work",
+      "items": [
+        {
+          "title": "Football clubs and academies",
+          "text": "Pre-season and mid-season camps on grass and artificial pitches, with friendly fixtures against local opposition. This is the camp we have run and photographed."
+        },
+        {
+          "title": "Combat-sports teams",
+          "text": "Sambo, judo, wrestling and jiu-jitsu squads training in indoor halls with mats, with local sparring partners arranged on request."
+        },
+        {
+          "title": "National teams and federations",
+          "text": "Preparation blocks before a championship season, with the schedule agreed in advance with your coaching staff."
+        },
+        {
+          "title": "Youth and academy groups",
+          "text": "Structured training days, supervised down-time and full board in one hotel base, with our staff on site throughout."
+        }
+      ]
+    },
+    "included": {
+      "kicker": "What is included",
+      "title": "Included as standard at the Agia Napa base",
+      "text": "Every camp package at our four-star beachfront hotel base in Agia Napa includes:",
+      "items": [
+        "Full board: breakfast, lunch and dinner buffet with soft drinks, juice, water and coffee",
+        "Use of the pool, sauna, jacuzzi, steam room and fully equipped gym",
+        "Floodlit artificial-grass training pitch",
+        "Free Wi-Fi and training water",
+        "Access to a massage room"
+      ],
+      "onRequestTitle": "Available on request",
+      "onRequestText": "Quoted individually for your camp:",
+      "onRequest": [
+        "Professional FIFA-standard training pitches",
+        "Airport transfers",
+        "Laundry service",
+        "Excursions"
+      ],
+      "priceNote": "One indicative starting price for all camps: from €80 per athlete per night on full board. The final figure depends on room type, group size, sport and dates. Request an offer for an exact quote."
+    },
+    "logistics": {
+      "kicker": "Accommodation, transport and facilities",
+      "title": "Everything organised, so your staff can focus on training",
+      "items": [
+        {
+          "title": "Accommodation",
+          "text": "Four-star beachfront hotel in Agia Napa with athlete-friendly full board, pool, sauna, gym and a massage room on site."
+        },
+        {
+          "title": "Transport",
+          "text": "Daily transport between the hotel and training venues is part of the camp plan. Airport transfers from Larnaca or Paphos are quoted on request."
+        },
+        {
+          "title": "Training facilities",
+          "text": "A floodlit artificial-grass pitch at the base, full-size grass pitches with stand seating for matches, FIFA-standard pitches on request, and indoor halls with mats for combat sports."
+        },
+        {
+          "title": "Friendly matches",
+          "text": "Friendly fixtures against local football opposition, played in full match conditions, and local sparring partners for combat-sports squads."
+        }
+      ]
+    },
+    "gallery": {
+      "kicker": "From our camps",
+      "title": "A football camp in Cyprus",
+      "text": "Our banner on the pitch and match action from a friendly played during the camp against local opposition.",
+      "items": [
+        {
+          "alt": "The MKA sport Events training camp banner beside the goalposts, with football players warming up on the pitch behind it",
+          "title": "Our banner on the touchline",
+          "caption": "The camp banner stayed pitchside for the length of the camp."
+        },
+        {
+          "alt": "A footballer in an orange shirt shielding the ball from a defender in white during a camp friendly in Cyprus",
+          "title": "Match action",
+          "caption": "A friendly against local opposition, arranged as part of the camp programme."
+        },
+        {
+          "alt": "View through the goal net of a footballer in orange on the ball as opposing players and the goalkeeper close in, during a camp friendly in Cyprus",
+          "title": "Full match conditions",
+          "caption": "Played on a full-size grass pitch with stand seating, not a training ground."
+        },
+        {
+          "alt": "A visiting women's football team and their coaches gathered at the bench during a break in a camp match in Cyprus",
+          "title": "The visiting squad",
+          "caption": "Coaches and players at the bench during a break in play."
+        }
+      ]
+    },
+    "sample": {
+      "kicker": "Sample structure",
+      "title": "What a camp day can look like",
+      "text": "Every programme is built with your coaching staff. These two example days show the rhythm we plan around: two sessions, proper recovery, and meals timed to training.",
+      "football": {
+        "title": "Football camp day",
+        "rows": [
+          ["07:30", "Breakfast", "Athlete buffet at the hotel"],
+          ["09:30", "Morning session", "Training on the artificial-grass pitch at the base"],
+          ["12:30", "Lunch and rest", "Meal plan agreed with your coaching staff"],
+          ["17:00", "Evening session or friendly match", "Grass pitch booked for the squad; fixtures against local opposition"],
+          ["19:30", "Recovery", "Pool, sauna or massage-room slots"],
+          ["20:30", "Dinner and team time", "Video review on request"]
+        ]
+      },
+      "combat": {
+        "title": "Combat-sports camp day",
+        "rows": [
+          ["07:00", "Morning run and mobility", "Seafront run followed by stretching"],
+          ["08:00", "Breakfast", "Athlete buffet at the hotel"],
+          ["10:00", "Technical session", "Technique and drilling on the mats"],
+          ["13:00", "Lunch and rest", "Meal plan agreed with your coaching staff"],
+          ["16:00", "Sparring", "Rounds with local partners where arranged"],
+          ["18:30", "Recovery", "Pool, sauna or massage-room slots"],
+          ["20:00", "Dinner and team time", "Video review on request"]
+        ]
+      },
+      "cols": ["Time", "Session", "Details"]
+    },
+    "cyprus": {
+      "kicker": "Why Cyprus",
+      "title": "The Mediterranean advantage",
+      "items": [
+        { "title": "Reliable weather", "text": "More than 300 days of sunshine a year, so outdoor sessions are not lost to the forecast, even in January." },
+        { "title": "Easy to reach", "text": "Direct flights from most European capitals to Larnaca and Paphos, with short transfers to the camp base." },
+        { "title": "Facilities for your sport", "text": "Grass and artificial pitches, indoor halls with mats, gyms and pools, booked for your group and your dates." },
+        { "title": "Value for money", "text": "Competitive package prices, especially outside the summer peak: ideal for winter and spring camps." }
+      ]
+    },
+    "faq": {
+      "kicker": "Questions",
+      "title": "Training camp FAQs",
+      "items": [
+        {
+          "q": "How far in advance should we book?",
+          "a": "As early as your season plan allows. Winter and spring dates are popular with visiting squads, so send your preferred dates and a second option and we will confirm availability."
+        },
+        {
+          "q": "Can we bring our own coaching staff and programme?",
+          "a": "Yes. That is how every camp works: your head coach keeps control of the training plan and we build the venues, transport and schedule around it."
+        },
+        {
+          "q": "What is the minimum group size?",
+          "a": "There is no fixed minimum. Tell us how many athletes and staff are travelling and we will quote for that group."
+        },
+        {
+          "q": "Are meals suitable for athletes?",
+          "a": "Full board is buffet-style with soft drinks, juice, water and coffee, and the meal plan is agreed with your coaching staff."
+        },
+        {
+          "q": "Can you organise excursions on rest days?",
+          "a": "Yes. Excursions across Cyprus are available on request and quoted separately."
+        },
+        {
+          "q": "Which airport should we fly into?",
+          "a": "Larnaca is the closest airport to the Agia Napa base; Paphos also works. Airport transfers are arranged on request."
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "Ready to plan your training camp?",
+      "text": "Send us your sport, dates and group size. We reply with a full proposal within one working day."
+    }
+  },
+  "events": {
+    "seo": {
+      "title": "Sports Event Organisation in Cyprus — Sambo Specialists | MKA sport Events",
+      "description": "Sports event organisation in Cyprus by MKA sport Events: venue coordination, competition setup, mats and infrastructure, delegation logistics, referee, medical and anti-doping coordination, with sambo as our specialist discipline."
+    },
+    "hero": {
+      "kicker": "Sports events",
+      "title": "Sports event organisation in Cyprus, with sambo expertise",
+      "text": "We plan and deliver tournaments and sports events across Cyprus and support international competitions held on the island. Sambo is our specialist discipline: we know its rules, its mat layouts and what visiting delegations, referees and officials need.",
+      "imageAlt": "Blue and yellow sambo competition mats in use during bouts at an international sambo championship in Larnaca, Cyprus, 2024"
+    },
+    "deliver": {
+      "kicker": "What we deliver",
+      "title": "The workstreams we take on",
+      "text": "One partner and one point of contact for the practical side of a competition. We scale the service to the event, from a club tournament to an international competition.",
+      "items": [
+        { "title": "Event planning", "text": "Concept, budget, timeline and supplier coordination from the first meeting to the closing ceremony." },
+        { "title": "Venue coordination", "text": "Selecting and booking the hall, agreeing the layout and managing the venue relationship." },
+        { "title": "Competition setup", "text": "Field of play laid out to the sport's competition standards, with warm-up areas and officials' positions." },
+        { "title": "Mats and infrastructure", "text": "Competition mats, scoreboards and timing systems sourced and installed for the event." },
+        { "title": "Delegation logistics", "text": "Accreditation, hotels and transport for teams, officials and visiting delegations." },
+        { "title": "Referee coordination", "text": "Liaison with the refereeing body, schedules and on-site requirements for officials." },
+        { "title": "Medical and anti-doping coordination", "text": "Medical cover at the venue and coordination with the relevant anti-doping bodies." },
+        { "title": "Event operations and broadcast support", "text": "Running order, ceremonies and day-of operations, plus camera and streaming positions coordinated with your broadcast partner." }
+      ]
+    },
+    "formats": {
+      "kicker": "Event formats",
+      "title": "From a club tournament to an international competition",
+      "items": [
+        { "title": "International competitions", "text": "Support for international sambo and combat-sports competitions held in Cyprus." },
+        { "title": "Open tournaments and cups", "text": "Invitational and open tournaments for visiting and local clubs." },
+        { "title": "National-level events", "text": "Championships and finals for federations and sports bodies in Cyprus." },
+        { "title": "Multi-sport festivals", "text": "Events combining several sports or age groups on one site." }
+      ]
+    },
+    "sambo": {
+      "kicker": "Specialist discipline",
+      "title": "Sambo, understood from the inside",
+      "p1": "Our founder, Marios Andreou, is President of the Cyprus Sambo Federation, the national governing body for sambo on the island and a member of the European Sambo Federation (ESF) and the International Sambo Federation (FIAS). That is his own role in the sport rather than a position held by the company.",
+      "p2": "It shapes what we bring to an event: competition rules, mat layouts and technical standards, referee and officiating practice, and the accreditation, hotel and transport needs of visiting delegations. We work to those standards on every sambo event we support in Cyprus.",
+      "hostingTitle": "International sambo in Cyprus",
+      "hostingText": "Cyprus has hosted FIAS and ESF championships in recent years. They are listed here as background on the island as a host:",
+      "events": [
+        { "year": "2025", "title": "European Sambo Championship", "place": "Cyprus" },
+        { "year": "2024", "title": "World Cadet, Youth and Junior Sambo Championships", "place": "Larnaca" },
+        { "year": "2016", "title": "First World University Sambo Championships", "place": "Nicosia" }
+      ],
+      "disclaimer": "These FIAS and ESF championships were not organised by MKA sport Events, and no endorsement of the company by the Cyprus Sambo Federation, the ESF or FIAS is implied. They show the level of competition Cyprus hosts and the standards our sambo events work to.",
+      "imageAlt": "A sambo athlete in red throwing an opponent in blue as the referee watches, in front of the European Sambo Championship Cyprus 2025 backdrop"
+    },
+    "gallery": {
+      "kicker": "On the mats in Cyprus",
+      "title": "International sambo championships held in Cyprus",
+      "text": "Photographs from two international sambo championships staged in Cyprus under FIAS and ESF regulations. They were organised by the federations, not by MKA sport Events; they show the level of competition our sambo events are built to serve.",
+      "credit": "Photographs courtesy of FIAS / sambo.sport",
+      "items": [
+        { "alt": "A sambo athlete in red throwing an opponent in blue as the referee watches, European Sambo Championship, Cyprus 2025", "title": "European Sambo Championship, Cyprus 2025", "caption": "A throw on the competition mat under the eye of the referee." },
+        { "alt": "A sambo athlete in a red jacket completing a throw over an opponent in blue at the European Sambo Championship in Cyprus, 2025", "title": "European Sambo Championship, Cyprus 2025", "caption": "Continental championship bouts under ESF rules." },
+        { "alt": "Two sambo athletes mid-throw in front of the World Cadet, Youth and Junior Sambo Championships emblem, Larnaca, Cyprus 2024", "title": "World Cadet, Youth and Junior Championships, Larnaca 2024", "caption": "Sport sambo on the main competition mat." },
+        { "alt": "Combat sambo athletes in protective headgear and gloves exchanging strikes in front of spectators waving national flags, Larnaca, Cyprus 2024", "title": "World Cadet, Youth and Junior Championships, Larnaca 2024", "caption": "Combat sambo in front of visiting delegations." },
+        { "alt": "A combat sambo athlete in red throwing an opponent in blue, with the mat-side scoreboard and camera operator visible, Larnaca, Cyprus 2024", "title": "World Cadet, Youth and Junior Championships, Larnaca 2024", "caption": "Mat-side scoring, timing and camera positions in operation." },
+        { "alt": "Elevated view of a sports hall laid with three sambo competition mats, national flags overhead and spectators in the stands, Larnaca, Cyprus 2024", "title": "World Cadet, Youth and Junior Championships, Larnaca 2024", "caption": "Three competition mats, national flags and spectator seating." }
+      ]
+    },
+    "how": {
+      "kicker": "How we work",
+      "title": "Early involvement makes every later decision easier",
+      "steps": [
+        { "title": "Brief", "text": "Sport, format, dates, expected numbers and the bodies involved." },
+        { "title": "Plan and budget", "text": "Venue options, competition layout, logistics and a costed plan." },
+        { "title": "Book and coordinate", "text": "Venue, mats and infrastructure, hotels, transport, officials and medical cover." },
+        { "title": "Deliver", "text": "Our team on site through setup, competition days and breakdown." }
+      ]
+    },
+    "finalCta": {
+      "title": "Hosting a tournament or competition in Cyprus?",
+      "text": "Get a delivery partner on board early. Tell us the sport, the format and the dates and we will come back with a plan."
+    }
+  },
+  "facilities": {
+    "seo": {
+      "title": "Cyprus as Your Training and Event Destination | MKA sport Events",
+      "description": "Why Cyprus works for training camps and sports events: climate, airports, our Agia Napa camp base, the facilities we book and the official Cyprus Sports Organisation venue map."
+    },
+    "hero": {
+      "kicker": "Cyprus",
+      "title": "Cyprus as your training and event destination",
+      "text": "Year-round training weather, two international airports, a beachfront camp base and halls and pitches across the island. Here is what the destination gives your camp or event, and how we book the right facility for it.",
+      "imageAlt": "A footballer in an orange shirt shielding the ball from a defender in white during a camp friendly on a grass pitch in Cyprus"
+    },
+    "regions": {
+      "kicker": "Where we work",
+      "title": "One island, short distances",
+      "text": "We are based in Nicosia and work across Cyprus. These are the places that matter most for a visiting group:",
+      "items": [
+        { "title": "Nicosia", "text": "Our home base and the capital. Company office at Chilis 28, and the city where the first World University Sambo Championships were held in 2016." },
+        { "title": "Agia Napa", "text": "Our training-camp base: a four-star beachfront hotel with a floodlit artificial-grass pitch, gym, pool and massage room." },
+        { "title": "Larnaca", "text": "The island's main international airport and the host city of the 2024 World Cadet, Youth and Junior Sambo Championships." },
+        { "title": "Limassol and Paphos", "text": "Cyprus's second international airport is at Paphos. Both cities have halls and pitches we can book for camps and events." }
+      ]
+    },
+    "climate": {
+      "kicker": "Climate and access",
+      "title": "Built for winter and spring camps",
+      "items": [
+        { "title": "300+ days of sunshine", "text": "Outdoor sessions are not lost to the forecast, even in January." },
+        { "title": "Two international airports", "text": "Direct flights from across Europe into Larnaca and Paphos." },
+        { "title": "Short transfers", "text": "Camp bases and venues are a short drive from the airports and from each other." },
+        { "title": "Value outside the peak", "text": "Hotels and pitches have capacity in winter and spring, and prices reflect it." }
+      ]
+    },
+    "types": {
+      "kicker": "What we book",
+      "title": "Facilities matched to your sport",
+      "text": "We book the facility that fits your sport, group size and dates, and handle the paperwork with it.",
+      "items": [
+        { "title": "Grass and artificial pitches", "text": "Full-size grass pitches with stand seating for matches, a floodlit artificial-grass pitch at the camp base, and FIFA-standard pitches on request." },
+        { "title": "Indoor halls with mats", "text": "Halls laid with mats for sambo, judo, wrestling and jiu-jitsu training, and competition layouts for events." },
+        { "title": "Gym, pool and recovery", "text": "A fully equipped gym, pool, sauna, jacuzzi, steam room and massage room at the camp base." },
+        { "title": "Competition venues", "text": "Halls with spectator seating and space for several competition mats, scoreboards and timing systems." }
+      ]
+    },
+    "venues": {
+      "kicker": "Venues",
+      "title": "Venues we work with",
+      "text": "Facility names and photographs are supplied on request while our venue list is being confirmed. Tell us your sport and dates and we will propose the right one.",
+      "sportsLabel": "Used for"
+    },
+    "koa": {
+      "kicker": "Official register",
+      "title": "Every registered sports facility in Cyprus, on one map",
+      "text": "The Cyprus Sports Organisation (KOA) keeps the official public register of sports venues in Cyprus, with an interactive map of every registered facility on the island. Use it to see what exists near your preferred base, then ask us to book it.",
+      "cta": "Open the official KOA sport map"
+    },
+    "finalCta": {
+      "title": "Need the right venue for your group?",
+      "text": "Tell us your sport, dates and group size. We will match you with the facility and handle the booking."
+    }
+  },
+  "contact": {
+    "seo": {
+      "title": "Contact MKA sport Events — Request an Offer | Nicosia, Cyprus",
+      "description": "Request an offer for a training camp or sports event in Cyprus. Contact MKA sport Events in Nicosia by WhatsApp, phone or email: +357 96 940622, mka.sport.cyp@gmail.com."
+    },
+    "hero": {
+      "kicker": "Contact",
+      "title": "Request an offer",
+      "text": "Camps, competitions or event organisation: tell us what you are planning and we reply within one working day. We work in English, Greek and Russian."
+    },
+    "channels": {
+      "title": "Talk to us directly",
+      "whatsapp": "WhatsApp",
+      "whatsappText": "Fastest reply. Opens a chat with a prepared message.",
+      "phone": "Phone",
+      "phoneText": "Two numbers, both in Cyprus.",
+      "email": "Email",
+      "emailText": "For detailed briefs and documents.",
+      "address": "Office",
+      "addressText": "Chilis 28, Nicosia, Cyprus",
+      "mapLink": "View on Google Maps"
+    },
+    "form": {
+      "title": "Tell us about your camp or event",
+      "intro": "The more you can tell us, the more precise the first proposal will be.",
+      "name": "Full name",
+      "organisation": "Organisation or club",
+      "email": "Email",
+      "phone": "Phone or WhatsApp",
+      "sport": "Sport",
+      "sportPlaceholder": "e.g. football, sambo, judo",
+      "service": "What do you need?",
+      "servicePlaceholder": "Please choose",
+      "serviceOptions": [
+        { "value": "camp", "label": "Training camp in Cyprus" },
+        { "value": "event", "label": "Sports event or tournament organisation" },
+        { "value": "competition", "label": "Support for an international competition" },
+        { "value": "other", "label": "Something else" }
+      ],
+      "participants": "Number of athletes and staff",
+      "dates": "Preferred dates",
+      "datesPlaceholder": "e.g. 10–20 February 2027, or a month",
+      "duration": "Duration",
+      "durationPlaceholder": "e.g. 7 nights",
+      "message": "Your message",
+      "messagePlaceholder": "Level of the group, training goals, accommodation needs, friendly matches, anything else we should know.",
+      "optional": "optional",
+      "required": "required",
+      "submit": "Request an Offer",
+      "whatsappAlt": "Or send the same details on WhatsApp",
+      "note": "This form opens your email app with the message ready to send; nothing is sent until you press Send there. You can also email us directly at",
+      "errors": {
+        "name": "Please enter your name.",
+        "email": "Please enter a valid email address.",
+        "service": "Please choose what you need.",
+        "message": "Please write a short message."
+      },
+      "success": "Thank you. Your email app should now open with your enquiry ready to send. If it does not, please email us directly at",
+      "subject": "Website enquiry",
+      "bodyLabels": {
+        "name": "Name",
+        "organisation": "Organisation",
+        "email": "Email",
+        "phone": "Phone / WhatsApp",
+        "sport": "Sport",
+        "service": "Service",
+        "participants": "Participants",
+        "dates": "Preferred dates",
+        "duration": "Duration",
+        "message": "Message"
+      },
+      "whatsappPrefix": "Hello MKA sport Events, I would like to request an offer."
+    }
+  }
+}

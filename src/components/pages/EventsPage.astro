@@ -1,0 +1,127 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHead from "@/components/SectionHead.astro";
+import FeatureGrid from "@/components/FeatureGrid.astro";
+import FeatureSplit from "@/components/FeatureSplit.astro";
+import HostedEvents from "@/components/HostedEvents.astro";
+import PhotoGallery from "@/components/PhotoGallery.astro";
+import Steps from "@/components/Steps.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Button from "@/components/Button.astro";
+import { getDictionary, localePath, type Locale } from "@/i18n";
+import { siteUrl } from "../../../site.config.mjs";
+import heroImg from "@/assets/images/event-arena-2.jpg";
+import samboImg from "@/assets/images/event-esf-2025-1.jpg";
+import g1 from "@/assets/images/event-esf-2025-1.jpg";
+import g2 from "@/assets/images/event-esf-2025-2.jpg";
+import g3 from "@/assets/images/event-larnaca-2024-1.jpg";
+import g4 from "@/assets/images/event-larnaca-2024-2.jpg";
+import g5 from "@/assets/images/event-larnaca-2024-3.jpg";
+import g6 from "@/assets/images/event-arena-1.jpg";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const e = t.events;
+
+const gallery = [g1, g2, g3, g4, g5, g6].map((image, i) => ({ image, ...e.gallery.items[i] }));
+
+const serviceSchema = {
+  "@type": "Service",
+  "@id": new URL(localePath(locale, "events"), siteUrl).href + "#service",
+  name: t.services.organisation.title,
+  serviceType: "Sports event organisation",
+  description: e.seo.description,
+  provider: { "@id": new URL("/#organization", siteUrl).href },
+  areaServed: { "@type": "Country", name: "Cyprus" },
+};
+---
+
+<BaseLayout
+  locale={locale}
+  current="events"
+  title={e.seo.title}
+  description={e.seo.description}
+  ogImage={heroImg}
+  ogImageAlt={e.hero.imageAlt}
+  schema={[serviceSchema]}
+>
+  <PageHero kicker={e.hero.kicker} title={e.hero.title} text={e.hero.text} image={heroImg} alt={e.hero.imageAlt} credit={t.common.photoCredit}>
+    <div class="actions">
+      <Button href={localePath(locale, "contact")} variant="primary" size="lg" icon="arrow" track="offer">{t.common.requestOffer}</Button>
+    </div>
+  </PageHero>
+
+  <!-- What we deliver -->
+  <section class="section">
+    <div class="container">
+      <SectionHead kicker={e.deliver.kicker} title={e.deliver.title} text={e.deliver.text} />
+      <FeatureGrid items={e.deliver.items} columns={4} />
+    </div>
+  </section>
+
+  <!-- Formats -->
+  <section class="section section--surface">
+    <div class="container">
+      <SectionHead kicker={e.formats.kicker} title={e.formats.title} />
+      <FeatureGrid items={e.formats.items} columns={4} numbered={false} />
+    </div>
+  </section>
+
+  <!-- Sambo -->
+  <section class="section section--dark">
+    <div class="container container--wide sambo">
+      <FeatureSplit image={samboImg} alt={e.sambo.imageAlt} imageSide="left" ratio="3x2" credit={t.common.photoCredit}>
+        <p class="kicker">{e.sambo.kicker}</p>
+        <h2>{e.sambo.title}</h2>
+        <p>{e.sambo.p1}</p>
+        <p>{e.sambo.p2}</p>
+      </FeatureSplit>
+      <div class="sambo__hosting reveal">
+        <HostedEvents title={e.sambo.hostingTitle} text={e.sambo.hostingText} events={e.sambo.events} disclaimer={e.sambo.disclaimer} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section">
+    <div class="container container--wide">
+      <SectionHead kicker={e.gallery.kicker} title={e.gallery.title} text={e.gallery.text} />
+      <PhotoGallery items={gallery} columns={3} credit={t.common.photoCredit} />
+      <p class="gallery-credit">{e.gallery.credit}</p>
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="section section--surface">
+    <div class="container">
+      <SectionHead kicker={e.how.kicker} title={e.how.title} />
+      <Steps steps={e.how.steps} />
+    </div>
+  </section>
+
+  <CtaBand locale={locale} title={e.finalCta.title} text={e.finalCta.text} />
+</BaseLayout>
+
+<style>
+  .sambo {
+    display: grid;
+    gap: var(--s-8);
+  }
+
+  .sambo__hosting {
+    max-width: 52rem;
+    padding-top: var(--s-6);
+    border-top: 1px solid var(--c-line-on-dark);
+  }
+
+  .gallery-credit {
+    margin-top: var(--s-5);
+    font-size: var(--fs-small);
+    color: var(--c-muted);
+  }
+</style>

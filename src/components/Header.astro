@@ -1,0 +1,415 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import Button from "./Button.astro";
+import logo from "@/assets/images/logo-mark.png";
+import { brandName } from "../../site.config.mjs";
+import { getDictionary, localePath, type Locale, type RouteKey } from "@/i18n";
+import { whatsappLink } from "@/lib/links";
+
+interface Props {
+  locale: Locale;
+  current: RouteKey;
+}
+
+const { locale, current } = Astro.props;
+const t = getDictionary(locale);
+const other: Locale = locale === "en" ? "ru" : "en";
+
+const navItems: { key: RouteKey; label: string }[] = [
+  { key: "about", label: t.nav.about },
+  { key: "camps", label: t.nav.camps },
+  { key: "events", label: t.nav.events },
+  { key: "facilities", label: t.nav.facilities },
+  { key: "contact", label: t.nav.contact },
+];
+---
+
+<header class="site-header" id="site-header">
+  <div class="container container--wide header-inner">
+    <a href={localePath(locale, "home")} class="brand" aria-label={`${brandName} — ${t.common.home}`}>
+      <Image src={logo} alt="" width="88" height="88" class="brand__mark" loading="eager" />
+      <span class="brand__name" aria-hidden="true">
+        <span class="brand__mka">MKA</span>
+        <span class="brand__rest">sport Events</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label={t.common.mainNavigation}>
+      <ul class="site-nav__list">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={localePath(locale, item.key)}
+                class:list={["site-nav__link", { "is-current": item.key === current }]}
+                aria-current={item.key === current ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="site-nav__extras">
+        <Button href={localePath(locale, "contact")} variant="primary" track="offer" size="sm">
+          {t.common.requestOffer}
+        </Button>
+        <a
+          class="site-nav__whatsapp"
+          href={whatsappLink(locale)}
+          target="_blank"
+          rel="noopener"
+          data-track="whatsapp"
+        >
+          <Icon name="whatsapp" />
+          <span>{t.common.chatOnWhatsapp}</span>
+        </a>
+        <a class="site-nav__lang" href={localePath(other, current)} hreflang={other} lang={other}>
+          {t.common.switchTo}
+        </a>
+      </div>
+    </nav>
+
+    <div class="header-tools">
+      <a
+        class="tool tool--whatsapp"
+        href={whatsappLink(locale)}
+        target="_blank"
+        rel="noopener"
+        aria-label={t.common.chatOnWhatsapp}
+        title={t.common.whatsapp}
+        data-track="whatsapp"
+      >
+        <Icon name="whatsapp" />
+      </a>
+      <a
+        class="tool tool--lang"
+        href={localePath(other, current)}
+        hreflang={other}
+        lang={other}
+        aria-label={t.common.switchTo}
+        title={t.common.switchTo}
+      >
+        {t.common.switchToShort}
+      </a>
+      <Button href={localePath(locale, "contact")} variant="primary" size="sm" track="offer" class="header-cta">
+        {t.common.requestOffer}
+      </Button>
+      <button
+        type="button"
+        class="tool nav-toggle"
+        id="nav-toggle"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label={t.common.openMenu}
+        data-label-open={t.common.openMenu}
+        data-label-close={t.common.closeMenu}
+      >
+        <Icon name="menu" class="nav-toggle__open" />
+        <Icon name="close" class="nav-toggle__close" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: saturate(160%) blur(10px);
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    min-height: var(--header-h);
+  }
+
+  /* Brand */
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex: 0 0 auto;
+    min-height: 44px;
+  }
+
+  .brand__mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+  }
+
+  .brand__name {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    color: var(--c-ink);
+    white-space: nowrap;
+  }
+
+  .brand__mka {
+    font-weight: 800;
+  }
+
+  .brand__rest {
+    font-weight: 500;
+    color: var(--c-navy-600);
+  }
+
+  /* Desktop nav */
+  .site-nav__list {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+  }
+
+  .site-nav__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.8rem;
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-navy-700);
+    position: relative;
+    transition: color var(--dur) var(--ease);
+  }
+
+  .site-nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0.8rem;
+    right: 0.8rem;
+    bottom: 6px;
+    height: 2px;
+    background: var(--c-turq);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur) var(--ease);
+  }
+
+  .site-nav__link:hover,
+  .site-nav__link.is-current {
+    color: var(--c-ink);
+  }
+
+  .site-nav__link.is-current::after,
+  .site-nav__link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .site-nav__extras {
+    display: none;
+  }
+
+  /* Tools */
+  .header-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 0 0 auto;
+  }
+
+  .tool {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: var(--radius-sm);
+    color: var(--c-navy-700);
+    transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+
+  .tool:hover {
+    background: var(--c-surface);
+    color: var(--c-ink);
+  }
+
+  .tool--whatsapp svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .tool--lang {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    padding-inline: 0.5rem;
+    border: 1px solid var(--c-line);
+  }
+
+  .tool--lang:hover {
+    border-color: var(--c-line-strong);
+  }
+
+  .header-cta {
+    margin-left: 0.4rem;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-toggle__close {
+    display: none;
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle__open {
+    display: none;
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle__close {
+    display: block;
+  }
+
+  /* Tighten before collapsing */
+  @media (max-width: 1240px) {
+    .site-nav__link {
+      padding: 0 0.55rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+    }
+
+    .site-nav__link::after {
+      left: 0.55rem;
+      right: 0.55rem;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .header-cta {
+      display: none;
+    }
+  }
+
+  /* Collapse into the panel */
+  @media (max-width: 960px) {
+    .nav-toggle {
+      display: inline-flex;
+    }
+
+    .site-nav {
+      position: fixed;
+      inset: var(--header-h) 0 0 0;
+      z-index: 90;
+      background: var(--c-navy-900);
+      color: #fff;
+      padding: var(--s-6) var(--gutter) calc(var(--s-6) + var(--mobile-bar-h));
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-6);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility 0s linear var(--dur);
+    }
+
+    .site-nav.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+    }
+
+    .site-nav__list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      border-top: 1px solid var(--c-line-on-dark);
+    }
+
+    .site-nav__list li {
+      border-bottom: 1px solid var(--c-line-on-dark);
+    }
+
+    .site-nav__link {
+      width: 100%;
+      min-height: 56px;
+      padding: 0.6rem 0;
+      font-size: clamp(1.6rem, 6vw, 2.2rem);
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .site-nav__link::after {
+      display: none;
+    }
+
+    .site-nav__link:hover,
+    .site-nav__link.is-current {
+      color: #fff;
+    }
+
+    .site-nav__link.is-current {
+      padding-left: 1rem;
+      box-shadow: inset 3px 0 0 var(--c-turq);
+    }
+
+    .site-nav__extras {
+      display: grid;
+      gap: var(--s-4);
+    }
+
+    .site-nav__whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-height: 44px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .site-nav__whatsapp svg {
+      width: 22px;
+      height: 22px;
+      color: var(--c-turq);
+    }
+
+    .site-nav__lang {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--c-on-dark-muted);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .site-nav__lang:hover {
+      color: #fff;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .brand__name {
+      font-size: 1.15rem;
+    }
+
+    .tool--whatsapp {
+      display: none; /* the sticky mobile bar carries WhatsApp on phones */
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-nav {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

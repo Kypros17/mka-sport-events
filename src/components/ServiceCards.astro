@@ -1,0 +1,141 @@
+---
+/**
+ * The three services as image-led panels: a photo, a large numeral, the
+ * service name and a short line. Deliberately not a rounded "card" grid.
+ */
+import { Picture } from "astro:assets";
+import Icon from "./Icon.astro";
+import { getDictionary, localePath, type Locale } from "@/i18n";
+import campsImg from "@/assets/images/camp-football-2.jpeg";
+import eventsImg from "@/assets/images/event-larnaca-2024-1.jpg";
+import orgImg from "@/assets/images/event-arena-2.jpg";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+
+const services = [
+  { ...t.services.camps, image: campsImg, alt: t.home.featuredCamp.imageAlt, href: localePath(locale, "camps"), credit: undefined },
+  { ...t.services.events, image: eventsImg, alt: t.events.gallery.items[2].alt, href: localePath(locale, "events"), credit: t.common.photoCredit },
+  { ...t.services.organisation, image: orgImg, alt: t.events.hero.imageAlt, href: localePath(locale, "events"), credit: t.common.photoCredit },
+];
+---
+
+<div class="services">
+  {
+    services.map((s, i) => (
+      <a href={s.href} class="service reveal" data-delay={String(i)}>
+        <div class="frame frame--4x3 service__media">
+          <Picture
+            src={s.image}
+            alt={s.alt}
+            widths={[420, 640, 850].filter((w) => w <= s.image.width)}
+            sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
+            formats={["avif", "webp"]}
+            fallbackFormat="jpg"
+            loading="lazy"
+            decoding="async"
+          />
+          {s.credit && <span class="credit">{s.credit}</span>}
+        </div>
+        <div class="service__body">
+          <span class="num">{String(i + 1).padStart(2, "0")}</span>
+          <h3 class="service__title">{s.title}</h3>
+          <p class="service__text">{s.short}</p>
+          <span class="arrow-link">
+            {s.cta}
+            <Icon name="arrow" />
+          </span>
+        </div>
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .services {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-6) var(--s-5);
+  }
+
+  .service {
+    display: grid;
+    gap: var(--s-4);
+    align-content: start;
+    color: inherit;
+  }
+
+  .service__media img {
+    transition: transform 900ms var(--ease);
+  }
+
+  .service:hover .service__media img {
+    transform: scale(1.04);
+  }
+
+  .service__body {
+    display: grid;
+    gap: var(--s-3);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--c-line);
+  }
+
+  .service__title {
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+  }
+
+  .service__text {
+    color: var(--c-muted);
+  }
+
+  .service:hover .arrow-link {
+    color: var(--c-turq-700);
+  }
+
+  .service:hover .arrow-link svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 960px) {
+    .services {
+      grid-template-columns: 1fr;
+      gap: var(--s-7);
+    }
+
+    .service {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      align-items: center;
+      gap: var(--s-5);
+    }
+
+    .service__body {
+      border-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .service {
+      grid-template-columns: 1fr;
+    }
+
+    .service__body {
+      border-top: 1px solid var(--c-line);
+      padding-top: var(--s-4);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service__media img {
+      transition: none;
+    }
+
+    .service:hover .service__media img {
+      transform: none;
+    }
+  }
+</style>

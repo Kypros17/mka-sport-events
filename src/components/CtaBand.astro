@@ -1,0 +1,88 @@
+---
+/**
+ * Full-bleed closing call to action: Request an Offer plus WhatsApp.
+ */
+import Button from "./Button.astro";
+import { getDictionary, localePath, type Locale } from "@/i18n";
+import { whatsappLink } from "@/lib/links";
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  text?: string;
+}
+
+const { locale, title, text } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<section class="cta-band section--dark">
+  <div class="container cta-band__inner">
+    <div class="cta-band__copy reveal">
+      <h2 class="cta-band__title">{title ?? t.cta.title}</h2>
+      <p class="lead">{text ?? t.cta.text}</p>
+    </div>
+    <div class="cta-band__actions reveal" data-delay="1">
+      <Button href={localePath(locale, "contact")} variant="primary" size="lg" icon="arrow" track="offer">
+        {t.cta.button}
+      </Button>
+      <Button href={whatsappLink(locale)} variant="whatsapp" size="lg" icon="whatsapp" iconPosition="start" external track="whatsapp">
+        {t.cta.secondary}
+      </Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band {
+    position: relative;
+    padding-block: var(--section-y);
+    overflow: hidden;
+  }
+
+  .cta-band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(100deg, transparent 55%, rgba(31, 177, 210, 0.12) 100%),
+      repeating-linear-gradient(-60deg, transparent 0 46px, rgba(255, 255, 255, 0.025) 46px 48px);
+    pointer-events: none;
+  }
+
+  .cta-band__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: var(--s-7);
+    align-items: center;
+  }
+
+  .cta-band__title {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    margin-bottom: var(--s-4);
+  }
+
+  .cta-band__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 860px) {
+    .cta-band__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-band__actions {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cta-band__actions :global(.btn) {
+      width: 100%;
+    }
+  }
+</style>

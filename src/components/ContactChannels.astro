@@ -1,0 +1,153 @@
+---
+/**
+ * Direct contact channels: WhatsApp, phone, email and the office address,
+ * each with a large touch target and a data-track attribute.
+ */
+import Icon from "./Icon.astro";
+import { contact } from "../../site.config.mjs";
+import { getDictionary, type Locale } from "@/i18n";
+import { whatsappLink, telLink, mailLink, mapsLink } from "@/lib/links";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale).contact.channels;
+---
+
+<div class="channels">
+  <h2 class="channels__title">{t.title}</h2>
+  <ul class="channels__list">
+    <li class="channel">
+      <span class="channel__icon"><Icon name="whatsapp" /></span>
+      <div class="channel__body">
+        <h3 class="channel__label">{t.whatsapp}</h3>
+        <p class="channel__text">{t.whatsappText}</p>
+        <a class="channel__link" href={whatsappLink(locale)} target="_blank" rel="noopener" data-track="whatsapp">
+          +{contact.whatsapp.slice(0, 3)} {contact.whatsapp.slice(3, 5)} {contact.whatsapp.slice(5)}
+          <Icon name="external" />
+        </a>
+      </div>
+    </li>
+    <li class="channel">
+      <span class="channel__icon"><Icon name="phone" /></span>
+      <div class="channel__body">
+        <h3 class="channel__label">{t.phone}</h3>
+        <p class="channel__text">{t.phoneText}</p>
+        {
+          contact.phones.map((p) => (
+            <a class="channel__link" href={telLink(p.e164)} data-track="phone">
+              {p.display}
+            </a>
+          ))
+        }
+      </div>
+    </li>
+    <li class="channel">
+      <span class="channel__icon"><Icon name="mail" /></span>
+      <div class="channel__body">
+        <h3 class="channel__label">{t.email}</h3>
+        <p class="channel__text">{t.emailText}</p>
+        <a class="channel__link" href={mailLink()} data-track="email">{contact.email}</a>
+      </div>
+    </li>
+    <li class="channel">
+      <span class="channel__icon"><Icon name="pin" /></span>
+      <div class="channel__body">
+        <h3 class="channel__label">{t.address}</h3>
+        <p class="channel__text">{t.addressText}</p>
+        <a class="channel__link channel__link--small" href={mapsLink()} target="_blank" rel="noopener">
+          {t.mapLink}
+          <Icon name="external" />
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<style>
+  .channels {
+    display: grid;
+    gap: var(--s-5);
+  }
+
+  .channels__title {
+    font-size: var(--fs-h3);
+  }
+
+  .channels__list {
+    display: grid;
+    border-top: 1px solid var(--c-line);
+  }
+
+  .channel {
+    display: grid;
+    grid-template-columns: 2.75rem 1fr;
+    gap: var(--s-4);
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .channel__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius);
+    background: var(--c-turq-100);
+    color: var(--c-turq-700);
+  }
+
+  .channel__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .channel__body {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .channel__label {
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+  }
+
+  .channel__text {
+    color: var(--c-muted);
+    font-size: var(--fs-small);
+  }
+
+  .channel__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    width: fit-content;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--c-ink);
+    transition: color var(--dur) var(--ease);
+  }
+
+  .channel__link svg {
+    width: 16px;
+    height: 16px;
+    color: var(--c-muted);
+  }
+
+  .channel__link:hover {
+    color: var(--c-turq-700);
+  }
+
+  .channel__link--small {
+    font-size: 1rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+</style>
