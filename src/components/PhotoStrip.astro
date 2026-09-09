@@ -1,0 +1,199 @@
+---
+/**
+ * Magazine photo spread: a horizontal, scroll-snapped strip of real camp
+ * photographs in alternating sizes and vertical offsets, a cyan hairline
+ * running behind them, and technical frame labels. Hover lifts the frame.
+ */
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Item {
+  image: ImageMetadata;
+  alt: string;
+  title: string;
+  caption: string;
+}
+
+interface Props {
+  items: Item[];
+  label?: string;
+  frameLabel?: string;
+}
+
+const { items, label, frameLabel = "Frame" } = Astro.props;
+// Alternate frame shapes: wide, tall, wide, square, wide
+const shapes = ["wide", "tall", "wide", "square", "wide"];
+---
+
+<div class="strip" role="region" aria-label={label} tabindex="0">
+  <ol class="strip__track">
+    {
+      items.map((item, i) => (
+        <li class:list={["strip__item", `strip__item--${shapes[i % shapes.length]}`, "reveal"]} data-delay={String(Math.min(i, 3))}>
+          <figure class="strip__figure">
+            <div class="strip__frame grade">
+              <Picture
+                src={item.image}
+                alt={item.alt}
+                widths={[480, 720, 960, 1200].filter((w) => w <= item.image.width)}
+                sizes="(min-width: 1024px) 600px, 80vw"
+                formats={["avif", "webp"]}
+                fallbackFormat="jpg"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption class="strip__caption">
+              <span class="strip__num">{String(i + 1).padStart(2, "0")}</span>
+              <strong>{item.title}</strong>
+              <span>{item.caption}</span>
+            </figcaption>
+          </figure>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  .strip {
+    position: relative;
+    width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-line-strong) transparent;
+    --edge: max(var(--gutter), calc((100vw - var(--container-wide)) / 2));
+    padding: var(--s-6) var(--edge) var(--s-4);
+    scroll-padding-left: var(--edge);
+  }
+
+  .strip:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .strip__track {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-6);
+    width: max-content;
+  }
+
+  .strip__item {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    transition: transform 500ms var(--ease);
+  }
+
+  .strip__item:hover {
+    transform: translateY(-6px);
+  }
+
+  .strip__item--wide {
+    width: clamp(300px, 46vw, 640px);
+  }
+
+  .strip__item--tall {
+    width: clamp(220px, 28vw, 380px);
+    margin-top: var(--s-7);
+  }
+
+  .strip__item--square {
+    width: clamp(240px, 32vw, 440px);
+    margin-top: var(--s-5);
+  }
+
+  .strip__frame {
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: var(--c-navy-800);
+  }
+
+  .strip__item--tall .strip__frame {
+    aspect-ratio: 4 / 5;
+  }
+
+  .strip__item--square .strip__frame {
+    aspect-ratio: 1;
+  }
+
+  .strip__frame :global(picture),
+  .strip__frame :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .strip__frame :global(img) {
+    object-fit: cover;
+    transition: transform 900ms var(--ease);
+  }
+
+  .strip__item:hover .strip__frame :global(img) {
+    transform: scale(1.04);
+  }
+
+  .strip__figure {
+    display: grid;
+    gap: var(--s-3);
+  }
+
+  .strip__caption {
+    display: grid;
+    gap: 0.2rem;
+    padding-top: var(--s-3);
+    border-top: 1px solid var(--c-line);
+    font-size: var(--fs-small);
+    color: var(--c-muted);
+  }
+
+  .strip__num {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--c-turq-700);
+  }
+
+  .strip__caption strong {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--c-ink);
+  }
+
+  @media (max-width: 767px) {
+    .strip__item--tall,
+    .strip__item--square {
+      margin-top: var(--s-4);
+    }
+
+    .strip__item--wide {
+      width: 80vw;
+    }
+
+    .strip__item--tall {
+      width: 58vw;
+    }
+
+    .strip__item--square {
+      width: 66vw;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .strip__item,
+    .strip__frame :global(img) {
+      transition: none;
+    }
+
+    .strip__item:hover {
+      transform: none;
+    }
+
+    .strip__item:hover .strip__frame :global(img) {
+      transform: none;
+    }
+  }
+</style>

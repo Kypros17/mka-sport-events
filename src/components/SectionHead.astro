@@ -1,8 +1,10 @@
 ---
 /**
- * Section heading: kicker, title and optional intro. Left-aligned by default
- * so sections do not all read as the same centred block; pass align="center"
- * where a centred head genuinely fits.
+ * Section heading. Two voices:
+ *  - default: kicker + title + intro, sentence case (inner pages)
+ *  - display: broadcast slate (number, label, running hairline), an oversized
+ *    outlined numeral as a graphic element, and an uppercase condensed title
+ *    (home page).
  */
 interface Props {
   kicker?: string;
@@ -11,29 +13,66 @@ interface Props {
   align?: "left" | "center";
   level?: "h1" | "h2" | "h3";
   size?: "md" | "lg";
+  /** Section number, e.g. "02". */
+  index?: string;
+  /** Use the sports display voice: slate, uppercase title. */
+  display?: boolean;
+  /** Show the oversized outlined numeral behind the title (off by default). */
+  giant?: boolean;
+  /** Optional accent word inside the title, rendered in cyan (display voice only). */
+  accent?: string;
   class?: string;
 }
 
-const { kicker, title, text, align = "left", level = "h2", size = "md", class: className } = Astro.props;
+const { kicker, title, text, align = "left", level = "h2", size = "md", index, display = false, giant = false, accent, class: className } = Astro.props;
 const Heading = level;
+
+// Split the title around the accent word so it can be coloured without HTML in the dictionary
+const parts = accent && title.includes(accent) ? title.split(accent) : null;
 ---
 
-<div class:list={["section-head", `section-head--${align}`, `section-head--${size}`, className, "reveal"]}>
-  {kicker && <p class="kicker">{kicker}</p>}
-  <Heading class="section-head__title">{title}</Heading>
+<div class:list={["section-head", `section-head--${align}`, `section-head--${size}`, { "section-head--display": display }, className, "reveal"]}>
+  {display && giant && index && <span class="giant-num giant-num--faint section-head__giant" aria-hidden="true">{index}</span>}
+  {
+    display ? (
+      <p class="slate">
+        {index && <span class="slate__num">{index}</span>}
+        {kicker}
+      </p>
+    ) : index ? (
+      <p class="section-index">
+        <span class="section-index__num">{index}</span>
+        {kicker}
+      </p>
+    ) : (
+      kicker && <p class="kicker">{kicker}</p>
+    )
+  }
+  <Heading class:list={["section-head__title", { display: display }]}>
+    {parts ? (
+      <>
+        {parts[0]}
+        <span class="display__accent">{accent}</span>
+        {parts[1]}
+      </>
+    ) : (
+      title
+    )}
+  </Heading>
   {text && <p class="lead section-head__text">{text}</p>}
   <slot />
 </div>
 
 <style>
   .section-head {
+    position: relative;
     display: grid;
     gap: var(--s-4);
     margin-bottom: clamp(2rem, 5vw, 3.5rem);
   }
 
   .section-head--left {
-    max-width: 44rem;
+    max-width: 48rem;
   }
 
   .section-head--center {
@@ -47,7 +86,38 @@ const Heading = level;
     font-size: clamp(2.4rem, 5vw, 4rem);
   }
 
+  .section-head--display {
+    max-width: none;
+    padding-top: var(--s-4);
+  }
+
+  .section-head--display .slate {
+    width: 100%;
+  }
+
+  .section-head--display .section-head__title {
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    max-width: 14ch;
+  }
+
+  .section-head__giant {
+    position: absolute;
+    right: 0;
+    top: -0.1em;
+    z-index: 0;
+  }
+
   .section-head__text {
     margin-top: var(--s-1);
+    max-width: 56ch;
+  }
+
+  @media (max-width: 767px) {
+    .section-head__giant {
+      right: auto;
+      left: -0.05em;
+      top: 0.3em;
+      opacity: 0.6;
+    }
   }
 </style>

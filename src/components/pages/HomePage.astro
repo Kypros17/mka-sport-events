@@ -1,21 +1,28 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import HomeHero from "@/components/HomeHero.astro";
-import SectionHead from "@/components/SectionHead.astro";
-import FeatureGrid from "@/components/FeatureGrid.astro";
-import ServiceCards from "@/components/ServiceCards.astro";
-import FeatureSplit from "@/components/FeatureSplit.astro";
-import Steps from "@/components/Steps.astro";
-import Faq from "@/components/Faq.astro";
+import WhoWeAre from "@/components/WhoWeAre.astro";
+import ServicePanels from "@/components/ServicePanels.astro";
+import Destination from "@/components/Destination.astro";
+import PackageBand from "@/components/PackageBand.astro";
+import PhotoRow from "@/components/PhotoRow.astro";
 import CtaBand from "@/components/CtaBand.astro";
-import Button from "@/components/Button.astro";
-import Icon from "@/components/Icon.astro";
+import Streaks from "@/components/Streaks.astro";
 import { getDictionary, localePath, type Locale } from "@/i18n";
 import heroImg from "@/assets/images/camp-football-1.jpeg";
-import proofImg from "@/assets/images/camp-banner-2.jpeg";
-import campImg from "@/assets/images/camp-football-3.jpeg";
-import samboImg from "@/assets/images/event-arena-1.jpg";
-import founderImg from "@/assets/images/camp-banner-1.jpeg";
+import whoImg from "@/assets/images/camp-banner-2.jpeg";
+import cardCamps from "@/assets/images/camp-football-3.jpeg";
+import cardEvents from "@/assets/images/camp-football-2.jpeg";
+import cardOrg from "@/assets/images/camp-banner-1.jpeg";
+import cyprusImg from "@/assets/images/camp-banner-1.jpeg";
+import packageImg from "@/assets/images/camp-team-1.jpeg";
+import ctaBg from "@/assets/images/camp-football-2.jpeg";
+import ctaSide from "@/assets/images/camp-football-3.jpeg";
+import p1 from "@/assets/images/camp-team-1.jpeg";
+import p2 from "@/assets/images/camp-banner-2.jpeg";
+import p3 from "@/assets/images/camp-football-2.jpeg";
+import p4 from "@/assets/images/camp-banner-1.jpeg";
+import p5 from "@/assets/images/camp-football-3.jpeg";
 
 interface Props {
   locale: Locale;
@@ -25,14 +32,13 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 const h = t.home;
 
-const faqSchema = {
-  "@type": "FAQPage",
-  mainEntity: h.faq.items.map((i) => ({
-    "@type": "Question",
-    name: i.q,
-    acceptedAnswer: { "@type": "Answer", text: i.a },
-  })),
-};
+const cards = [
+  { ...h.serviceCards[0], href: localePath(locale, "camps"), image: cardCamps, position: "50% 40%" },
+  { ...h.serviceCards[1], href: localePath(locale, "events"), image: cardEvents, position: "45% 40%" },
+  { ...h.serviceCards[2], href: localePath(locale, "events"), image: cardOrg, position: "22% 50%" },
+];
+
+const gallery = [p1, p2, p3, p4, p5].map((image, i) => ({ image, alt: h.proof.items[i].alt }));
 ---
 
 <BaseLayout
@@ -42,139 +48,132 @@ const faqSchema = {
   description={h.seo.description}
   ogImage={heroImg}
   ogImageAlt={h.hero.imageAlt}
-  schema={[faqSchema]}
+  headerVariant="overlay"
 >
   <HomeHero locale={locale} />
 
-  <!-- Who we serve -->
-  <section class="section">
-    <div class="container">
-      <SectionHead kicker={h.audience.kicker} title={h.audience.title} />
-      <FeatureGrid items={h.audience.items} columns={3} />
+  <!-- 01 Who we are -->
+  <WhoWeAre
+    index="01"
+    label={h.who.label}
+    brand={h.who.brand}
+    title={h.who.title}
+    text={h.who.text}
+    cta={h.who.cta}
+    href={localePath(locale, "about")}
+    script={h.who.script}
+    image={whoImg}
+    imageAlt={h.who.imageAlt}
+    workLabel={h.who.workLabel}
+    audiences={h.who.audiences}
+  />
+
+  <!-- 02 Our services -->
+  <section class="services" id="services">
+    <Streaks side="left" soft />
+    <div class="container container--wide services__grid">
+      <div class="services__head reveal">
+        <p class="slate on-dark services__slate"><span class="slate__num">02</span>{h.servicesHead.label}</p>
+        <h2 class="services__title display display--it">
+          {h.servicesHead.lines.map((line) => <span>{line}</span>)}
+        </h2>
+      </div>
+      <ServicePanels cards={cards} />
     </div>
   </section>
 
-  <!-- Three services -->
-  <section class="section section--surface" id="services">
-    <div class="container container--wide">
-      <SectionHead kicker={h.servicesHead.kicker} title={h.servicesHead.title} text={h.servicesHead.text} />
-      <ServiceCards locale={locale} />
-    </div>
-  </section>
+  <!-- 03 Cyprus -->
+  <Destination
+    index="03"
+    label={h.cyprus.label}
+    display={h.cyprus.display}
+    benefits={h.cyprus.benefits}
+    cta={h.cyprus.cta}
+    href={localePath(locale, "facilities")}
+    places={h.cyprus.places}
+    mapLabel={h.cyprus.mapLabel}
+    tagline={h.cyprus.tagline}
+    image={cyprusImg}
+    imageAlt={h.cyprus.imageAlt}
+  />
 
-  <!-- Proof -->
-  <section class="section">
-    <div class="container container--wide">
-      <FeatureSplit image={proofImg} alt={h.proof.imageAlt} imageSide="left" ratio="4x3">
-        <p class="kicker">{h.proof.kicker}</p>
-        <h2>{h.proof.title}</h2>
-        <p>{h.proof.text}</p>
-        <ul class="checklist">
-          {h.proof.points.map((p) => <li>{p}</li>)}
-        </ul>
-        <div class="actions">
-          <a href={localePath(locale, "camps")} class="arrow-link">{h.proof.cta}<Icon name="arrow" /></a>
-        </div>
-      </FeatureSplit>
-    </div>
-  </section>
+  <!-- 04 Training camps -->
+  <PackageBand
+    locale={locale}
+    index="04"
+    label={h.package.label}
+    from={h.package.from}
+    price={h.package.price}
+    indicative={h.package.indicative}
+    meta={h.package.meta}
+    cta={h.package.cta}
+    includedTitle={h.package.includedTitle}
+    included={h.package.included}
+    tagline={h.package.tagline}
+    image={packageImg}
+    imageAlt={h.package.imageAlt}
+  />
 
-  <!-- Featured camp package -->
-  <section class="section section--sand">
-    <div class="container container--wide">
-      <FeatureSplit image={campImg} alt={h.featuredCamp.imageAlt} imageSide="right" ratio="4x3">
-        <p class="kicker">{h.featuredCamp.kicker}</p>
-        <h2>{h.featuredCamp.title}</h2>
-        <p>{h.featuredCamp.text}</p>
-        <ul class="checklist">
-          {h.featuredCamp.included.map((p) => <li>{p}</li>)}
-        </ul>
-        <p class="small">{h.featuredCamp.onRequest}</p>
-        <div class="actions">
-          <Button href={localePath(locale, "camps")} variant="secondary" icon="arrow">{h.featuredCamp.cta}</Button>
-          <Button href={localePath(locale, "contact")} variant="primary" track="offer">{t.common.requestOffer}</Button>
-        </div>
-      </FeatureSplit>
-    </div>
-  </section>
+  <!-- Real experiences -->
+  <PhotoRow label={h.proof.label} title={h.proof.title} note={h.proof.text} items={gallery} regionLabel={h.proof.stripLabel} />
 
-  <!-- Sambo expertise -->
-  <section class="section section--dark">
-    <div class="container container--wide">
-      <FeatureSplit image={samboImg} alt={h.sambo.imageAlt} imageSide="left" ratio="3x2" credit={t.common.photoCredit}>
-        <p class="kicker">{h.sambo.kicker}</p>
-        <h2>{h.sambo.title}</h2>
-        <p>{h.sambo.text}</p>
-        <p>{h.sambo.text2}</p>
-        <div class="actions">
-          <a href={localePath(locale, "events")} class="arrow-link">{h.sambo.cta}<Icon name="arrow" /></a>
-        </div>
-      </FeatureSplit>
-    </div>
-  </section>
-
-  <!-- Why Cyprus -->
-  <section class="section">
-    <div class="container">
-      <SectionHead kicker={h.cyprus.kicker} title={h.cyprus.title} />
-      <FeatureGrid items={h.cyprus.items} columns={4} />
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section class="section section--surface">
-    <div class="container">
-      <SectionHead kicker={h.how.kicker} title={h.how.title} />
-      <Steps steps={h.how.steps} />
-    </div>
-  </section>
-
-  <!-- Founder -->
-  <section class="section">
-    <div class="container container--wide">
-      <FeatureSplit image={founderImg} alt={h.founder.imageAlt} imageSide="right" ratio="4x3" position="22% 50%">
-        <p class="kicker">{h.founder.kicker}</p>
-        <h2>{h.founder.title}</h2>
-        <p>{h.founder.text}</p>
-        <div class="actions">
-          <a href={localePath(locale, "about")} class="arrow-link">{h.founder.cta}<Icon name="arrow" /></a>
-        </div>
-      </FeatureSplit>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section section--line-top">
-    <div class="container faq-layout">
-      <SectionHead kicker={h.faq.kicker} title={h.faq.title} class="faq-layout__head" />
-      <Faq items={h.faq.items} />
-    </div>
-  </section>
-
-  <CtaBand locale={locale} title={h.finalCta.title} text={h.finalCta.text} />
+  <!-- Final CTA -->
+  <CtaBand
+    locale={locale}
+    title={h.finalCta.title}
+    text={h.finalCta.text}
+    showContacts
+    contactsLabel={h.finalCta.contactsLabel}
+    image={ctaBg}
+    imageAlt={h.proof.items[2].alt}
+    sideImage={ctaSide}
+    sideImageAlt={h.serviceCards[0].alt}
+    script={h.finalCta.script}
+  />
 </BaseLayout>
 
 <style>
-  .faq-layout {
+  .services {
+    position: relative;
+    background: var(--c-navy-900);
+    color: #fff;
+    overflow: hidden;
+    padding-block: var(--home-y);
+  }
+
+  .services__grid {
+    position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-    gap: var(--s-7);
-    align-items: start;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
   }
 
-  .faq-layout :global(.faq-layout__head) {
-    position: sticky;
-    top: calc(var(--header-h) + 1.5rem);
-    margin-bottom: 0;
+  .services__head {
+    display: grid;
+    gap: var(--s-3);
+    align-content: center;
   }
 
-  @media (max-width: 860px) {
-    .faq-layout {
+  .services__slate::after {
+    display: none;
+  }
+
+  .services__title {
+    display: grid;
+    font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+    line-height: 0.92;
+    color: #fff;
+    padding-right: 0.15em;
+  }
+
+  .services__title span {
+    display: block;
+  }
+
+  @media (max-width: 1100px) {
+    .services__grid {
       grid-template-columns: 1fr;
-    }
-
-    .faq-layout :global(.faq-layout__head) {
-      position: static;
     }
   }
 </style>

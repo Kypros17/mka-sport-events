@@ -1,27 +1,91 @@
 ---
 /**
- * Full-bleed closing call to action: Request an Offer plus WhatsApp.
+ * Closing call to action. With `image` it follows the reference's final
+ * frame: a dark textured photograph behind three columns, the italic
+ * headline and copy, the two stacked buttons, and a parallelogram
+ * photograph with a handwritten slogan. Without an image it is a plain dark
+ * band (inner pages).
  */
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import Button from "./Button.astro";
+import Streaks from "./Streaks.astro";
+import { contact } from "../../site.config.mjs";
 import { getDictionary, localePath, type Locale } from "@/i18n";
-import { whatsappLink } from "@/lib/links";
+import { whatsappLink, telLink, mailLink } from "@/lib/links";
 
 interface Props {
   locale: Locale;
   title?: string;
   text?: string;
+  showContacts?: boolean;
+  contactsLabel?: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  /** Second, framed photograph beside the buttons (home page). */
+  sideImage?: ImageMetadata;
+  sideImageAlt?: string;
+  script?: string;
+  accent?: string;
 }
 
-const { locale, title, text } = Astro.props;
+const { locale, title, text, showContacts = false, contactsLabel, image, imageAlt = "", sideImage, sideImageAlt = "", script, accent } = Astro.props;
 const t = getDictionary(locale);
+const heading = title ?? t.cta.title;
+const parts = accent && heading.includes(accent) ? heading.split(accent) : null;
 ---
 
-<section class="cta-band section--dark">
-  <div class="container cta-band__inner">
+<section class:list={["cta-band", "section--ink", { "cta-band--frame": !!image }]}>
+  {
+    image && (
+      <div class="cta-band__media" aria-hidden="true">
+        <Picture
+          src={image}
+          alt=""
+          widths={[640, 960, 1280, 1600].filter((w) => w <= image.width)}
+          sizes="100vw"
+          formats={["avif", "webp"]}
+          fallbackFormat="jpg"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    )
+  }
+  {image && imageAlt && <p class="sr-only">{imageAlt}</p>}
+  {image && <Streaks side="left" soft />}
+
+  <div class:list={["container container--wide cta-band__inner", { "cta-band__inner--three": !!sideImage }]}>
     <div class="cta-band__copy reveal">
-      <h2 class="cta-band__title">{title ?? t.cta.title}</h2>
-      <p class="lead">{text ?? t.cta.text}</p>
+      <h2 class:list={["cta-band__title", { "display display--it": !!image }]}>
+        {parts ? (
+          <>
+            {parts[0]}
+            <span class="display__accent">{accent}</span>
+            {parts[1]}
+          </>
+        ) : (
+          heading
+        )}
+      </h2>
+      <p class="cta-band__text">{text ?? t.cta.text}</p>
+      {
+        showContacts && (
+          <p class="cta-band__contacts">
+            {contactsLabel && <span class="cta-band__contacts-label">{contactsLabel}</span>}
+            {contact.phones.map((p) => (
+              <a href={telLink(p.e164)} data-track="phone">
+                {p.display}
+              </a>
+            ))}
+            <a href={mailLink()} data-track="email">
+              {contact.email}
+            </a>
+          </p>
+        )
+      }
     </div>
+
     <div class="cta-band__actions reveal" data-delay="1">
       <Button href={localePath(locale, "contact")} variant="primary" size="lg" icon="arrow" track="offer">
         {t.cta.button}
@@ -30,57 +94,199 @@ const t = getDictionary(locale);
         {t.cta.secondary}
       </Button>
     </div>
+
+    {
+      sideImage && (
+        <div class="cta-band__side reveal" data-delay="2">
+          <div class="cta-band__photo para">
+            <Picture
+              src={sideImage}
+              alt={sideImageAlt}
+              widths={[480, 720, 960].filter((w) => w <= sideImage.width)}
+              sizes="(min-width: 1024px) 30vw, 100vw"
+              formats={["avif", "webp"]}
+              fallbackFormat="jpg"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          {script && <span class="script cta-band__script" aria-hidden="true">{script}</span>}
+        </div>
+      )
+    }
   </div>
 </section>
 
 <style>
   .cta-band {
     position: relative;
-    padding-block: var(--section-y);
+    padding-block: var(--section-y-lg);
+    border-top: 1px solid var(--c-line-on-dark);
     overflow: hidden;
+    isolation: isolate;
   }
 
-  .cta-band::before {
+  .cta-band--frame {
+    padding-block: var(--home-y);
+    border-top: 0;
+  }
+
+  .cta-band__media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .cta-band__media :global(picture),
+  .cta-band__media :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .cta-band__media :global(img) {
+    object-fit: cover;
+    object-position: 50% 40%;
+    filter: grayscale(0.6) contrast(1.1) brightness(0.55);
+  }
+
+  .cta-band__media::after {
     content: "";
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(100deg, transparent 55%, rgba(31, 177, 210, 0.12) 100%),
-      repeating-linear-gradient(-60deg, transparent 0 46px, rgba(255, 255, 255, 0.025) 46px 48px);
-    pointer-events: none;
+      linear-gradient(90deg, rgba(5, 11, 20, 0.95) 0%, rgba(5, 11, 20, 0.85) 50%, rgba(5, 11, 20, 0.6) 100%),
+      linear-gradient(180deg, rgba(5, 11, 20, 0.3), rgba(5, 11, 20, 0.7));
   }
 
   .cta-band__inner {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    gap: var(--s-7);
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--grid-gap);
+    align-items: end;
+  }
+
+  .cta-band__inner--three {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 4fr);
     align-items: center;
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .cta-band__copy {
+    display: grid;
+    gap: var(--s-3);
   }
 
   .cta-band__title {
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    margin-bottom: var(--s-4);
+    font-size: clamp(2.4rem, 5vw, 4.4rem);
+    line-height: 0.95;
+    max-width: 14ch;
+    color: #fff;
+  }
+
+  .cta-band--frame .cta-band__title {
+    font-size: clamp(2rem, 3.6vw, 3.3rem);
+    max-width: 16ch;
+    padding-right: 0.15em;
+  }
+
+  .cta-band__text {
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 52ch;
+    font-size: 0.98rem;
   }
 
   .cta-band__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--s-3);
-    justify-content: flex-end;
   }
 
-  @media (max-width: 860px) {
-    .cta-band__inner {
+  .cta-band__inner--three .cta-band__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta-band__inner--three .cta-band__actions :global(.btn) {
+    justify-content: center;
+  }
+
+  .cta-band__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.2rem;
+    font-size: var(--fs-small);
+    color: var(--c-on-dark-muted);
+    margin-top: 0.4rem;
+  }
+
+  .cta-band__contacts-label {
+    font-family: var(--font-display);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    color: var(--c-cyan);
+    width: 100%;
+  }
+
+  .cta-band__contacts a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-color: var(--c-line-on-dark);
+    text-underline-offset: 0.2em;
+  }
+
+  .cta-band__contacts a:hover {
+    text-decoration-color: var(--c-cyan);
+  }
+
+  .cta-band__side {
+    position: relative;
+  }
+
+  .cta-band__photo {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--c-navy-800);
+  }
+
+  .cta-band__photo :global(picture),
+  .cta-band__photo :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .cta-band__photo :global(img) {
+    object-fit: cover;
+  }
+
+  .cta-band__script {
+    position: absolute;
+    right: -0.1em;
+    bottom: -0.2em;
+    font-size: clamp(2.4rem, 3.6vw, 3.4rem);
+    line-height: 0.85;
+    text-align: right;
+    transform: rotate(-8deg);
+    text-shadow: 0 2px 14px rgba(5, 11, 20, 0.6);
+  }
+
+  @media (max-width: 960px) {
+    .cta-band__inner,
+    .cta-band__inner--three {
       grid-template-columns: 1fr;
     }
 
-    .cta-band__actions {
-      justify-content: flex-start;
+    .cta-band__inner--three .cta-band__actions {
+      flex-direction: row;
     }
   }
 
   @media (max-width: 480px) {
+    .cta-band__actions,
     .cta-band__actions :global(.btn) {
       width: 100%;
     }

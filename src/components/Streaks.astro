@@ -1,0 +1,10 @@
+---
+/** Decorative diagonal cyan light streaks at a section edge. */
+interface Props {
+  side?: "left" | "right";
+  soft?: boolean;
+}
+const { side = "left", soft = false } = Astro.props;
+---
+
+<span class:list={["streaks", `streaks--${side}`, { "streaks--soft": soft }]} aria-hidden="true"></span>

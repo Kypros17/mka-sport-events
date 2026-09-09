@@ -1,0 +1,196 @@
+---
+/**
+ * Sambo expertise on a distinct deep-navy ground with a target graphic and a
+ * transparent SAMBO watermark. Three lettered columns keep MKA's expertise,
+ * the founder's federation role and the championships Cyprus has hosted
+ * clearly separate. A verified photograph can be added later via `image`.
+ */
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import HostedEvents from "./HostedEvents.astro";
+
+interface Column {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  index?: string;
+  kicker: string;
+  title: string;
+  watermark?: string;
+  expertise: Column;
+  founder: Column;
+  hosted: {
+    title: string;
+    text: string;
+    events: { year: string; title: string; place: string }[];
+    disclaimer: string;
+  };
+  image?: ImageMetadata;
+  imageAlt?: string;
+  imageCredit?: string;
+}
+
+const { index, kicker, title, watermark, expertise, founder, hosted, image, imageAlt = "", imageCredit } = Astro.props;
+const letters = ["A", "B", "C"];
+---
+
+<section class="section section--lg section--dark sambo bg-grid">
+  {watermark && <span class="watermark sambo__wm" aria-hidden="true">{watermark}</span>}
+  <span class="target sambo__target" aria-hidden="true"></span>
+  <span class="ring sambo__ring" aria-hidden="true"></span>
+
+  <div class="container container--wide sambo__inner">
+    <div class="sambo__head reveal">
+      <p class="slate">
+        {index && <span class="slate__num">{index}</span>}
+        {kicker}
+      </p>
+      <h2 class="sambo__title display">{title}</h2>
+    </div>
+
+    {
+      image && (
+        <div class="sambo__media corners grade reveal">
+          <Picture
+            src={image}
+            alt={imageAlt}
+            widths={[640, 960, 1280, 1600].filter((w) => w <= image.width)}
+            sizes="(min-width: 1480px) 1480px, 100vw"
+            formats={["avif", "webp"]}
+            fallbackFormat="jpg"
+            loading="lazy"
+            decoding="async"
+          />
+          {imageCredit && <span class="credit">{imageCredit}</span>}
+        </div>
+      )
+    }
+
+    <div class="grid-12 sambo__columns">
+      <div class="col-4 sambo__col reveal">
+        <span class="giant-num sambo__letter" aria-hidden="true">{letters[0]}</span>
+        <h3 class="sambo__col-title">{expertise.title}</h3>
+        <p>{expertise.text}</p>
+      </div>
+      <div class="col-4 sambo__col reveal" data-delay="1">
+        <span class="giant-num sambo__letter" aria-hidden="true">{letters[1]}</span>
+        <h3 class="sambo__col-title">{founder.title}</h3>
+        <p>{founder.text}</p>
+      </div>
+      <div class="col-4 sambo__col reveal" data-delay="2">
+        <span class="giant-num sambo__letter" aria-hidden="true">{letters[2]}</span>
+        <h3 class="sambo__col-title">{hosted.title}</h3>
+        <HostedEvents text={hosted.text} events={hosted.events} disclaimer={hosted.disclaimer} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sambo {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--c-navy-800);
+  }
+
+  .sambo__wm {
+    top: -0.1em;
+    bottom: auto;
+    right: -0.03em;
+  }
+
+  .sambo__target {
+    left: clamp(1rem, 4vw, 3rem);
+    bottom: 12%;
+    width: 44px;
+    height: 44px;
+    opacity: 0.7;
+  }
+
+  .sambo__ring {
+    width: 30vw;
+    height: 30vw;
+    left: -12vw;
+    bottom: -18vw;
+    opacity: 0.6;
+  }
+
+  .sambo__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: var(--s-7);
+  }
+
+  .sambo__head {
+    display: grid;
+    gap: var(--s-4);
+  }
+
+  .sambo__title {
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    max-width: 14ch;
+  }
+
+  .sambo__media {
+    aspect-ratio: 21 / 9;
+    overflow: hidden;
+  }
+
+  .sambo__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sambo__columns {
+    border-top: 1px solid var(--c-line-on-dark);
+  }
+
+  .sambo__col {
+    display: grid;
+    gap: var(--s-3);
+    align-content: start;
+    padding-top: var(--s-5);
+    position: relative;
+  }
+
+  .sambo__col::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 2.5rem;
+    height: 2px;
+    background: var(--c-cyan);
+  }
+
+  .sambo__letter {
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    -webkit-text-stroke-color: var(--c-cyan);
+  }
+
+  .sambo__col-title {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .sambo__col > p {
+    color: var(--c-on-dark-muted);
+    max-width: 40ch;
+  }
+
+  @media (max-width: 860px) {
+    .sambo__col {
+      padding-block: var(--s-4);
+      border-bottom: 1px solid var(--c-line-on-dark);
+    }
+
+    .sambo__col:last-child {
+      border-bottom: 0;
+    }
+  }
+</style>

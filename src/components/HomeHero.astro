@@ -1,11 +1,15 @@
 ---
 /**
- * Cinematic home hero: full-bleed owned photograph, dark gradient, large
- * display headline, two calls to action and a three-item fact strip. The
- * image is the page's LCP element and loads eagerly with high priority.
+ * Home hero, composed like the reference: a compact full-bleed photograph
+ * with a dark navy overlay on the left, a label line, the italic headline
+ * with the destination in cyan, a thin tracked promise line, two buttons,
+ * and the benefit strip inside the hero. Right edge: a small stacked tagline
+ * and the location. The header overlays this section.
  */
 import { Picture } from "astro:assets";
 import Button from "./Button.astro";
+import Icon from "./Icon.astro";
+import Streaks from "./Streaks.astro";
 import { getDictionary, localePath, type Locale } from "@/i18n";
 import heroImg from "@/assets/images/camp-football-1.jpeg";
 
@@ -16,13 +20,14 @@ interface Props {
 const { locale } = Astro.props;
 const t = getDictionary(locale);
 const h = t.home.hero;
+const icons = ["plane", "sun", "stadium", "trophy"] as const;
 ---
 
-<section class="hero">
-  <div class="hero__media">
+<section class="hero" id="hero">
+  <div class="hero__media" aria-hidden="true">
     <Picture
       src={heroImg}
-      alt={h.imageAlt}
+      alt=""
       widths={[640, 960, 1280, 1600]}
       sizes="100vw"
       formats={["avif", "webp"]}
@@ -32,55 +37,83 @@ const h = t.home.hero;
       decoding="async"
     />
   </div>
+  <p class="sr-only">{h.imageAlt}</p>
+  <Streaks side="left" />
+
   <div class="container container--wide hero__inner">
     <div class="hero__copy">
-      <p class="kicker kicker--on-dark">{h.kicker}</p>
-      <h1 class="hero__title">{h.title}</h1>
-      <p class="hero__text">{h.text}</p>
+      <ul class="label-line" aria-label={h.labelsLabel}>
+        {h.labels.map((l) => <li>{l}</li>)}
+      </ul>
+
+      <h1 class="hero__title display display--it">
+        <span class="hero__l1">{h.line1}</span>
+        <span class="hero__l2">
+          {h.line2a} <span class="display__accent">{h.line2b}</span>
+        </span>
+      </h1>
+      <p class="tracked hero__l3">{h.line3}</p>
+
       <div class="hero__actions">
-        <Button href={localePath(locale, "contact")} variant="primary" size="lg" icon="arrow" track="offer">
+        <Button href={localePath(locale, "contact")} variant="primary" icon="arrow" track="offer">
           {t.common.requestOffer}
         </Button>
-        <Button href="#services" variant="ghost" size="lg">
-          {t.common.exploreServices}
+        <Button href="#services" variant="ghost">
+          {h.ctaExplore}
         </Button>
       </div>
+
+      <ul class="hero__benefits" aria-label={h.benefitsLabel}>
+        {
+          h.benefits.map((b, i) => (
+            <li class="hero__benefit">
+              <span class="hero__benefit-icon"><Icon name={icons[i]} /></span>
+              <span class="hero__benefit-title">{b}</span>
+            </li>
+          ))
+        }
+      </ul>
     </div>
-    <dl class="hero__facts">
-      {
-        h.facts.map((f) => (
-          <div class="hero__fact">
-            <dt>{f.label}</dt>
-            <dd>{f.value}</dd>
-          </div>
-        ))
-      }
-    </dl>
+
+    <div class="hero__side" aria-hidden="true">
+      <p class="stack-tag">
+        {h.tagline.map((w) => <span>{w}</span>)}
+      </p>
+      <p class="hero__location">
+        {h.location.split(",").map((part) => <span>{part.trim()}</span>)}
+      </p>
+    </div>
   </div>
 </section>
 
 <style>
   .hero {
     position: relative;
-    min-height: min(88svh, 900px);
-    display: flex;
-    align-items: flex-end;
+    min-height: clamp(560px, 66vh, 720px);
+    display: grid;
     color: #fff;
-    background: var(--c-navy-900);
+    background-color: var(--c-ink-950);
     overflow: hidden;
+    isolation: isolate;
   }
 
   .hero__media {
     position: absolute;
     inset: 0;
+    z-index: -1;
   }
 
-  .hero__media img {
+  .hero__media :global(picture),
+  .hero__media :global(img) {
     width: 100%;
     height: 100%;
+  }
+
+  .hero__media :global(img) {
     object-fit: cover;
-    object-position: 62% 40%;
-    animation: hero-zoom 14s var(--ease) both;
+    object-position: 70% 30%;
+    filter: contrast(1.05) saturate(1.12);
+    animation: hero-settle 12s var(--ease) both;
   }
 
   .hero__media::after {
@@ -88,13 +121,13 @@ const h = t.home.hero;
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(180deg, rgba(10, 19, 34, 0.25) 0%, rgba(10, 19, 34, 0.15) 35%, rgba(10, 19, 34, 0.92) 100%),
-      linear-gradient(90deg, rgba(10, 19, 34, 0.75) 0%, rgba(10, 19, 34, 0.2) 55%, rgba(10, 19, 34, 0) 100%);
+      linear-gradient(90deg, rgba(8, 18, 32, 0.96) 0%, rgba(8, 18, 32, 0.88) 34%, rgba(8, 18, 32, 0.45) 58%, rgba(8, 18, 32, 0.08) 100%),
+      linear-gradient(180deg, rgba(5, 11, 20, 0.55) 0%, rgba(5, 11, 20, 0) 30%, rgba(5, 11, 20, 0.35) 100%);
   }
 
-  @keyframes hero-zoom {
+  @keyframes hero-settle {
     from {
-      transform: scale(1.08);
+      transform: scale(1.05);
     }
     to {
       transform: scale(1);
@@ -105,27 +138,35 @@ const h = t.home.hero;
     position: relative;
     z-index: 1;
     display: grid;
-    gap: var(--s-7);
-    padding-block: clamp(4rem, 10vw, 7rem) clamp(2rem, 5vw, 3.5rem);
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: var(--s-6);
+    padding-top: calc(var(--header-h) + clamp(1.5rem, 3vw, 2.5rem));
+    padding-bottom: clamp(1.5rem, 3vw, 2.25rem);
   }
 
   .hero__copy {
     display: grid;
-    gap: var(--s-5);
-    max-width: 52rem;
+    gap: var(--s-4);
+    align-content: end;
+    max-width: 60rem;
   }
 
   .hero__title {
-    font-size: var(--fs-display);
+    display: grid;
+    font-size: clamp(2.6rem, 5.6vw, 5.2rem);
+    line-height: 0.9;
     color: #fff;
-    max-width: 14ch;
+    padding-right: 0.15em; /* keep italic overhang inside the box */
   }
 
-  .hero__text {
-    font-size: var(--fs-lead);
-    line-height: 1.55;
-    color: rgba(255, 255, 255, 0.85);
-    max-width: 58ch;
+  .hero__l1,
+  .hero__l2 {
+    display: block;
+  }
+
+  .hero__l3 {
+    margin-top: 0.1rem;
   }
 
   .hero__actions {
@@ -135,52 +176,120 @@ const h = t.home.hero;
     margin-top: var(--s-2);
   }
 
-  .hero__facts {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--s-5);
-    padding-top: var(--s-5);
-    border-top: 1px solid rgba(255, 255, 255, 0.22);
-    max-width: 60rem;
+  /* Benefit strip inside the hero */
+  .hero__benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem clamp(1.2rem, 3vw, 2.6rem);
+    margin-top: var(--s-4);
   }
 
-  .hero__fact dt {
+  .hero__benefit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .hero__benefit-icon {
+    display: inline-flex;
+    color: var(--c-cyan);
+  }
+
+  .hero__benefit-icon :global(svg) {
+    width: 30px;
+    height: 30px;
+  }
+
+  .hero__benefit-title {
     font-family: var(--font-display);
-    font-size: 0.78rem;
-    letter-spacing: 0.2em;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--c-turq);
-    margin-bottom: 0.3rem;
+    color: #fff;
+    line-height: 1.2;
+    max-width: 14ch;
+    overflow-wrap: anywhere;
   }
 
-  .hero__fact dd {
+  /* Right edge: stacked tagline and location */
+  .hero__side {
+    display: grid;
+    gap: var(--s-7);
+    justify-items: end;
+    align-content: end;
+    text-align: right;
+    padding-bottom: 0.4rem;
+  }
+
+  .hero__side .stack-tag {
+    justify-items: end;
+  }
+
+  .hero__location {
+    display: grid;
     font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-weight: 600;
-    line-height: 1.15;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.5;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 960px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__side {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
     .hero {
       min-height: 0;
     }
 
-    .hero__media img {
-      object-position: 60% 30%;
+    .hero__media :global(img) {
+      object-position: 68% 28%;
     }
 
-    .hero__facts {
-      grid-template-columns: 1fr;
-      gap: var(--s-4);
+    .hero__media::after {
+      background:
+        linear-gradient(180deg, rgba(5, 11, 20, 0.65) 0%, rgba(5, 11, 20, 0.15) 26%, rgba(5, 11, 20, 0.75) 52%, rgba(5, 11, 20, 0.98) 100%);
+    }
+
+    .hero__inner {
+      padding-top: calc(var(--header-h) + 44vw);
+      padding-bottom: var(--s-5);
+    }
+
+    .hero__title {
+      font-size: clamp(2.7rem, 13.5vw, 4.2rem);
     }
 
     .hero__actions :global(.btn) {
       width: 100%;
     }
+
+    .hero__benefits {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem 1rem;
+      padding-top: var(--s-4);
+      border-top: 1px solid var(--c-line-on-dark);
+    }
+
+    .hero__benefit-title {
+      max-width: none;
+      font-size: 0.78rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__media img {
+    .hero__media :global(img) {
       animation: none;
     }
   }

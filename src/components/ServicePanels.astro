@@ -1,0 +1,214 @@
+---
+/**
+ * Three service panels as in the reference: a parallelogram photograph, a
+ * large italic cyan number overlapping its lower-left corner, the italic
+ * title, one line and an underlined link. Thin angled cyan rules separate
+ * the panels.
+ */
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Icon from "./Icon.astro";
+
+interface Card {
+  title: string;
+  text: string;
+  cta: string;
+  href: string;
+  image: ImageMetadata;
+  alt: string;
+  position?: string;
+}
+
+interface Props {
+  cards: Card[];
+}
+
+const { cards } = Astro.props;
+---
+
+<div class="panels">
+  {
+    cards.map((c, i) => (
+      <article class="panel reveal" data-delay={String(i)}>
+        <a href={c.href} class="panel__media para" tabindex="-1" aria-hidden="true" style={c.position ? `--pos: ${c.position}` : undefined}>
+          <Picture
+            src={c.image}
+            alt=""
+            widths={[480, 720, 960].filter((w) => w <= c.image.width)}
+            sizes="(min-width: 1024px) 26vw, (min-width: 640px) 50vw, 100vw"
+            formats={["avif", "webp"]}
+            fallbackFormat="jpg"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <div class="panel__body">
+          <span class="panel__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+          <h3 class="panel__title display--it">
+            <a href={c.href}>{c.title}</a>
+          </h3>
+          <p class="panel__text">{c.text}</p>
+          <a href={c.href} class="ul-link ul-link--light panel__cta">
+            {c.cta}
+            <Icon name="arrow" />
+          </a>
+        </div>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .panels {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.75rem);
+  }
+
+  .panel {
+    position: relative;
+    display: grid;
+    gap: 0;
+  }
+
+  /* Angled cyan rule between panels */
+  .panel + .panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(-0.5 * clamp(1rem, 2vw, 1.75rem));
+    width: 1px;
+    background: linear-gradient(180deg, var(--c-cyan), rgba(31, 177, 210, 0.15));
+    transform: skewX(-14deg);
+  }
+
+  .panel__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--c-navy-800);
+  }
+
+  .panel__media :global(picture),
+  .panel__media :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .panel__media :global(img) {
+    object-fit: cover;
+    object-position: var(--pos, 50% 45%);
+    transition: transform 900ms var(--ease);
+  }
+
+  .panel:hover .panel__media :global(img) {
+    transform: scale(1.05);
+  }
+
+  .panel__body {
+    display: grid;
+    gap: 0.45rem;
+    align-content: start;
+    position: relative;
+    padding: 0 0 0.25rem 0.5rem;
+    margin-top: -1.6rem;
+  }
+
+  .panel__num {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 3.4vw, 3.4rem);
+    font-weight: 800;
+    font-style: italic;
+    line-height: 0.8;
+    color: var(--c-cyan);
+    text-shadow: 0 2px 14px rgba(5, 11, 20, 0.7);
+  }
+
+  .panel__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 1.75vw, 1.7rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: #fff;
+    max-width: 16ch;
+    overflow-wrap: anywhere;
+  }
+
+  .panel__title a {
+    display: inline-block;
+    padding: 0.45em 0;
+    margin: -0.45em 0;
+    color: #fff;
+    transition: color var(--dur) var(--ease);
+  }
+
+  .panel__title a:hover {
+    color: var(--c-cyan);
+  }
+
+  .panel__text {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    max-width: 34ch;
+  }
+
+  .panel__cta {
+    width: fit-content;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 960px) {
+    .panels {
+      grid-template-columns: 1fr;
+      gap: var(--s-5);
+    }
+
+    .panel {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--s-4);
+      align-items: center;
+    }
+
+    .panel + .panel::before {
+      display: none;
+    }
+
+    .panel__media {
+      aspect-ratio: 4 / 5;
+    }
+
+    .panel__body {
+      margin-top: 0;
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .panel {
+      grid-template-columns: 1fr;
+    }
+
+    .panel__media {
+      aspect-ratio: 16 / 9;
+      clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%);
+    }
+
+    .panel__body {
+      margin-top: -1.4rem;
+      padding-left: 0.4rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel__media :global(img) {
+      transition: none;
+    }
+
+    .panel:hover .panel__media :global(img) {
+      transform: none;
+    }
+  }
+</style>

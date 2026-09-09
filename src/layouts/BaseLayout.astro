@@ -26,9 +26,21 @@ interface Props {
   schema?: Record<string, unknown>[];
   /** Hide the sticky mobile CTA bar (used on the contact page). */
   hideMobileBar?: boolean;
+  /** Header treatment: "overlay" (transparent over the hero, home page) or "solid". */
+  headerVariant?: "solid" | "overlay";
 }
 
-const { locale, current, title, description, ogImage, ogImageAlt, schema = [], hideMobileBar = false } = Astro.props;
+const {
+  locale,
+  current,
+  title,
+  description,
+  ogImage,
+  ogImageAlt,
+  schema = [],
+  hideMobileBar = false,
+  headerVariant = "solid",
+} = Astro.props;
 const t = getDictionary(locale);
 const tags = localeTags[locale];
 
@@ -139,7 +151,7 @@ const jsonLd = {
   </head>
   <body class:list={{ "has-mobile-bar": !hideMobileBar }}>
     <a class="skip-link" href="#main-content">{t.common.skipToContent}</a>
-    <Header locale={locale} current={current} />
+    <Header locale={locale} current={current} variant={headerVariant} />
     <main id="main-content" tabindex="-1">
       <slot />
     </main>

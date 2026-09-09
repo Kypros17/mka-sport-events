@@ -1,0 +1,165 @@
+---
+/**
+ * "Real experiences" gallery as in the reference: label and title on the
+ * left, a right-aligned note, then five photographs in one row with equal
+ * heights and slightly different widths. Scrolls sideways on phones.
+ */
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Item {
+  image: ImageMetadata;
+  alt: string;
+}
+
+interface Props {
+  label: string;
+  title: string;
+  note: string;
+  items: Item[];
+  regionLabel?: string;
+}
+
+const { label, title, note, items, regionLabel } = Astro.props;
+---
+
+<section class="row-gallery">
+  <div class="container container--wide row-gallery__head reveal">
+    <div>
+      <p class="row-gallery__label">{label}</p>
+      <h2 class="row-gallery__title">{title}</h2>
+    </div>
+    <p class="row-gallery__note">{note}</p>
+  </div>
+  <div class="container container--wide row-gallery__scroller reveal" role="region" aria-label={regionLabel} tabindex="0">
+    <ul class="row-gallery__row">
+      {
+        items.map((item, i) => (
+          <li class:list={["row-gallery__item", { "row-gallery__item--wide": i === 2 }]}>
+            <div class="row-gallery__frame">
+              <Picture
+                src={item.image}
+                alt={item.alt}
+                widths={[360, 540, 720].filter((w) => w <= item.image.width)}
+                sizes="(min-width: 1024px) 20vw, 70vw"
+                formats={["avif", "webp"]}
+                fallbackFormat="jpg"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .row-gallery {
+    background: var(--c-bg);
+    padding-block: var(--home-y);
+  }
+
+  .row-gallery__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--s-3) var(--s-6);
+    margin-bottom: var(--s-4);
+  }
+
+  .row-gallery__label {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-ink);
+  }
+
+  .row-gallery__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-ink);
+  }
+
+  .row-gallery__note {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-align: right;
+    color: var(--c-ink);
+    max-width: 26ch;
+    line-height: 1.5;
+  }
+
+  .row-gallery__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.25fr 1fr 1fr;
+    gap: clamp(0.6rem, 1.2vw, 1rem);
+  }
+
+  .row-gallery__frame {
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--c-navy-800);
+  }
+
+  .row-gallery__frame :global(picture),
+  .row-gallery__frame :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .row-gallery__frame :global(img) {
+    object-fit: cover;
+    transition: transform 800ms var(--ease);
+  }
+
+  .row-gallery__item:hover .row-gallery__frame :global(img) {
+    transform: scale(1.04);
+  }
+
+  @media (max-width: 860px) {
+    .row-gallery__note {
+      text-align: left;
+    }
+
+    .row-gallery__scroller {
+      width: 100%;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      padding-inline: var(--gutter);
+      padding-bottom: var(--s-3);
+    }
+
+    .row-gallery__row {
+      display: flex;
+      width: max-content;
+    }
+
+    .row-gallery__item {
+      width: 68vw;
+      scroll-snap-align: start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .row-gallery__frame :global(img) {
+      transition: none;
+    }
+
+    .row-gallery__item:hover .row-gallery__frame :global(img) {
+      transform: none;
+    }
+  }
+</style>

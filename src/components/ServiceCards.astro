@@ -18,7 +18,7 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 
 const services = [
-  { ...t.services.camps, image: campsImg, alt: t.home.featuredCamp.imageAlt, href: localePath(locale, "camps"), credit: undefined },
+  { ...t.services.camps, image: campsImg, alt: t.camps.gallery.items[1].alt, href: localePath(locale, "camps"), credit: undefined },
   { ...t.services.events, image: eventsImg, alt: t.events.gallery.items[2].alt, href: localePath(locale, "events"), credit: t.common.photoCredit },
   { ...t.services.organisation, image: orgImg, alt: t.events.hero.imageAlt, href: localePath(locale, "events"), credit: t.common.photoCredit },
 ];

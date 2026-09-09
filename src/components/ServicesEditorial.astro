@@ -1,0 +1,307 @@
+---
+/**
+ * Three services as major divisions on a dark ground. 01 Training Camps is
+ * the featured panel with the photograph; 02 and 03 stack alongside as
+ * angled panels, one with a graphic target treatment and one with the
+ * on-site camp photograph. Oversized numerals overlap each panel.
+ */
+import { Picture } from "astro:assets";
+import Icon from "./Icon.astro";
+import { getDictionary, localePath, type Locale } from "@/i18n";
+import campsImg from "@/assets/images/camp-football-3.jpeg";
+import orgImg from "@/assets/images/camp-banner-1.jpeg";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const s = t.services;
+const labels = t.home.servicesLabels;
+
+const entries = [
+  { ...s.camps, href: localePath(locale, "camps"), image: campsImg, alt: t.camps.gallery.items[2].alt, position: "50% 40%" },
+  { ...s.events, href: localePath(locale, "events"), image: undefined, alt: "", position: "" },
+  { ...s.organisation, href: localePath(locale, "events"), image: orgImg, alt: t.home.proof.items[4].alt, position: "22% 50%" },
+];
+---
+
+<div class="grid-12 services">
+  {
+    entries.map((e, i) => (
+      <article class:list={["service", i === 0 ? "service--featured col-7" : "service--entry col-5 col-start-8", "reveal"]} data-delay={String(i)}>
+        <a href={e.href} class="service__panel cut-br grade" tabindex="-1" aria-hidden="true" style={e.position ? `--pos: ${e.position}` : undefined}>
+          {e.image ? (
+            <Picture
+              src={e.image}
+              alt=""
+              widths={[640, 960, 1200, 1600].filter((w) => w <= e.image!.width)}
+              sizes={i === 0 ? "(min-width: 1024px) 58vw, 100vw" : "(min-width: 1024px) 40vw, 100vw"}
+              formats={["avif", "webp"]}
+              fallbackFormat="jpg"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <span class="service__graphic bg-grid">
+              <span class="ring service__ring service__ring--a" />
+              <span class="ring service__ring service__ring--b" />
+              <span class="target service__target" />
+              <span class="slash slash--thin service__slash" />
+            </span>
+          )}
+          <span class="giant-num service__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+        </a>
+
+        <div class="service__body">
+          <p class="meta">
+            <span class="meta__key">{labels.division}</span>
+            <span class="meta__val">{String(i + 1).padStart(2, "0")}</span>
+          </p>
+          <h3 class="service__title display">
+            <a href={e.href}>{e.title}</a>
+          </h3>
+          <p class="service__tags">{e.tags.map((tag) => <span class="tag">{tag}</span>)}</p>
+          <dl class="service__rows">
+            <div class="service__row">
+              <dt>{labels.who}</dt>
+              <dd>{e.who}</dd>
+            </div>
+            <div class="service__row">
+              <dt>{labels.handles}</dt>
+              <dd>{e.handles}</dd>
+            </div>
+            {i === 0 && (
+              <div class="service__row">
+                <dt>{labels.why}</dt>
+                <dd>{e.why}</dd>
+              </div>
+            )}
+          </dl>
+          <a href={e.href} class="arrow-link service__cta">
+            {e.cta}
+            <Icon name="arrow" />
+          </a>
+        </div>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .services {
+    row-gap: var(--s-8);
+  }
+
+  .service {
+    display: grid;
+    gap: var(--s-5);
+    align-content: start;
+    position: relative;
+  }
+
+  .service--featured {
+    grid-row: span 2;
+  }
+
+  .service__panel {
+    position: relative;
+    display: block;
+    aspect-ratio: 3 / 2;
+    background: var(--c-navy-800);
+    overflow: hidden;
+  }
+
+  .service--entry .service__panel {
+    aspect-ratio: 16 / 9;
+  }
+
+  .service__panel :global(picture),
+  .service__panel :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .service__panel :global(img) {
+    object-fit: cover;
+    object-position: var(--pos, 50% 50%);
+    transition: transform 900ms var(--ease);
+  }
+
+  .service:hover .service__panel :global(img) {
+    transform: scale(1.04);
+  }
+
+  .service__graphic {
+    position: absolute;
+    inset: 0;
+    display: block;
+    background-color: var(--c-navy-800);
+    overflow: hidden;
+  }
+
+  .service__ring--a {
+    width: 60%;
+    aspect-ratio: 1;
+    right: -12%;
+    top: -30%;
+  }
+
+  .service__ring--b {
+    width: 34%;
+    aspect-ratio: 1;
+    right: 1%;
+    top: -17%;
+    border-width: 2px;
+  }
+
+  .service__target {
+    left: 12%;
+    bottom: 16%;
+  }
+
+  .service__slash {
+    left: 55%;
+    top: -20%;
+  }
+
+  .service__num {
+    position: absolute;
+    left: -0.04em;
+    bottom: -0.12em;
+    z-index: 2;
+    font-size: clamp(5rem, 11vw, 10rem);
+    -webkit-text-stroke-color: rgba(31, 177, 210, 0.9);
+    transition: transform 600ms var(--ease);
+  }
+
+  .service:hover .service__num {
+    transform: translateX(6px);
+  }
+
+  .service__body {
+    display: grid;
+    gap: var(--s-3);
+    position: relative;
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--c-line-on-dark);
+  }
+
+  .service__body::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    height: 2px;
+    width: 3rem;
+    background: var(--c-cyan);
+    transition: width 500ms var(--ease);
+  }
+
+  .service:hover .service__body::before {
+    width: 100%;
+  }
+
+  .service__title {
+    font-size: clamp(2rem, 3.2vw, 2.9rem);
+  }
+
+  .service--featured .service__title {
+    font-size: clamp(2.6rem, 4.6vw, 4.2rem);
+  }
+
+  .service__title a {
+    display: inline-block;
+    padding: 0.3em 0;
+    margin: -0.3em 0;
+    color: #fff;
+    transition: color var(--dur) var(--ease);
+  }
+
+  .service__title a:hover {
+    color: var(--c-cyan);
+  }
+
+  .service__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .service__rows {
+    display: grid;
+    border-top: 1px solid var(--c-line-on-dark);
+  }
+
+  .service__row {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: var(--s-4);
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--c-line-on-dark);
+  }
+
+  .service__row dt {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--c-cyan);
+    padding-top: 0.2rem;
+  }
+
+  .service__row dd {
+    color: var(--c-on-dark-muted);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .service--featured .service__row dd {
+    font-size: 1rem;
+  }
+
+  .service__cta {
+    width: fit-content;
+    color: #fff;
+  }
+
+  .service__cta:hover {
+    color: var(--c-cyan);
+  }
+
+  @media (max-width: 860px) {
+    .services {
+      row-gap: var(--s-7);
+    }
+
+    .service--featured {
+      grid-row: auto;
+    }
+
+    .service--entry .service__panel {
+      aspect-ratio: 3 / 2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .service__row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service__panel :global(img),
+    .service__num,
+    .service__body::before {
+      transition: none;
+    }
+
+    .service:hover .service__panel :global(img),
+    .service:hover .service__num {
+      transform: none;
+    }
+  }
+</style>

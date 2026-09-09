@@ -1,0 +1,243 @@
+---
+/**
+ * "04 Training camps" band as in the reference: three columns on dark navy.
+ * Left: price copy and the quote button. Middle: "Included as standard"
+ * checklist. Right: a parallelogram photograph and a stacked tagline.
+ */
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Button from "./Button.astro";
+import Icon from "./Icon.astro";
+import Streaks from "./Streaks.astro";
+import { localePath, type Locale } from "@/i18n";
+
+interface Props {
+  locale: Locale;
+  index: string;
+  label: string;
+  from: string;
+  price: string;
+  indicative: string;
+  meta: string;
+  cta: string;
+  includedTitle: string;
+  included: string[];
+  tagline: string[];
+  image: ImageMetadata;
+  imageAlt: string;
+}
+
+const { locale, index, label, from, price, indicative, meta, cta, includedTitle, included, tagline, image, imageAlt } = Astro.props;
+---
+
+<section class="package" id="camps">
+  <Streaks side="left" soft />
+  <div class="container container--wide package__grid">
+    <div class="package__copy reveal">
+      <p class="slate on-dark package__slate"><span class="slate__num">{index}</span>{label}</p>
+      <h2 class="package__title">
+        <span class="package__from">{from}</span>
+        <span class="package__price display--it">{price}</span>
+      </h2>
+      <p class="package__meta">
+        <span class="tag">{indicative}</span>
+        <span class="package__meta-text">{meta}</span>
+      </p>
+      <Button href={localePath(locale, "contact")} variant="primary" icon="arrow" track="offer">
+        {cta}
+      </Button>
+    </div>
+
+    <div class="package__included reveal" data-delay="1">
+      <p class="package__included-title">{includedTitle}</p>
+      <ul class="package__list">
+        {included.map((item) => <li><Icon name="check" />{item}</li>)}
+      </ul>
+    </div>
+
+    <div class="package__side reveal" data-delay="2">
+      <div class="package__photo para">
+        <Picture
+          src={image}
+          alt={imageAlt}
+          widths={[480, 720, 960].filter((w) => w <= image.width)}
+          sizes="(min-width: 1024px) 30vw, 100vw"
+          formats={["avif", "webp"]}
+          fallbackFormat="jpg"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <p class="stack-tag package__tagline" aria-hidden="true">
+        {tagline.map((w) => <span>{w}</span>)}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .package {
+    position: relative;
+    background: var(--c-navy-900);
+    color: #fff;
+    overflow: hidden;
+    padding-block: var(--home-y);
+  }
+
+  .package__grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 4.4fr) minmax(0, 3.6fr) minmax(0, 4fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
+  }
+
+  .package__copy {
+    display: grid;
+    gap: 0.7rem;
+    justify-items: start;
+  }
+
+  .package__slate::after {
+    display: none;
+  }
+
+  .package__title {
+    display: grid;
+    gap: 0.05em;
+    color: #fff;
+  }
+
+  .package__from {
+    font-size: clamp(1.4rem, 2.2vw, 2rem);
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: 0;
+    color: #fff;
+  }
+
+  .package__price {
+    font-size: clamp(2.8rem, 4.8vw, 4.4rem);
+    line-height: 0.95;
+    color: #fff;
+  }
+
+  .package__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .package__meta :global(.tag) {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+    font-size: 0.68rem;
+  }
+
+  .package__meta-text {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .package__copy :global(.btn) {
+    margin-top: 0.5rem;
+  }
+
+  .package__included {
+    display: grid;
+    gap: 0.8rem;
+    align-content: center;
+  }
+
+  .package__included-title {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-cyan);
+  }
+
+  .package__list {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .package__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    line-height: 1.4;
+    font-size: 0.95rem;
+  }
+
+  .package__list :global(svg) {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    margin-top: 0.15rem;
+    color: var(--c-cyan);
+  }
+
+  .package__side {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--s-4);
+    align-items: center;
+  }
+
+  .package__photo {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--c-navy-800);
+  }
+
+  .package__photo :global(picture),
+  .package__photo :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .package__photo :global(img) {
+    object-fit: cover;
+    object-position: 50% 45%;
+  }
+
+  .package__tagline {
+    font-style: normal;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  @media (max-width: 1100px) {
+    .package__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .package__side {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .package__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .package__side {
+      grid-template-columns: 1fr;
+    }
+
+    .package__tagline {
+      display: none;
+    }
+
+    .package__copy :global(.btn) {
+      width: 100%;
+    }
+  }
+</style>

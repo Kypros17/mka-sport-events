@@ -1,0 +1,343 @@
+---
+/**
+ * "03 Your next training camp: Cyprus." as in the reference: photograph on
+ * the left with the italic headline over a dark overlay and a diagonal edge;
+ * a light panel on the right with four icon benefits in a row, the
+ * underlined link, the outline map with markers and a small tagline.
+ */
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Icon from "./Icon.astro";
+
+interface Place {
+  name: string;
+  key: "nicosia" | "agia-napa" | "larnaca" | "paphos" | "limassol";
+}
+
+interface Benefit {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  index: string;
+  label: string;
+  display: string[];
+  benefits: Benefit[];
+  cta: string;
+  href: string;
+  places: Place[];
+  mapLabel: string;
+  tagline: string;
+  image: ImageMetadata;
+  imageAlt: string;
+}
+
+const { index, label, display, benefits, cta, href, places, mapLabel, tagline, image, imageAlt } = Astro.props;
+const icons = ["sun", "plane", "pin", "stadium"] as const;
+
+const coast =
+  "M17,195 L40,178 L86,172 L125,170 L150,180 L168,140 L176,108 L220,112 L274,122 L340,110 L417,104 L460,80 L490,60 L540,40 L586,18 L560,45 L515,90 L480,120 L453,137 L430,165 L426,189 L445,215 L461,237 L430,240 L390,242 L350,249 L343,285 L300,310 L260,325 L225,322 L206,321 L212,340 L201,354 L180,340 L140,322 L100,306 L56,294 L30,275 L20,261 L15,225 Z";
+
+const markers: Record<Place["key"], { x: number; y: number; anchor: "start" | "end"; dx: number; dy: number }> = {
+  nicosia: { x: 284, y: 174, anchor: "start", dx: 14, dy: -8 },
+  "agia-napa": { x: 441, y: 228, anchor: "start", dx: 14, dy: 4 },
+  larnaca: { x: 350, y: 249, anchor: "start", dx: 14, dy: 20 },
+  limassol: { x: 206, y: 321, anchor: "end", dx: -14, dy: 6 },
+  paphos: { x: 56, y: 294, anchor: "end", dx: -14, dy: 4 },
+};
+---
+
+<section class="destination">
+  <div class="destination__photo">
+    <div class="destination__media" aria-hidden="true">
+      <Picture
+        src={image}
+        alt=""
+        widths={[640, 960, 1280].filter((w) => w <= image.width)}
+        sizes="(min-width: 1024px) 50vw, 100vw"
+        formats={["avif", "webp"]}
+        fallbackFormat="jpg"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <p class="sr-only">{imageAlt}</p>
+    <div class="destination__copy reveal">
+      <p class="slate on-dark destination__slate"><span class="slate__num">{index}</span>{label}</p>
+      <h2 class="destination__title display display--it">
+        {display.map((line, i) => (
+          <span class:list={[{ display__accent: i === display.length - 1 }]}>{line}</span>
+        ))}
+      </h2>
+    </div>
+  </div>
+
+  <div class="destination__panel">
+    <div class="destination__panel-inner">
+      <ul class="destination__benefits reveal" data-delay="1">
+        {
+          benefits.map((b, i) => (
+            <li class="benefit">
+              <span class="benefit__icon"><Icon name={icons[i]} /></span>
+              <span class="benefit__title">{b.title}</span>
+              <span class="benefit__text">{b.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <a href={href} class="ul-link destination__cta reveal" data-delay="2">
+        {cta}
+        <Icon name="arrow" />
+      </a>
+      <div class="destination__map reveal" data-delay="2">
+        <svg viewBox="0 0 610 380" role="img" aria-label={mapLabel} class="map">
+          <path d={coast} class="map__coast" />
+          {
+            places.map((p) => {
+              const m = markers[p.key];
+              return (
+                <g>
+                  <circle cx={m.x} cy={m.y} r="6" class="map__dot" />
+                  <text x={m.x + m.dx} y={m.y + m.dy} text-anchor={m.anchor} class="map__label">
+                    {p.name}
+                  </text>
+                </g>
+              );
+            })
+          }
+        </svg>
+        <p class="destination__tagline">{tagline}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .destination {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 43fr) minmax(0, 57fr);
+    background: var(--c-panel-light);
+    min-height: clamp(380px, 32vw, 460px);
+    overflow: hidden;
+  }
+
+  .destination__photo {
+    position: relative;
+    display: grid;
+    align-items: center;
+    color: #fff;
+    isolation: isolate;
+    clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+    margin-right: -10%;
+    z-index: 1;
+  }
+
+  .destination__media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--c-navy-800);
+  }
+
+  .destination__media :global(picture),
+  .destination__media :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .destination__media :global(img) {
+    object-fit: cover;
+    object-position: 55% 15%;
+    filter: saturate(1.15);
+  }
+
+  .destination__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(5, 11, 20, 0.9) 0%, rgba(5, 11, 20, 0.6) 45%, rgba(5, 11, 20, 0.2) 100%),
+      linear-gradient(180deg, rgba(5, 11, 20, 0.2), rgba(5, 11, 20, 0.5));
+  }
+
+  .destination__copy {
+    display: grid;
+    gap: var(--s-3);
+    padding: var(--home-y) 12% var(--home-y) max(var(--gutter), calc((100vw - var(--container-wide)) / 2));
+  }
+
+  .destination__slate::after {
+    display: none;
+  }
+
+  .destination__title {
+    display: grid;
+    font-size: clamp(2.2rem, 4.4vw, 4rem);
+    line-height: 0.92;
+    color: #fff;
+    padding-right: 0.15em;
+  }
+
+  .destination__title span {
+    display: block;
+  }
+
+  .destination__panel {
+    display: grid;
+    align-items: center;
+    padding: var(--home-y) max(var(--gutter), calc((100vw - var(--container-wide)) / 2)) var(--home-y) clamp(1.5rem, 4vw, 4rem);
+  }
+
+  .destination__panel-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: clamp(1.5rem, 3vw, 3rem);
+    row-gap: var(--s-4);
+    align-items: center;
+  }
+
+  .destination__benefits {
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--s-4);
+  }
+
+  .benefit {
+    display: grid;
+    gap: 0.25rem;
+    align-content: start;
+  }
+
+  .benefit__icon {
+    color: var(--c-turq-700);
+    margin-bottom: 0.4rem;
+  }
+
+  .benefit__icon :global(svg) {
+    width: 30px;
+    height: 30px;
+  }
+
+  .benefit__title {
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-ink);
+    line-height: 1.2;
+  }
+
+  .benefit__text {
+    font-size: 0.78rem;
+    color: var(--c-muted);
+    line-height: 1.4;
+  }
+
+  .destination__cta {
+    grid-column: 1;
+    grid-row: 2;
+    width: fit-content;
+  }
+
+  .destination__map {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    display: grid;
+    gap: 0.4rem;
+    justify-items: end;
+  }
+
+  .map {
+    width: 100%;
+    max-width: 22rem;
+    height: auto;
+    overflow: visible;
+  }
+
+  .map__coast {
+    fill: rgba(31, 177, 210, 0.06);
+    stroke: var(--c-navy-700);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .map__dot {
+    fill: var(--c-cyan);
+    stroke: #fff;
+    stroke-width: 2;
+  }
+
+  .map__label {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    fill: var(--c-ink);
+  }
+
+  .destination__tagline {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: right;
+    color: var(--c-muted);
+    line-height: 1.5;
+    max-width: 12ch;
+  }
+
+  @media (max-width: 1100px) {
+    .destination__benefits {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 860px) {
+    .destination {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    .destination__photo {
+      clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%);
+      margin-right: 0;
+      min-height: 52vw;
+    }
+
+    .destination__copy {
+      padding: calc(var(--home-y) + 2rem) var(--gutter) calc(var(--home-y) + 2rem);
+    }
+
+    .destination__panel {
+      padding: var(--s-5) var(--gutter) var(--home-y);
+    }
+
+    .destination__panel-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .destination__map {
+      grid-column: 1;
+      grid-row: auto;
+      justify-items: start;
+    }
+
+    .destination__cta {
+      grid-row: auto;
+    }
+
+    .destination__tagline {
+      text-align: left;
+      max-width: none;
+    }
+  }
+</style>

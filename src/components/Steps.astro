@@ -5,12 +5,17 @@
  */
 interface Props {
   steps: { title: string; text: string }[];
+  /**
+   * "line": all steps hang from one continuous rule with dot markers.
+   * "giant": oversized outlined numerals as graphic elements (home page).
+   */
+  variant?: "default" | "line" | "giant";
 }
 
-const { steps } = Astro.props;
+const { steps, variant = "default" } = Astro.props;
 ---
 
-<ol class="steps">
+<ol class:list={["steps", { "steps--line": variant === "line", "steps--giant": variant === "giant" }]}>
   {
     steps.map((step, i) => (
       <li class="steps__item reveal" data-delay={String(Math.min(i, 3))}>
@@ -65,6 +70,64 @@ const { steps } = Astro.props;
     color: var(--c-muted);
   }
 
+  /* Line variant: one continuous rule, dot markers, smaller numerals */
+  .steps--line {
+    gap: 0 var(--s-6);
+  }
+
+  .steps--line .steps__item {
+    border-top: 1px solid var(--c-line-strong);
+    padding-top: var(--s-6);
+    padding-right: var(--s-4);
+  }
+
+  .steps--line .steps__item::before {
+    top: -5px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--c-turq);
+  }
+
+  .steps--line .steps__num {
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    color: var(--c-turq-700);
+  }
+
+  .steps--line .steps__title {
+    font-size: 1.5rem;
+  }
+
+  /* Giant variant: outlined cyan numerals, uppercase titles, one rule */
+  .steps--giant {
+    gap: 0 var(--s-6);
+  }
+
+  .steps--giant .steps__item {
+    border-top: 1px solid var(--c-line-strong);
+    padding-top: var(--s-5);
+  }
+
+  .steps--giant .steps__item::before {
+    width: 2.5rem;
+  }
+
+  .steps--giant .steps__num {
+    font-size: clamp(4rem, 7vw, 6.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--c-cyan);
+    margin-bottom: var(--s-4);
+  }
+
+  .steps--giant .steps__title {
+    font-size: 1.45rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
   :global(.section--dark) .steps__item {
     border-top-color: var(--c-line-on-dark);
   }
@@ -86,6 +149,11 @@ const { steps } = Astro.props;
   @media (max-width: 520px) {
     .steps {
       grid-template-columns: 1fr;
+    }
+
+    .steps--line .steps__item {
+      padding-top: var(--s-5);
+      padding-bottom: var(--s-4);
     }
   }
 </style>

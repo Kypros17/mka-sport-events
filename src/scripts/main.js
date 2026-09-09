@@ -63,9 +63,28 @@ function initNav() {
   if (mq.addEventListener) mq.addEventListener("change", onChange);
 }
 
+/* ---------- Overlay header: solid once the hero has scrolled away ---------- */
+function initOverlayHeader() {
+  const header = document.getElementById("site-header");
+  if (!header || header.dataset.variant !== "overlay") return;
+  const hero = document.getElementById("hero");
+  if (!hero) return;
+
+  // Geometry-based and deterministic: solid as soon as the hero's bottom edge
+  // passes under the header. One cheap layout read per scroll event.
+  const update = () => {
+    const solid = hero.getBoundingClientRect().bottom <= header.offsetHeight;
+    header.classList.toggle("is-solid", solid);
+  };
+  const onScroll = update;
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  update();
+}
+
 /* ---------- Reveal on scroll ---------- */
 function initReveal() {
-  const els = document.querySelectorAll(".reveal");
+  const els = document.querySelectorAll(".reveal, .line-reveal");
   if (!els.length) return;
   if (!("IntersectionObserver" in window)) {
     els.forEach((el) => el.classList.add("is-visible"));
@@ -190,6 +209,7 @@ function initContactForm() {
 }
 
 initNav();
+initOverlayHeader();
 initReveal();
 initContactForm();
 initTracking();
