@@ -93,9 +93,11 @@ const navItems: { key: RouteKey; label: string }[] = [
       >
         {t.common.switchToShort}
       </a>
-      <Button href={localePath(locale, "contact")} variant="primary" size="sm" track="offer" class="header-cta">
-        {t.common.requestOffer}
-      </Button>
+      <div class="header-cta">
+        <Button href={localePath(locale, "contact")} variant="primary" size="sm" track="offer">
+          {t.common.requestOffer}
+        </Button>
+      </div>
       <button
         type="button"
         class="tool nav-toggle"
@@ -240,7 +242,7 @@ const navItems: { key: RouteKey; label: string }[] = [
     color: var(--c-ink);
   }
 
-  .tool--whatsapp svg {
+  .tool--whatsapp :global(svg) {
     width: 22px;
     height: 22px;
   }
@@ -259,6 +261,7 @@ const navItems: { key: RouteKey; label: string }[] = [
   }
 
   .header-cta {
+    display: flex;
     margin-left: 0.4rem;
   }
 
@@ -266,15 +269,15 @@ const navItems: { key: RouteKey; label: string }[] = [
     display: none;
   }
 
-  .nav-toggle__close {
+  :global(.nav-toggle__close) {
     display: none;
   }
 
-  .nav-toggle[aria-expanded="true"] .nav-toggle__open {
+  .nav-toggle[aria-expanded="true"] :global(.nav-toggle__open) {
     display: none;
   }
 
-  .nav-toggle[aria-expanded="true"] .nav-toggle__close {
+  .nav-toggle[aria-expanded="true"] :global(.nav-toggle__close) {
     display: block;
   }
 
@@ -376,7 +379,7 @@ const navItems: { key: RouteKey; label: string }[] = [
       font-weight: 600;
     }
 
-    .site-nav__whatsapp svg {
+    .site-nav__whatsapp :global(svg) {
       width: 22px;
       height: 22px;
       color: var(--c-turq);

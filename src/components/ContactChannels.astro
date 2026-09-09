@@ -100,7 +100,7 @@ const t = getDictionary(locale).contact.channels;
     color: var(--c-turq-700);
   }
 
-  .channel__icon svg {
+  .channel__icon :global(svg) {
     width: 22px;
     height: 22px;
   }
@@ -133,7 +133,7 @@ const t = getDictionary(locale).contact.channels;
     transition: color var(--dur) var(--ease);
   }
 
-  .channel__link svg {
+  .channel__link :global(svg) {
     width: 16px;
     height: 16px;
     color: var(--c-muted);

@@ -17,7 +17,7 @@
   --c-navy-600: #1f3a66;
   --c-turq: #1fb1d2;        /* the logo's turquoise, accents and large type only */
   --c-turq-600: #158fab;
-  --c-turq-700: #0f7a93;    /* turquoise for small text on white: ≥ 4.5:1 */
+  --c-turq-700: #0d6e85;    /* turquoise for small text on white and sand: ≥ 4.5:1 */
   --c-turq-100: #e3f5f9;
   --c-red: #d42b3a;         /* primary call to action only */
   --c-red-700: #b3202e;
@@ -584,6 +584,12 @@ hr {
   overflow: hidden;
   border-radius: var(--radius);
   background: var(--c-navy-800);
+}
+
+.frame picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .frame img {

@@ -68,14 +68,14 @@ const { items } = Astro.props;
     color: var(--c-turq-700);
   }
 
-  .faq__icon {
+  :global(.faq__icon) {
     width: 22px;
     height: 22px;
     color: var(--c-muted);
     transition: transform var(--dur) var(--ease);
   }
 
-  .faq__item[open] .faq__icon {
+  .faq__item[open] :global(.faq__icon) {
     transform: rotate(45deg);
   }
 
