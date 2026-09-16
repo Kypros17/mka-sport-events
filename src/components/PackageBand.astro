@@ -33,29 +33,29 @@ const { locale, index, label, from, price, indicative, meta, cta, includedTitle,
 <section class="package" id="camps">
   <Streaks side="left" soft />
   <div class="container container--wide package__grid">
-    <div class="package__copy reveal">
-      <p class="slate on-dark package__slate"><span class="slate__num">{index}</span>{label}</p>
+    <div class="package__copy" data-stagger="tight">
+      <p class="slate on-dark package__slate" data-motion="rise"><span class="slate__num">{index}</span>{label}</p>
       <h2 class="package__title">
-        <span class="package__from">{from}</span>
-        <span class="package__price display--it">{price}</span>
+        <span class="package__from" data-motion="rise">{from}</span>
+        <span class="package__price display--it" data-motion="rise">{price}</span>
       </h2>
-      <p class="package__meta">
+      <p class="package__meta" data-motion="rise">
         <span class="tag">{indicative}</span>
         <span class="package__meta-text">{meta}</span>
       </p>
-      <Button href={localePath(locale, "contact")} variant="primary" icon="arrow" track="offer">
+      <Button href={localePath(locale, "contact")} variant="primary" icon="arrow" track="offer" attrs={{ "data-motion": "rise" }}>
         {cta}
       </Button>
     </div>
 
-    <div class="package__included reveal" data-delay="1">
-      <p class="package__included-title">{includedTitle}</p>
-      <ul class="package__list">
+    <div class="package__included" data-stagger="tight" data-motion-delay="80">
+      <p class="package__included-title" data-motion="rise">{includedTitle}</p>
+      <ul class="package__list" data-motion="rise">
         {included.map((item) => <li><Icon name="check" />{item}</li>)}
       </ul>
     </div>
 
-    <div class="package__side reveal" data-delay="2">
+    <div class="package__side">
       <div class="package__photo para" data-reveal="image" data-motion-delay="160">
         <Picture
           src={image}
@@ -68,7 +68,7 @@ const { locale, index, label, from, price, indicative, meta, cta, includedTitle,
           decoding="async"
         />
       </div>
-      <p class="stack-tag package__tagline" aria-hidden="true">
+      <p class="stack-tag package__tagline" aria-hidden="true" data-motion="fade" data-motion-delay="400">
         {tagline.map((w) => <span>{w}</span>)}
       </p>
     </div>

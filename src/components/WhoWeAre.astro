@@ -31,15 +31,15 @@ const { index, label, brand, title, text, cta, href, script, image, imageAlt, wo
 <section class="who">
   <Streaks side="right" soft />
   <div class="container container--wide who__grid">
-    <div class="who__copy reveal">
-      <p class="slate"><span class="slate__num">{index}</span>{label}</p>
-      <h2 class="who__title display--it">{brand}</h2>
-      <p class="who__sub">{title}</p>
-      <p class="who__text">{text}</p>
-      <a href={href} class="ul-link">{cta}<Icon name="arrow" /></a>
+    <div class="who__copy" data-stagger="tight">
+      <p class="slate" data-motion="rise"><span class="slate__num">{index}</span>{label}</p>
+      <h2 class="who__title display--it" data-motion="rise">{brand}</h2>
+      <p class="who__sub" data-motion="rise">{title}</p>
+      <p class="who__text" data-motion="rise">{text}</p>
+      <a href={href} class="ul-link" data-motion="rise">{cta}<Icon name="arrow" /></a>
     </div>
 
-    <div class="who__media reveal" data-delay="1">
+    <div class="who__media">
       <div class="who__photo para" data-reveal="image" data-motion-delay="80">
         <Picture
           src={image}
@@ -52,12 +52,12 @@ const { index, label, brand, title, text, cta, href, script, image, imageAlt, wo
           decoding="async"
         />
       </div>
-      <span class="script who__script" aria-hidden="true">{script}</span>
+      <span class="script who__script" aria-hidden="true" data-motion="fade" data-motion-delay="200">{script}</span>
     </div>
 
-    <div class="who__aside reveal" data-delay="2">
-      <p class="who__aside-label">{workLabel}</p>
-      <ol class="who__list">
+    <div class="who__aside" data-stagger="tight" data-motion-delay="160">
+      <p class="who__aside-label" data-motion="rise">{workLabel}</p>
+      <ol class="who__list" data-motion="rise">
         {audiences.map((a) => <li>{a}</li>)}
       </ol>
     </div>

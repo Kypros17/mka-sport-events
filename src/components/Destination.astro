@@ -63,11 +63,11 @@ const markers: Record<Place["key"], { x: number; y: number; anchor: "start" | "e
       />
     </div>
     <p class="sr-only">{imageAlt}</p>
-    <div class="destination__copy reveal">
-      <p class="slate on-dark destination__slate"><span class="slate__num">{index}</span>{label}</p>
+    <div class="destination__copy" data-stagger="tight">
+      <p class="slate on-dark destination__slate" data-motion="rise"><span class="slate__num">{index}</span>{label}</p>
       <h2 class="destination__title display display--it">
         {display.map((line, i) => (
-          <span class:list={[{ display__accent: i === display.length - 1 }]}>{line}</span>
+          <span class:list={[{ display__accent: i === display.length - 1 }]} data-motion="rise">{line}</span>
         ))}
       </h2>
     </div>
@@ -75,10 +75,10 @@ const markers: Record<Place["key"], { x: number; y: number; anchor: "start" | "e
 
   <div class="destination__panel">
     <div class="destination__panel-inner">
-      <ul class="destination__benefits reveal" data-delay="1">
+      <ul class="destination__benefits" data-stagger="tight" data-motion-delay="80">
         {
           benefits.map((b, i) => (
-            <li class="benefit">
+            <li class="benefit" data-motion="rise">
               <span class="benefit__icon"><Icon name={icons[i]} /></span>
               <span class="benefit__title">{b.title}</span>
               <span class="benefit__text">{b.text}</span>
@@ -86,11 +86,11 @@ const markers: Record<Place["key"], { x: number; y: number; anchor: "start" | "e
           ))
         }
       </ul>
-      <a href={href} class="ul-link destination__cta reveal" data-delay="2">
+      <a href={href} class="ul-link destination__cta" data-motion="rise" data-motion-delay="240">
         {cta}
         <Icon name="arrow" />
       </a>
-      <div class="destination__map reveal" data-delay="2">
+      <div class="destination__map" data-motion="rise" data-motion-delay="160">
         <svg viewBox="0 0 610 380" role="img" aria-label={mapLabel} class="map">
           <path d={coast} class="map__coast" />
           {

@@ -189,13 +189,31 @@ function initReveal() {
     });
   });
 
-  targets.forEach((el) => {
+  // A delay on a group is inherited by everything inside it
+  targets.concat(groups).forEach((el) => {
     const delay = Number(el.getAttribute("data-motion-delay"));
     if (delay > 0) el.style.setProperty("--motion-delay", delay + "ms");
   });
 
+  // A finished [data-motion] element drops the attribute: every motion rule
+  // stops matching and the element is back on its own styles, transitions
+  // and hover effects, in its final visible state.
   const finish = (el) => {
-    if (el.hasAttribute("data-motion")) el.classList.add("is-done");
+    if (el.hasAttribute("data-motion")) el.removeAttribute("data-motion");
+  };
+
+  const PRIMARY_PROPERTY = { fade: "opacity", rise: "opacity", mask: "clip-path", line: "transform" };
+  const finishAfterTransition = (el) => {
+    const property = PRIMARY_PROPERTY[el.getAttribute("data-motion")] || "opacity";
+    let backstop = 0;
+    const done = (event) => {
+      if (event && (event.target !== el || event.propertyName !== property)) return;
+      el.removeEventListener("transitionend", done);
+      clearTimeout(backstop);
+      finish(el);
+    };
+    el.addEventListener("transitionend", done);
+    backstop = setTimeout(done, 2500);
   };
 
   const show = (el) => {
@@ -209,22 +227,34 @@ function initReveal() {
       return;
     }
     if (el.hasAttribute("data-motion")) {
-      const done = (event) => {
-        if (event.target !== el) return;
-        el.removeEventListener("transitionend", done);
+      // Not rendered at this width (display: none): nothing to animate
+      if (!el.getClientRects().length) {
+        el.classList.add("is-visible");
         finish(el);
-      };
-      el.addEventListener("transitionend", done);
+        return;
+      }
+      finishAfterTransition(el);
     }
     el.classList.add("is-visible");
   };
 
-  const showAll = () => {
-    targets.forEach((el) => {
+  // Show elements in their final state at once, cancelling any reveal
+  // transition already running (a browser keeps a running transition whose
+  // end value matches the new style, so removing the attribute alone could
+  // leave a focused element faded for a moment).
+  const showNow = (els) => {
+    els.forEach((el) => {
+      el.style.transition = "none";
       el.classList.add("is-visible");
       finish(el);
     });
+    void document.body.offsetWidth;
+    els.forEach((el) => {
+      el.style.transition = "";
+    });
   };
+
+  const showAll = () => showNow(targets);
 
   // Reduced motion, the failsafe having already fired, or no observer
   // support: everything is shown in its final state at once.
@@ -253,6 +283,20 @@ function initReveal() {
 
   groups.filter((group) => !groupOf(group)).forEach((group) => observer.observe(group));
   targets.filter((el) => !groupOf(el) && !el.hasAttribute("data-stagger")).forEach((el) => observer.observe(el));
+
+  // Keyboard focus never lands on something still invisible: whatever
+  // contains the focused element is shown at once.
+  const HIDDEN = "[data-motion], .reveal";
+  document.addEventListener("focusin", (event) => {
+    const chain = [];
+    let el = event.target instanceof Element ? event.target.closest(HIDDEN) : null;
+    while (el) {
+      chain.push(el);
+      el = el.parentElement ? el.parentElement.closest(HIDDEN) : null;
+    }
+    if (chain.length) showNow(chain);
+  });
+
   root.classList.add("motion-ready");
 
   // Switching reduced motion on mid-visit reveals everything immediately

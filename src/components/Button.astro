@@ -19,6 +19,8 @@ interface Props {
   class?: string;
   ariaLabel?: string;
   id?: string;
+  /** Extra attributes for the element, e.g. { "data-motion": "rise" }. */
+  attrs?: Record<string, string | undefined>;
 }
 
 const {
@@ -34,6 +36,7 @@ const {
   class: className,
   ariaLabel,
   id,
+  attrs = {},
 } = Astro.props;
 
 const classes = [
@@ -57,13 +60,14 @@ const classes = [
       target={external ? "_blank" : undefined}
       rel={external ? "noopener" : undefined}
       aria-label={ariaLabel}
+      {...attrs}
     >
       {icon && iconPosition === "start" && <Icon name={icon} />}
       <slot />
       {icon && iconPosition === "end" && <Icon name={icon} />}
     </a>
   ) : (
-    <button id={id} type={type} class={classes} data-track={track} aria-label={ariaLabel}>
+    <button id={id} type={type} class={classes} data-track={track} aria-label={ariaLabel} {...attrs}>
       {icon && iconPosition === "start" && <Icon name={icon} />}
       <slot />
       {icon && iconPosition === "end" && <Icon name={icon} />}

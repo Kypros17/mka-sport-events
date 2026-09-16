@@ -24,14 +24,14 @@ const { label, title, note, items, regionLabel } = Astro.props;
 ---
 
 <section class="row-gallery">
-  <div class="container container--wide row-gallery__head reveal">
+  <div class="container container--wide row-gallery__head" data-stagger="tight">
     <div>
-      <p class="row-gallery__label">{label}</p>
-      <h2 class="row-gallery__title">{title}</h2>
+      <p class="row-gallery__label" data-motion="rise">{label}</p>
+      <h2 class="row-gallery__title" data-motion="rise">{title}</h2>
     </div>
-    <p class="row-gallery__note">{note}</p>
+    <p class="row-gallery__note" data-motion="rise">{note}</p>
   </div>
-  <div class="container container--wide row-gallery__scroller reveal" role="region" aria-label={regionLabel} tabindex="0">
+  <div class="container container--wide row-gallery__scroller" role="region" aria-label={regionLabel} tabindex="0">
     <ul class="row-gallery__row" data-stagger>
       {
         items.map((item, i) => (

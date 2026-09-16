@@ -29,7 +29,7 @@ const { cards } = Astro.props;
 <div class="panels">
   {
     cards.map((c, i) => (
-      <article class="panel reveal" data-delay={String(i)}>
+      <article class="panel">
         <a
           href={c.href}
           class="panel__media para"
@@ -50,13 +50,13 @@ const { cards } = Astro.props;
             decoding="async"
           />
         </a>
-        <div class="panel__body">
-          <span class="panel__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-          <h3 class="panel__title display--it">
+        <div class="panel__body" data-stagger="tight" data-motion-delay={String(i * 40)}>
+          <span class="panel__num" aria-hidden="true" data-motion="rise">{String(i + 1).padStart(2, "0")}</span>
+          <h3 class="panel__title display--it" data-motion="rise">
             <a href={c.href}>{c.title}</a>
           </h3>
-          <p class="panel__text">{c.text}</p>
-          <a href={c.href} class="ul-link ul-link--light panel__cta">
+          <p class="panel__text" data-motion="rise">{c.text}</p>
+          <a href={c.href} class="ul-link ul-link--light panel__cta" data-motion="rise">
             {c.cta}
             <Icon name="arrow" />
           </a>

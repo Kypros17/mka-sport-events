@@ -105,7 +105,8 @@
   --motion-dur-slow: 1100ms;
   --motion-dur-hover: 350ms;
   --motion-stagger: 80ms;
-  --motion-distance: 20px;
+  --motion-distance: 24px;
+  --motion-dur-reveal: 600ms;
   --focus-ring: 0 0 0 3px var(--c-bg), 0 0 0 6px var(--c-turq-600);
 }
 
@@ -1155,11 +1156,18 @@ html.js .line-reveal.is-visible {
      data-motion="rise"        opacity with a short upward travel
      data-motion="mask"        a line rises from behind a clip (headlines)
      data-motion="line"        a hairline draws in from the left
-     data-motion-delay="240"   extra delay in milliseconds
+     data-motion-delay="240"   extra delay in milliseconds (also on a group)
      data-stagger              on a container: every .reveal, .line-reveal,
                                [data-motion] and [data-reveal] inside it is
                                revealed when the container enters, offset by
                                --i steps
+     data-stagger="tight"      the same with a shorter step, for section copy
+
+   fade, rise and mask move with the standalone `translate` property, never
+   `transform`, so an element's own transform (a rotated script word, a
+   button's hover lift) is never overridden. When an element has finished,
+   main.js removes its data-motion attribute, so it returns to its own
+   styles and transitions.
      data-reveal="image|backdrop"   image reveals, see "Image reveal" below
 
    Hover rule: effects that move, zoom or sweep live inside
@@ -1171,12 +1179,13 @@ html.js .line-reveal.is-visible {
     --motion-dur-fast: 360ms;
     --motion-dur-slow: 880ms;
     --motion-stagger: 60ms;
-    --motion-distance: 12px;
+    --motion-distance: 20px;
+    --motion-dur-reveal: 520ms;
   }
 }
 
 html.js [data-motion] {
-  transition-property: opacity, transform, clip-path;
+  transition-property: opacity, translate, transform, clip-path;
   transition-duration: var(--motion-dur);
   transition-timing-function: var(--ease-out);
   transition-delay: calc(var(--motion-delay, 0ms) + var(--i, 0) * var(--motion-stagger));
@@ -1184,17 +1193,19 @@ html.js [data-motion] {
 
 html.js [data-motion="fade"] {
   opacity: 0;
+  transition-duration: var(--motion-dur-reveal);
 }
 
 html.js [data-motion="rise"] {
   opacity: 0;
-  transform: translate3d(0, var(--motion-distance), 0);
+  translate: 0 var(--motion-distance);
+  transition-duration: var(--motion-dur-reveal);
 }
 
 /* Generous negative insets keep italic overhangs and descenders unclipped */
 html.js [data-motion="mask"] {
   clip-path: inset(-0.25em -0.5em 100% -0.25em);
-  transform: translate3d(0, 0.4em, 0);
+  translate: 0 0.4em;
 }
 
 html.js [data-motion="line"] {
@@ -1205,6 +1216,10 @@ html.js [data-motion="line"] {
 
 html.js [data-motion].is-visible {
   opacity: 1;
+  translate: none;
+}
+
+html.js [data-motion="line"].is-visible {
   transform: none;
 }
 
@@ -1212,14 +1227,20 @@ html.js [data-motion="mask"].is-visible {
   clip-path: inset(-0.25em -0.5em -0.25em -0.25em);
 }
 
-/* Once finished, drop the clip so focus rings and shadows are never cut */
-html.js [data-motion].is-done {
-  clip-path: none;
-}
-
 html.js [data-stagger] .reveal,
 html.js [data-stagger] .line-reveal {
   transition-delay: calc(var(--i, 0) * var(--motion-stagger));
+}
+
+/* Section copy: a shorter step so a block is complete within ~0.85s */
+[data-stagger="tight"] {
+  --motion-stagger: 60ms;
+}
+
+@media (max-width: 767px) {
+  [data-stagger="tight"] {
+    --motion-stagger: 45ms;
+  }
 }
 
 /* Image reveal
@@ -1256,12 +1277,22 @@ html.js [data-reveal].is-visible picture {
 
 /* Failsafe: the behaviour script never started, so show everything */
 html.motion-off .reveal,
-html.motion-off .line-reveal,
-html.motion-off [data-motion] {
+html.motion-off .line-reveal {
   opacity: 1;
   transform: none;
   clip-path: none;
   transition: none;
+}
+
+html.motion-off [data-motion] {
+  opacity: 1;
+  translate: none;
+  clip-path: none;
+  transition: none;
+}
+
+html.motion-off [data-motion="line"] {
+  transform: none;
 }
 
 html.motion-off [data-reveal] picture {
@@ -1273,9 +1304,13 @@ html.motion-off [data-reveal] picture {
 @media (prefers-reduced-motion: reduce) {
   html.js [data-motion] {
     opacity: 1;
-    transform: none;
+    translate: none;
     clip-path: none;
     transition: none;
+  }
+
+  html.js [data-motion="line"] {
+    transform: none;
   }
 
   html.js [data-reveal] picture {
@@ -1287,10 +1322,15 @@ html.motion-off [data-reveal] picture {
 
 @media print {
   html.js .reveal,
-  html.js .line-reveal,
-  html.js [data-motion] {
+  html.js .line-reveal {
     opacity: 1 !important;
     transform: none !important;
+    clip-path: none !important;
+  }
+
+  html.js [data-motion] {
+    opacity: 1 !important;
+    translate: none !important;
     clip-path: none !important;
   }
 

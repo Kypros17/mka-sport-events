@@ -32,6 +32,10 @@ interface Props {
 const { locale, title, text, showContacts = false, contactsLabel, image, imageAlt = "", sideImage, sideImageAlt = "", script, accent } = Astro.props;
 const t = getDictionary(locale);
 const heading = title ?? t.cta.title;
+// The homepage frame (with a photograph) reveals element by element; the
+// plain band on inner pages keeps its block reveal.
+const frame = !!image;
+const rise = frame ? "rise" : undefined;
 const parts = accent && heading.includes(accent) ? heading.split(accent) : null;
 ---
 
@@ -56,8 +60,8 @@ const parts = accent && heading.includes(accent) ? heading.split(accent) : null;
   {image && <Streaks side="left" soft />}
 
   <div class:list={["container container--wide cta-band__inner", { "cta-band__inner--three": !!sideImage }]}>
-    <div class="cta-band__copy reveal">
-      <h2 class:list={["cta-band__title", { "display display--it": !!image }]}>
+    <div class:list={["cta-band__copy", { reveal: !frame }]} data-stagger={frame ? "tight" : undefined}>
+      <h2 class:list={["cta-band__title", { "display display--it": !!image }]} data-motion={rise}>
         {parts ? (
           <>
             {parts[0]}
@@ -68,10 +72,10 @@ const parts = accent && heading.includes(accent) ? heading.split(accent) : null;
           heading
         )}
       </h2>
-      <p class="cta-band__text">{text ?? t.cta.text}</p>
+      <p class="cta-band__text" data-motion={rise}>{text ?? t.cta.text}</p>
       {
         showContacts && (
-          <p class="cta-band__contacts">
+          <p class="cta-band__contacts" data-motion={rise}>
             {contactsLabel && <span class="cta-band__contacts-label">{contactsLabel}</span>}
             {contact.phones.map((p) => (
               <a href={telLink(p.e164)} data-track="phone">
@@ -86,18 +90,32 @@ const parts = accent && heading.includes(accent) ? heading.split(accent) : null;
       }
     </div>
 
-    <div class="cta-band__actions reveal" data-delay="1">
-      <Button href={localePath(locale, "contact")} variant="primary" size="lg" icon="arrow" track="offer">
+    <div
+      class:list={["cta-band__actions", { reveal: !frame }]}
+      data-delay={frame ? undefined : "1"}
+      data-stagger={frame ? "tight" : undefined}
+      data-motion-delay={frame ? "120" : undefined}
+    >
+      <Button href={localePath(locale, "contact")} variant="primary" size="lg" icon="arrow" track="offer" attrs={{ "data-motion": rise }}>
         {t.cta.button}
       </Button>
-      <Button href={whatsappLink(locale)} variant="whatsapp" size="lg" icon="whatsapp" iconPosition="start" external track="whatsapp">
+      <Button
+        href={whatsappLink(locale)}
+        variant="whatsapp"
+        size="lg"
+        icon="whatsapp"
+        iconPosition="start"
+        external
+        track="whatsapp"
+        attrs={{ "data-motion": rise }}
+      >
         {t.cta.secondary}
       </Button>
     </div>
 
     {
       sideImage && (
-        <div class="cta-band__side reveal" data-delay="2">
+        <div class="cta-band__side">
           <div class="cta-band__photo para" data-reveal="image" data-motion-delay="160">
             <Picture
               src={sideImage}
@@ -110,7 +128,11 @@ const parts = accent && heading.includes(accent) ? heading.split(accent) : null;
               decoding="async"
             />
           </div>
-          {script && <span class="script cta-band__script" aria-hidden="true">{script}</span>}
+          {script && (
+            <span class="script cta-band__script" aria-hidden="true" data-motion="fade" data-motion-delay="200">
+              {script}
+            </span>
+          )}
         </div>
       )
     }

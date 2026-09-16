@@ -72,10 +72,10 @@ const gallery = [p1, p2, p3, p4, p5].map((image, i) => ({ image, alt: h.proof.it
   <section class="services" id="services">
     <Streaks side="left" soft />
     <div class="container container--wide services__grid">
-      <div class="services__head reveal">
-        <p class="slate on-dark services__slate"><span class="slate__num">02</span>{h.servicesHead.label}</p>
+      <div class="services__head" data-stagger="tight">
+        <p class="slate on-dark services__slate" data-motion="rise"><span class="slate__num">02</span>{h.servicesHead.label}</p>
         <h2 class="services__title display display--it">
-          {h.servicesHead.lines.map((line) => <span>{line}</span>)}
+          {h.servicesHead.lines.map((line) => <span data-motion="rise">{line}</span>)}
         </h2>
       </div>
       <ServicePanels cards={cards} />
