@@ -103,8 +103,10 @@ const { cards } = Astro.props;
     transition: transform 900ms var(--ease);
   }
 
-  .panel:hover .panel__media :global(img) {
-    transform: scale(1.05);
+  @media (hover: hover) and (pointer: fine) {
+    .panel:hover .panel__media :global(img) {
+      transform: scale(1.05);
+    }
   }
 
   .panel__body {

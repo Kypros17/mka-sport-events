@@ -129,8 +129,10 @@ const entries = [
     transition: transform 900ms var(--ease);
   }
 
-  .service:hover .service__panel :global(img) {
-    transform: scale(1.04);
+  @media (hover: hover) and (pointer: fine) {
+    .service:hover .service__panel :global(img) {
+      transform: scale(1.04);
+    }
   }
 
   .service__graphic {
@@ -176,8 +178,10 @@ const entries = [
     transition: transform 600ms var(--ease);
   }
 
-  .service:hover .service__num {
-    transform: translateX(6px);
+  @media (hover: hover) and (pointer: fine) {
+    .service:hover .service__num {
+      transform: translateX(6px);
+    }
   }
 
   .service__body {
@@ -199,8 +203,10 @@ const entries = [
     transition: width 500ms var(--ease);
   }
 
-  .service:hover .service__body::before {
-    width: 100%;
+  @media (hover: hover) and (pointer: fine) {
+    .service:hover .service__body::before {
+      width: 100%;
+    }
   }
 
   .service__title {

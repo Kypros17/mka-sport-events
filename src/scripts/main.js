@@ -63,6 +63,17 @@ function initNav() {
   if (mq.addEventListener) mq.addEventListener("change", onChange);
 }
 
+/* ---------- Motion preferences ---------- */
+const root = document.documentElement;
+const reducedMotionQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+const prefersReducedMotion = () => Boolean(reducedMotionQuery && reducedMotionQuery.matches);
+
+function onMediaChange(query, handler) {
+  if (!query) return;
+  if (query.addEventListener) query.addEventListener("change", handler);
+  else if (query.addListener) query.addListener(handler);
+}
+
 /* ---------- Overlay header: solid once the hero has scrolled away ---------- */
 function initOverlayHeader() {
   const header = document.getElementById("site-header");
@@ -70,38 +81,154 @@ function initOverlayHeader() {
   const hero = document.getElementById("hero");
   if (!hero) return;
 
-  // Geometry-based and deterministic: solid as soon as the hero's bottom edge
-  // passes under the header. One cheap layout read per scroll event.
-  const update = () => {
-    const solid = hero.getBoundingClientRect().bottom <= header.offsetHeight;
+  // The first state is applied without transitions (for example after a
+  // reload part-way down the page); real scrolling then animates.
+  header.classList.add("is-instant");
+  let released = false;
+  const setSolid = (solid) => {
     header.classList.toggle("is-solid", solid);
+    if (released) return;
+    released = true;
+    requestAnimationFrame(() => requestAnimationFrame(() => header.classList.remove("is-instant")));
   };
-  const onScroll = update;
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll, { passive: true });
+
+  if ("IntersectionObserver" in window) {
+    // Solid as soon as the hero's bottom edge passes under the header. An
+    // observer whose root is inset by the header height reports exactly that
+    // crossing, with no work at all on ordinary scroll events.
+    let observer = null;
+    let observedHeight = -1;
+    const observe = () => {
+      const height = header.offsetHeight;
+      if (height === observedHeight) return;
+      observedHeight = height;
+      if (observer) observer.disconnect();
+      observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[entries.length - 1];
+          setSolid(!entry.isIntersecting && entry.boundingClientRect.bottom <= height);
+        },
+        { rootMargin: "-" + height + "px 0px 0px 0px", threshold: 0 }
+      );
+      observer.observe(hero);
+    };
+    observe();
+    let resizeFrame = 0;
+    window.addEventListener(
+      "resize",
+      () => {
+        cancelAnimationFrame(resizeFrame);
+        resizeFrame = requestAnimationFrame(observe);
+      },
+      { passive: true }
+    );
+    return;
+  }
+
+  // Fallback: at most one layout read per animation frame
+  let frame = 0;
+  const update = () => {
+    frame = 0;
+    setSolid(hero.getBoundingClientRect().bottom <= header.offsetHeight);
+  };
+  const schedule = () => {
+    if (!frame) frame = requestAnimationFrame(update);
+  };
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", schedule, { passive: true });
   update();
 }
 
-/* ---------- Reveal on scroll ---------- */
+/* ---------- Reveal on scroll ----------
+   Handles the classic .reveal and .line-reveal classes and the opt-in
+   [data-motion] primitives defined in global.css. A [data-stagger] container
+   is observed as one unit: when it enters, everything inside it reveals with
+   an index-based delay (--i). That also covers sideways scrollers, whose
+   off-screen items would never intersect the viewport on their own. */
+const REVEAL_TARGETS = ".reveal, .line-reveal, [data-motion]";
+const MAX_STAGGER_STEPS = 8;
+
 function initReveal() {
-  const els = document.querySelectorAll(".reveal, .line-reveal");
-  if (!els.length) return;
-  if (!("IntersectionObserver" in window)) {
-    els.forEach((el) => el.classList.add("is-visible"));
+  const targets = Array.from(document.querySelectorAll(REVEAL_TARGETS));
+  const groups = Array.from(document.querySelectorAll("[data-stagger]"));
+  if (!targets.length) {
+    root.classList.add("motion-ready");
     return;
   }
+
+  const groupOf = (el) => (el.parentElement ? el.parentElement.closest("[data-stagger]") : null);
+
+  groups.forEach((group) => {
+    let index = 0;
+    group.querySelectorAll(REVEAL_TARGETS).forEach((el) => {
+      if (groupOf(el) === group) el.style.setProperty("--i", String(Math.min(index++, MAX_STAGGER_STEPS)));
+    });
+  });
+
+  targets.forEach((el) => {
+    const delay = Number(el.getAttribute("data-motion-delay"));
+    if (delay > 0) el.style.setProperty("--motion-delay", delay + "ms");
+  });
+
+  const finish = (el) => {
+    if (el.hasAttribute("data-motion")) el.classList.add("is-done");
+  };
+
+  const show = (el) => {
+    if (el.classList.contains("is-visible")) return;
+    if (el.hasAttribute("data-motion")) {
+      const done = (event) => {
+        if (event.target !== el) return;
+        el.removeEventListener("transitionend", done);
+        finish(el);
+      };
+      el.addEventListener("transitionend", done);
+    }
+    el.classList.add("is-visible");
+  };
+
+  const showAll = () => {
+    targets.forEach((el) => {
+      el.classList.add("is-visible");
+      finish(el);
+    });
+  };
+
+  // Reduced motion, the failsafe having already fired, or no observer
+  // support: everything is shown in its final state at once.
+  if (root.classList.contains("motion-off") || prefersReducedMotion() || !("IntersectionObserver" in window)) {
+    showAll();
+    root.classList.add("motion-ready");
+    return;
+  }
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        observer.unobserve(el);
+        if (el.hasAttribute("data-stagger")) {
+          if (el.matches(REVEAL_TARGETS)) show(el);
+          el.querySelectorAll(REVEAL_TARGETS).forEach(show);
+        } else {
+          show(el);
         }
       });
     },
     { threshold: 0.1, rootMargin: "0px 0px -8% 0px" }
   );
-  els.forEach((el) => observer.observe(el));
+
+  groups.filter((group) => !groupOf(group)).forEach((group) => observer.observe(group));
+  targets.filter((el) => !groupOf(el) && !el.hasAttribute("data-stagger")).forEach((el) => observer.observe(el));
+  root.classList.add("motion-ready");
+
+  // Switching reduced motion on mid-visit reveals everything immediately
+  onMediaChange(reducedMotionQuery, () => {
+    if (!prefersReducedMotion()) return;
+    observer.disconnect();
+    showAll();
+  });
 }
 
 /* ---------- Contact form (mailto handoff + live WhatsApp link) ---------- */
@@ -208,8 +335,13 @@ function initContactForm() {
   });
 }
 
-initNav();
-initOverlayHeader();
-initReveal();
-initContactForm();
-initTracking();
+// Each feature starts on its own, so one failure cannot block the others.
+// The reveal system goes first: until it runs, revealed content stays hidden.
+[initReveal, initNav, initOverlayHeader, initContactForm, initTracking].forEach((init) => {
+  try {
+    init();
+  } catch (error) {
+    if (init === initReveal) root.classList.add("motion-off");
+    console.error(error);
+  }
+});

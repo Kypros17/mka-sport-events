@@ -145,7 +145,14 @@ const jsonLd = {
     <meta name="color-scheme" content="light" />
 
     <script is:inline>
-      document.documentElement.classList.add("js");
+      (function (root) {
+        root.classList.add("js");
+        // Failsafe: if the behaviour script has not started the reveal system
+        // within 3 seconds (blocked, failed or very slow), show everything.
+        setTimeout(function () {
+          if (!root.classList.contains("motion-ready")) root.classList.add("motion-off");
+        }, 3000);
+      })(document.documentElement);
     </script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>

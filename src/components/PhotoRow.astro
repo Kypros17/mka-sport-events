@@ -124,8 +124,10 @@ const { label, title, note, items, regionLabel } = Astro.props;
     transition: transform 800ms var(--ease);
   }
 
-  .row-gallery__item:hover .row-gallery__frame :global(img) {
-    transform: scale(1.04);
+  @media (hover: hover) and (pointer: fine) {
+    .row-gallery__item:hover .row-gallery__frame :global(img) {
+      transform: scale(1.04);
+    }
   }
 
   @media (max-width: 860px) {

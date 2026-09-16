@@ -73,8 +73,10 @@ const services = [
     transition: transform 900ms var(--ease);
   }
 
-  .service:hover .service__media img {
-    transform: scale(1.04);
+  @media (hover: hover) and (pointer: fine) {
+    .service:hover .service__media img {
+      transform: scale(1.04);
+    }
   }
 
   .service__body {
@@ -96,8 +98,10 @@ const services = [
     color: var(--c-turq-700);
   }
 
-  .service:hover .arrow-link :global(svg) {
-    transform: translateX(4px);
+  @media (hover: hover) and (pointer: fine) {
+    .service:hover .arrow-link :global(svg) {
+      transform: translateX(4px);
+    }
   }
 
   @media (max-width: 960px) {

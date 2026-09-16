@@ -212,9 +212,14 @@ const navItems: { key: RouteKey; label: string }[] = [
     color: #fff;
   }
 
-  .site-nav__link.is-current::after,
-  .site-nav__link:hover::after {
+  .site-nav__link.is-current::after {
     transform: scaleX(1);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .site-nav__link:hover::after {
+      transform: scaleX(1);
+    }
   }
 
   .site-nav__extras {
@@ -278,20 +283,61 @@ const navItems: { key: RouteKey; label: string }[] = [
     display: none;
   }
 
-  /* Overlay variant: transparent over the hero, solid on scroll */
+  /* Overlay variant: transparent over the hero, solid once the hero has
+     scrolled away. The dark glass and the cyan hairline are pseudo-elements:
+     a backdrop-filter on the header box itself would make it the containing
+     block of the fixed mobile menu panel and collapse that panel. Only
+     opacity and transform animate. */
   .site-header--overlay {
     position: fixed;
     left: 0;
     right: 0;
     background: transparent;
     border-bottom-color: transparent;
-    transition: background-color 320ms var(--ease), border-color 320ms var(--ease);
   }
 
-  .site-header--overlay.is-solid {
+  .site-header--overlay::before,
+  .site-header--overlay::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .site-header--overlay::before {
+    inset: 0;
+    z-index: -1;
     background: rgba(5, 11, 20, 0.94);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    border-bottom-color: rgba(31, 177, 210, 0.25);
+    opacity: 0;
+    transition: opacity var(--motion-dur-fast) var(--ease-out);
+  }
+
+  /* Sits exactly on the 1px border row the solid header uses */
+  .site-header--overlay::after {
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(31, 177, 210, 0.6) 0%, rgba(31, 177, 210, 0.25) 45%);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform var(--motion-dur) var(--ease-out);
+  }
+
+  .site-header--overlay.is-solid::before {
+    opacity: 1;
+  }
+
+  .site-header--overlay.is-solid::after {
+    transform: scaleX(1);
+    transition-delay: 60ms;
+  }
+
+  /* First paint (e.g. a reload part-way down the page) snaps into place */
+  .site-header--overlay.is-instant::before,
+  .site-header--overlay.is-instant::after {
+    transition: none;
   }
 
   :global(.nav-toggle__close) {
