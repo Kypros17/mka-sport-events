@@ -1471,17 +1471,42 @@ html.motion-off [data-reveal] picture {
   text-decoration-color: var(--c-cyan);
   text-decoration-thickness: 2px;
   text-underline-offset: 0.35em;
-  transition: color var(--dur) var(--ease);
+  transition:
+    color var(--dur) var(--ease),
+    text-underline-offset var(--motion-dur-hover) var(--ease-out);
 }
 
 .ul-link svg {
   width: 1.1em;
   height: 1.1em;
   color: var(--c-cyan);
+  transition: transform var(--motion-dur-hover) var(--ease-out);
 }
 
 .ul-link:hover {
   color: var(--c-turq-700);
+}
+
+/* Response: the cyan underline tucks up to the words and the arrow leads
+   forward. The same state for a mouse (hover-capable devices only, so it
+   never sticks after a tap) and for keyboard focus. Paint and transform
+   only: the link box never changes size. */
+@media (hover: hover) and (pointer: fine) {
+  .ul-link:hover {
+    text-underline-offset: 0.2em;
+  }
+
+  .ul-link:hover svg {
+    transform: translateX(4px);
+  }
+}
+
+.ul-link:focus-visible {
+  text-underline-offset: 0.2em;
+}
+
+.ul-link:focus-visible svg {
+  transform: translateX(4px);
 }
 
 .on-dark .ul-link,
@@ -1492,6 +1517,19 @@ html.motion-off [data-reveal] picture {
 .on-dark .ul-link:hover,
 .ul-link--light:hover {
   color: var(--c-cyan);
+}
+
+/* Reduced motion: keep the colour change, drop the moving line and arrow */
+@media (prefers-reduced-motion: reduce) {
+  .ul-link:hover,
+  .ul-link:focus-visible {
+    text-underline-offset: 0.35em;
+  }
+
+  .ul-link:hover svg,
+  .ul-link:focus-visible svg {
+    transform: none;
+  }
 }
 
 /* Parallelogram photo mask */

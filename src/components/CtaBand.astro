@@ -259,9 +259,11 @@ const parts = accent && heading.includes(accent) ? heading.split(accent) : null;
     text-decoration: underline;
     text-decoration-color: var(--c-line-on-dark);
     text-underline-offset: 0.2em;
+    transition: text-decoration-color var(--dur) var(--ease);
   }
 
-  .cta-band__contacts a:hover {
+  .cta-band__contacts a:hover,
+  .cta-band__contacts a:focus-visible {
     text-decoration-color: var(--c-cyan);
   }
 
