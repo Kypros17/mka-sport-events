@@ -1156,9 +1156,11 @@ html.js .line-reveal.is-visible {
      data-motion="mask"        a line rises from behind a clip (headlines)
      data-motion="line"        a hairline draws in from the left
      data-motion-delay="240"   extra delay in milliseconds
-     data-stagger              on a container: every .reveal, .line-reveal
-                               and [data-motion] inside it is revealed when
-                               the container enters, offset by --i steps
+     data-stagger              on a container: every .reveal, .line-reveal,
+                               [data-motion] and [data-reveal] inside it is
+                               revealed when the container enters, offset by
+                               --i steps
+     data-reveal="image|backdrop"   image reveals, see "Image reveal" below
 
    Hover rule: effects that move, zoom or sweep live inside
    @media (hover: hover) and (pointer: fine) so they never stick on touch.
@@ -1220,6 +1222,38 @@ html.js [data-stagger] .line-reveal {
   transition-delay: calc(var(--i, 0) * var(--motion-stagger));
 }
 
+/* Image reveal
+     data-reveal="image"      on an image frame: the <picture> inside fades
+                              up and settles from a slight scale
+     data-reveal="backdrop"   on a full-bleed background: a slower fade and
+                              settle, no travel
+   Only the <picture> moves. The frame keeps its crop, clip-path, size and
+   hover rules (which transform the <img>), so layout and hovers are
+   untouched. At the start scale the picture still covers the frame, and
+   the frame's overflow or clip keeps the extra edge out of view. */
+html.js [data-reveal] picture {
+  transition-property: opacity, transform;
+  transition-timing-function: var(--ease-out);
+  transition-delay: calc(var(--motion-delay, 0ms) + var(--i, 0) * var(--motion-stagger));
+}
+
+html.js [data-reveal="image"] picture {
+  opacity: 0;
+  transform: translate3d(0, 2.5%, 0) scale(1.06);
+  transition-duration: var(--motion-dur), var(--motion-dur-slow);
+}
+
+html.js [data-reveal="backdrop"] picture {
+  opacity: 0;
+  transform: scale(1.06);
+  transition-duration: var(--motion-dur-slow), calc(var(--motion-dur-slow) * 1.6);
+}
+
+html.js [data-reveal].is-visible picture {
+  opacity: 1;
+  transform: none;
+}
+
 /* Failsafe: the behaviour script never started, so show everything */
 html.motion-off .reveal,
 html.motion-off .line-reveal,
@@ -1230,11 +1264,23 @@ html.motion-off [data-motion] {
   transition: none;
 }
 
+html.motion-off [data-reveal] picture {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html.js [data-motion] {
     opacity: 1;
     transform: none;
     clip-path: none;
+    transition: none;
+  }
+
+  html.js [data-reveal] picture {
+    opacity: 1;
+    transform: none;
     transition: none;
   }
 }
@@ -1246,6 +1292,11 @@ html.motion-off [data-motion] {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
+  }
+
+  html.js [data-reveal] picture {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

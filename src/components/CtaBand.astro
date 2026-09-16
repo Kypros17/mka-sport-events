@@ -38,7 +38,7 @@ const parts = accent && heading.includes(accent) ? heading.split(accent) : null;
 <section class:list={["cta-band", "section--ink", { "cta-band--frame": !!image }]}>
   {
     image && (
-      <div class="cta-band__media" aria-hidden="true">
+      <div class="cta-band__media" aria-hidden="true" data-reveal="backdrop">
         <Picture
           src={image}
           alt=""
@@ -98,7 +98,7 @@ const parts = accent && heading.includes(accent) ? heading.split(accent) : null;
     {
       sideImage && (
         <div class="cta-band__side reveal" data-delay="2">
-          <div class="cta-band__photo para">
+          <div class="cta-band__photo para" data-reveal="image" data-motion-delay="160">
             <Picture
               src={sideImage}
               alt={sideImageAlt}

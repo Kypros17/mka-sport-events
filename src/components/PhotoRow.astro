@@ -32,11 +32,11 @@ const { label, title, note, items, regionLabel } = Astro.props;
     <p class="row-gallery__note">{note}</p>
   </div>
   <div class="container container--wide row-gallery__scroller reveal" role="region" aria-label={regionLabel} tabindex="0">
-    <ul class="row-gallery__row">
+    <ul class="row-gallery__row" data-stagger>
       {
         items.map((item, i) => (
           <li class:list={["row-gallery__item", { "row-gallery__item--wide": i === 2 }]}>
-            <div class="row-gallery__frame">
+            <div class="row-gallery__frame" data-reveal="image">
               <Picture
                 src={item.image}
                 alt={item.alt}

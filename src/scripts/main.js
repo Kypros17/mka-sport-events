@@ -141,12 +141,36 @@ function initOverlayHeader() {
 
 /* ---------- Reveal on scroll ----------
    Handles the classic .reveal and .line-reveal classes and the opt-in
-   [data-motion] primitives defined in global.css. A [data-stagger] container
+   [data-motion] and [data-reveal] primitives defined in global.css. Image
+   reveals wait briefly for their image to load, so a photograph never fades
+   in as an empty frame. A [data-stagger] container
    is observed as one unit: when it enters, everything inside it reveals with
    an index-based delay (--i). That also covers sideways scrollers, whose
    off-screen items would never intersect the viewport on their own. */
-const REVEAL_TARGETS = ".reveal, .line-reveal, [data-motion]";
+const REVEAL_TARGETS = ".reveal, .line-reveal, [data-motion], [data-reveal]";
 const MAX_STAGGER_STEPS = 8;
+const IMAGE_WAIT_MS = 700;
+
+// Calls back once the frame's image has loaded (or failed), or after a short
+// cap so a slow network never holds the reveal back for long.
+function whenImageReady(frame, callback) {
+  const img = frame.querySelector("img");
+  if (!img || img.complete) {
+    callback();
+    return;
+  }
+  let called = false;
+  const run = () => {
+    if (called) return;
+    called = true;
+    img.removeEventListener("load", run);
+    img.removeEventListener("error", run);
+    callback();
+  };
+  img.addEventListener("load", run);
+  img.addEventListener("error", run);
+  setTimeout(run, IMAGE_WAIT_MS);
+}
 
 function initReveal() {
   const targets = Array.from(document.querySelectorAll(REVEAL_TARGETS));
@@ -176,6 +200,14 @@ function initReveal() {
 
   const show = (el) => {
     if (el.classList.contains("is-visible")) return;
+    if (el.hasAttribute("data-reveal") && !el.dataset.revealPending) {
+      el.dataset.revealPending = "true";
+      whenImageReady(el, () => {
+        delete el.dataset.revealPending;
+        el.classList.add("is-visible");
+      });
+      return;
+    }
     if (el.hasAttribute("data-motion")) {
       const done = (event) => {
         if (event.target !== el) return;

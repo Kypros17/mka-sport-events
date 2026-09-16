@@ -30,7 +30,15 @@ const { cards } = Astro.props;
   {
     cards.map((c, i) => (
       <article class="panel reveal" data-delay={String(i)}>
-        <a href={c.href} class="panel__media para" tabindex="-1" aria-hidden="true" style={c.position ? `--pos: ${c.position}` : undefined}>
+        <a
+          href={c.href}
+          class="panel__media para"
+          tabindex="-1"
+          aria-hidden="true"
+          style={c.position ? `--pos: ${c.position}` : undefined}
+          data-reveal="image"
+          data-motion-delay={String(i * 80)}
+        >
           <Picture
             src={c.image}
             alt=""
