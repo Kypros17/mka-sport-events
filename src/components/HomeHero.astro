@@ -288,8 +288,202 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
     }
   }
 
+  /* ---------- Entrance sequence ----------
+     Pure CSS, runs once when the page loads, complete in about 1.4s.
+     - Scoped to html.js (set by the inline script in <head> before first
+       paint), so without JavaScript the hero is simply static.
+     - Only opacity and transform animate, so there is no layout shift.
+     - fill-mode "backwards" holds the start state during each delay and
+       releases the element when it ends, so the Stage 1 hover transforms on
+       the buttons keep working afterwards and no text can stay hidden.
+     - Order: streaks and label line, headline line 1, line 2, the cyan
+       accent sweep, the promise line, the buttons, the benefit strip. */
+  .hero {
+    --hero-step: 1;
+  }
+
+  @media (max-width: 767px) {
+    .hero {
+      --hero-step: 0.8;
+    }
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, var(--hero-rise, 14px), 0);
+    }
+  }
+
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-draw-down {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes hero-draw-x {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  /* The underline draws in from the left, then exits to the right: the final
+     frame is invisible, so the resting design is unchanged. */
+  @keyframes hero-sweep {
+    0% {
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+    }
+    50% {
+      transform: scaleX(1);
+      transform-origin: 0 50%;
+    }
+    50.1% {
+      transform: scaleX(1);
+      transform-origin: 100% 50%;
+    }
+    100% {
+      transform: scaleX(0);
+      transform-origin: 100% 50%;
+    }
+  }
+
+  /* Cyan light streaks draw in from the top */
+  :global(html.js) .hero :global(.streaks) {
+    animation: hero-draw-down var(--motion-dur-slow) var(--ease-out) backwards;
+  }
+
+  /* Label line: SPORTS CAMPS | EVENTS | CYPRUS */
+  :global(html.js) .hero .label-line li {
+    --hero-rise: 10px;
+    animation: hero-rise var(--motion-dur-fast) var(--ease-out) backwards;
+    animation-delay: calc(var(--hero-step) * 40ms);
+  }
+
+  :global(html.js) .hero .label-line li:nth-child(2) {
+    animation-delay: calc(var(--hero-step) * 100ms);
+  }
+
+  :global(html.js) .hero .label-line li:nth-child(3) {
+    animation-delay: calc(var(--hero-step) * 160ms);
+  }
+
+  /* Headline, one line at a time */
+  :global(html.js) .hero__l1,
+  :global(html.js) .hero__l2 {
+    --hero-rise: 0.32em;
+    animation: hero-rise var(--motion-dur) var(--ease-out) backwards;
+    animation-delay: calc(var(--hero-step) * 120ms);
+  }
+
+  :global(html.js) .hero__l2 {
+    animation-delay: calc(var(--hero-step) * 220ms);
+  }
+
+  /* Cyan accent: a thin underline sweeps under the destination once */
+  .hero .display__accent {
+    position: relative;
+  }
+
+  .hero .display__accent::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0.14em;
+    bottom: 0.04em;
+    height: max(2px, 0.045em);
+    background: var(--c-cyan);
+    transform: scaleX(0);
+    pointer-events: none;
+  }
+
+  :global(html.js) .hero .display__accent::after {
+    animation: hero-sweep 900ms var(--ease-in-out) calc(var(--hero-step) * 480ms) backwards;
+  }
+
+  /* WE ARRANGE THE REST. */
+  :global(html.js) .hero__l3 {
+    --hero-rise: 10px;
+    animation: hero-rise var(--motion-dur-fast) var(--ease-out) backwards;
+    animation-delay: calc(var(--hero-step) * 380ms);
+  }
+
+  /* Buttons */
+  :global(html.js) .hero__actions :global(.btn) {
+    --hero-rise: 12px;
+    animation: hero-rise var(--motion-dur-fast) var(--ease-out) backwards;
+    animation-delay: calc(var(--hero-step) * 470ms);
+  }
+
+  :global(html.js) .hero__actions :global(.btn:nth-child(2)) {
+    animation-delay: calc(var(--hero-step) * 540ms);
+  }
+
+  /* Benefit strip, last */
+  :global(html.js) .hero__benefit {
+    --hero-rise: 10px;
+    animation: hero-rise var(--motion-dur-fast) var(--ease-out) backwards;
+    animation-delay: calc(var(--hero-step) * 620ms);
+  }
+
+  :global(html.js) .hero__benefit:nth-child(2) {
+    animation-delay: calc(var(--hero-step) * 680ms);
+  }
+
+  :global(html.js) .hero__benefit:nth-child(3) {
+    animation-delay: calc(var(--hero-step) * 740ms);
+  }
+
+  :global(html.js) .hero__benefit:nth-child(4) {
+    animation-delay: calc(var(--hero-step) * 800ms);
+  }
+
+  /* Right edge: stacked tagline, its cyan bar, the location. The column is
+     hidden at 960px and below, so it only animates where it is shown. */
+  @media (min-width: 961px) {
+    :global(html.js) .hero__side .stack-tag span {
+      animation: hero-fade var(--motion-dur-fast) var(--ease-out) backwards;
+      animation-delay: calc(var(--hero-step) * 520ms);
+    }
+
+    :global(html.js) .hero__side .stack-tag::after {
+      transform-origin: 100% 50%;
+      animation: hero-draw-x var(--motion-dur) var(--ease-out) backwards;
+      animation-delay: calc(var(--hero-step) * 620ms);
+    }
+
+    :global(html.js) .hero__location {
+      animation: hero-fade var(--motion-dur-fast) var(--ease-out) backwards;
+      animation-delay: calc(var(--hero-step) * 700ms);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero__media :global(img) {
+      animation: none;
+    }
+
+    /* Everything in its final place at once; the accent line never shows */
+    :global(html.js) .hero :global(.streaks),
+    :global(html.js) .hero .label-line li,
+    :global(html.js) .hero__l1,
+    :global(html.js) .hero__l2,
+    :global(html.js) .hero .display__accent::after,
+    :global(html.js) .hero__l3,
+    :global(html.js) .hero__actions :global(.btn),
+    :global(html.js) .hero__benefit,
+    :global(html.js) .hero__side .stack-tag span,
+    :global(html.js) .hero__side .stack-tag::after,
+    :global(html.js) .hero__location {
       animation: none;
     }
   }
