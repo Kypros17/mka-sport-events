@@ -16,11 +16,13 @@ export const localeNames: Record<Locale, string> = {
   ru: "Русский",
 };
 
-const dictionaries = { en, ru } as const;
 export type Dictionary = typeof en;
 
+/** Typed (not cast) so any key missing from ru.json fails `astro check`, and so the build. */
+const dictionaries: Record<Locale, Dictionary> = { en, ru };
+
 export function getDictionary(locale: Locale): Dictionary {
-  return dictionaries[locale] as Dictionary;
+  return dictionaries[locale];
 }
 
 /**

@@ -67,8 +67,9 @@ images/, css/, js/, *.html at the root: the RETIRED static site, kept until the
 
 All visible text is in `src/i18n/en.json` and `src/i18n/ru.json`, using the same
 keys in both files. Change the text there, not in the components. Both files
-must keep identical structure; the build fails if a key used by a template is
-missing.
+must keep identical structure: `npm run build` type-checks first (`astro check`)
+and fails if a key is missing from `ru.json` or a template uses a key that does
+not exist.
 
 ## Adding real venues
 

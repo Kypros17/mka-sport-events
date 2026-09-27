@@ -11,7 +11,8 @@ import Icon from "./Icon.astro";
 
 interface Place {
   name: string;
-  key: "nicosia" | "agia-napa" | "larnaca" | "paphos" | "limassol";
+  /** Must match a key of `markers` below; JSON dictionaries type it as string. */
+  key: string;
 }
 
 interface Benefit {
@@ -39,13 +40,18 @@ const icons = ["sun", "plane", "pin", "stadium"] as const;
 const coast =
   "M17,195 L40,178 L86,172 L125,170 L150,180 L168,140 L176,108 L220,112 L274,122 L340,110 L417,104 L460,80 L490,60 L540,40 L586,18 L560,45 L515,90 L480,120 L453,137 L430,165 L426,189 L445,215 L461,237 L430,240 L390,242 L350,249 L343,285 L300,310 L260,325 L225,322 L206,321 L212,340 L201,354 L180,340 L140,322 L100,306 L56,294 L30,275 L20,261 L15,225 Z";
 
-const markers: Record<Place["key"], { x: number; y: number; anchor: "start" | "end"; dx: number; dy: number }> = {
+const markers: Record<string, { x: number; y: number; anchor: "start" | "end"; dx: number; dy: number }> = {
   nicosia: { x: 284, y: 174, anchor: "start", dx: 14, dy: -8 },
   "agia-napa": { x: 441, y: 228, anchor: "start", dx: 14, dy: 4 },
   larnaca: { x: 350, y: 249, anchor: "start", dx: 14, dy: 20 },
   limassol: { x: 206, y: 321, anchor: "end", dx: -14, dy: 6 },
   paphos: { x: 56, y: 294, anchor: "end", dx: -14, dy: 4 },
 };
+
+const missing = places.filter((p) => !(p.key in markers)).map((p) => p.key);
+if (missing.length > 0) {
+  throw new Error(`Destination: no map marker for place key(s) ${missing.join(", ")}`);
+}
 ---
 
 <section class="destination">

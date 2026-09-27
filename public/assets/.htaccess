@@ -1,0 +1,15 @@
+# Build assets in this folder (CSS, JS, fonts, optimised images) are written by
+# Astro with a content hash in the file name, so a changed file always gets a
+# new URL. They can be cached for a year and never revalidated.
+# Keep this file here: public/assets/ is merged into dist/assets/ at build time.
+
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</IfModule>
+
+<IfModule !mod_headers.c>
+  <IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+  </IfModule>
+</IfModule>
