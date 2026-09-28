@@ -20,12 +20,9 @@ export const brandName = "MKA sport Events";
 /** Confirmed contact details (see CLAUDE.md). */
 export const contact = {
   email: "mka.sport.cyp@gmail.com",
-  phones: [
-    { display: "+357 96 940622", e164: "+35796940622" },
-    { display: "+357 99 513619", e164: "+35799513619" },
-  ],
+  phones: [{ display: "+357 99 513619", e164: "+35799513619" }],
   /** WhatsApp number in international format without "+", as wa.me expects. */
-  whatsapp: "35796940622",
+  whatsapp: "35799513619",
   address: {
     street: "Chilis 28",
     city: "Nicosia",

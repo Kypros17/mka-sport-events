@@ -146,13 +146,14 @@ These are confirmed — use them everywhere, never invent alternatives. They are
 `site.config.mjs` and imported wherever needed:
 
 - **Email:** mka.sport.cyp@gmail.com (also the `mailto:` target of the form)
-- **Phones:** +357 96 940622 and +357 99 513619 (both shown, both linked as `tel:`)
+- **Phone:** +357 99 513619 (shown and linked as `tel:`). +357 96 940622 was removed at the
+  client's request in September 2026 — do not add it back.
 - **Address:** Chilis 28, Nicosia, Cyprus
 - **Instagram:** https://instagram.com/mizunocyprus
 - **TikTok:** https://tiktok.com/@mizunocyprus
   (both handles are named after the client's Mizuno retail business, but they are the
   company's real social accounts — keep them despite the shop's removal from this site)
-- **WhatsApp:** https://wa.me/35796940622 with a prepared message per language
+- **WhatsApp:** https://wa.me/35799513619 with a prepared message per language
   (`common.whatsappMessage` in the dictionaries) — header, mobile bar, CTA bands, contact page
 - **Official KOA sport map:** https://cso.org.cy/sport-map/ — the Cyprus Sports Organisation's
   public register of sports venues, linked from the Cyprus page in a new tab
