@@ -11,7 +11,7 @@ import Button from "./Button.astro";
 import Icon from "./Icon.astro";
 import Streaks from "./Streaks.astro";
 import { getDictionary, localePath, type Locale } from "@/i18n";
-import heroImg from "@/assets/images/camp-football-1.jpeg";
+import heroImg from "@/assets/images/sambo-action-throw.webp";
 
 interface Props {
   locale: Locale;
@@ -28,7 +28,7 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
     <Picture
       src={heroImg}
       alt=""
-      widths={[640, 960, 1280, 1600]}
+      widths={[640, 960, 1280, 1600].filter((w) => w <= heroImg.width)}
       sizes="100vw"
       formats={["avif", "webp"]}
       fallbackFormat="jpg"
@@ -111,7 +111,7 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
 
   .hero__media :global(img) {
     object-fit: cover;
-    object-position: 70% 30%;
+    object-position: 55% 46%;
     filter: contrast(1.05) saturate(1.12);
     animation: hero-settle 12s var(--ease) both;
   }
@@ -253,7 +253,7 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
     }
 
     .hero__media :global(img) {
-      object-position: 68% 28%;
+      object-position: 52% 60%;
     }
 
     .hero__media::after {

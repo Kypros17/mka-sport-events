@@ -114,7 +114,7 @@
       "line2b": "Cyprus.",
       "line3": "We arrange the rest.",
       "text": "Sports training camps and sports events in Cyprus, organised from Nicosia: pitches, halls, hotel base, transport and competition setup, with our own staff on the ground.",
-      "imageAlt": "Two footballers competing for the ball during a friendly match at an MKA sport Events training camp in Cyprus",
+      "imageAlt": "A sambo athlete in blue throwing his opponent in red during a bout on a yellow competition mat",
       "location": "Nicosia, Cyprus",
       "ctaExplore": "Explore our services",
       "benefitsLabel": "Why Cyprus",
@@ -143,7 +143,7 @@
       "text": "We host training camps for visiting squads and plan, support and deliver sports events across the island.",
       "cta": "Learn more",
       "script": "Cyprus",
-      "imageAlt": "The MKA sport Events training camp banner beside the goalposts on a grass pitch in Cyprus, with players warming up behind it",
+      "imageAlt": "The Georgia national sambo team and coaches on the mat during their MKA sport Events training camp in Cyprus",
       "workLabel": "We work with",
       "audiences": [
         "Clubs",
@@ -166,19 +166,19 @@
         "title": "Sports Training Camps",
         "text": "Full support for training camps of any sport, for teams and athletes.",
         "cta": "Plan a camp",
-        "alt": "View through the goal net of a footballer on the ball during a camp friendly in Cyprus"
+        "alt": "Athletes recovering by the hotel pool between sessions at an MKA sport Events training camp in Cyprus"
       },
       {
         "title": "International Sports Events",
         "text": "We assist with competition setup, logistics and on-the-ground support.",
         "cta": "Organise an event",
-        "alt": "A footballer in an orange shirt shielding the ball from a defender during a camp friendly in Cyprus"
+        "alt": "A sambo throw at the European Sambo Championship held in Cyprus in 2025"
       },
       {
         "title": "Sports Event Organisation",
         "text": "From planning and budgeting to operations on the day.",
         "cta": "Discuss your event",
-        "alt": "The MKA sport Events camp banner beside the goal with a member of the camp team alongside it"
+        "alt": "Two sambo athletes in red and blue gripping jackets during a competition bout"
       }
     ],
     "cyprus": {
@@ -208,7 +208,7 @@
       ],
       "cta": "Discover Cyprus",
       "mapLabel": "Outline map of Cyprus marking Nicosia, Agia Napa, Larnaca, Paphos and Limassol",
-      "imageAlt": "A grass pitch in Cyprus with hills behind it, photographed during an MKA sport Events training camp",
+      "imageAlt": "A seafront hotel pool in Cyprus with pine trees and the sea behind, during an MKA sport Events training camp",
       "places": [
         {
           "key": "nicosia",
@@ -250,7 +250,7 @@
         "Free Wi-Fi and training water",
         "Access to a massage room"
       ],
-      "imageAlt": "A visiting women's football team and their coaches gathered at the bench during a break in a camp match in Cyprus",
+      "imageAlt": "Sambo athletes playing basketball on an outdoor court in Cyprus during their training camp",
       "tagline": [
         "Train",
         "Recover",

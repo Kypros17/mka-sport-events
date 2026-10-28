@@ -9,15 +9,15 @@ import PhotoRow from "@/components/PhotoRow.astro";
 import CtaBand from "@/components/CtaBand.astro";
 import Streaks from "@/components/Streaks.astro";
 import { getDictionary, localePath, type Locale } from "@/i18n";
-import heroImg from "@/assets/images/camp-football-1.jpeg";
-import whoImg from "@/assets/images/camp-banner-2.jpeg";
-import cardCamps from "@/assets/images/camp-football-3.jpeg";
-import cardEvents from "@/assets/images/camp-football-2.jpeg";
-import cardOrg from "@/assets/images/camp-banner-1.jpeg";
-import cyprusImg from "@/assets/images/camp-banner-1.jpeg";
-import packageImg from "@/assets/images/camp-team-1.jpeg";
-import ctaBg from "@/assets/images/camp-football-2.jpeg";
-import ctaSide from "@/assets/images/camp-football-3.jpeg";
+import heroImg from "@/assets/images/sambo-action-throw.webp";
+import whoImg from "@/assets/images/camp-sambo-team.jpg";
+import cardCamps from "@/assets/images/camp-sambo-pool.jpg";
+import cardEvents from "@/assets/images/sambo-action-esf-2025.webp";
+import cardOrg from "@/assets/images/sambo-action-grip.webp";
+import cyprusImg from "@/assets/images/camp-sambo-pool-sea.jpg";
+import packageImg from "@/assets/images/camp-sambo-basketball.jpg";
+import ctaBg from "@/assets/images/sambo-action-grip.webp";
+import ctaSide from "@/assets/images/camp-sambo-team.jpg";
 import p1 from "@/assets/images/camp-sambo-team.jpg";
 import p2 from "@/assets/images/camp-sambo-pool-sea.jpg";
 import p3 from "@/assets/images/camp-football-2.jpeg";
@@ -33,9 +33,9 @@ const t = getDictionary(locale);
 const h = t.home;
 
 const cards = [
-  { ...h.serviceCards[0], href: localePath(locale, "camps"), image: cardCamps, position: "50% 40%" },
-  { ...h.serviceCards[1], href: localePath(locale, "events"), image: cardEvents, position: "45% 40%" },
-  { ...h.serviceCards[2], href: localePath(locale, "events"), image: cardOrg, position: "22% 50%" },
+  { ...h.serviceCards[0], href: localePath(locale, "camps"), image: cardCamps, position: "55% 60%" },
+  { ...h.serviceCards[1], href: localePath(locale, "events"), image: cardEvents, position: "50% 45%" },
+  { ...h.serviceCards[2], href: localePath(locale, "events"), image: cardOrg, position: "45% 40%" },
 ];
 
 const gallery = [p1, p2, p3, p4, p5].map((image, i) => ({ image, alt: h.proof.items[i].alt }));
@@ -125,9 +125,9 @@ const gallery = [p1, p2, p3, p4, p5].map((image, i) => ({ image, alt: h.proof.it
     showContacts
     contactsLabel={h.finalCta.contactsLabel}
     image={ctaBg}
-    imageAlt={h.proof.items[2].alt}
+    imageAlt={h.serviceCards[2].alt}
     sideImage={ctaSide}
-    sideImageAlt={h.serviceCards[0].alt}
+    sideImageAlt={h.proof.items[0].alt}
     script={h.finalCta.script}
   />
 </BaseLayout>

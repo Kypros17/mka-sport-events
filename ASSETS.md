@@ -26,10 +26,23 @@ not supplied, so captions stay general.
 
 | File | Size | Used on |
 | --- | --- | --- |
-| camp-sambo-team.jpg | 1600×1200 | Home "Real experiences" strip, camps sambo gallery |
+| camp-sambo-team.jpg | 1600×1200 | Home "Who we are" and final CTA side image, home strip, camps sambo gallery |
 | camp-sambo-pool-sea.jpg | 1600×901 | Home strip, camps sambo gallery |
 | camp-sambo-pool.jpg | 1600×901 | Camps sambo gallery |
 | camp-sambo-basketball.jpg | 1600×901 | Home strip, camps sambo gallery |
+
+### Sambo competition action (client-owned)
+
+Supplied October 2026; the client confirmed these are MKA sport Events' own photographs.
+Small source files, so they render soft at full width; larger originals would sharpen the
+home hero. Captions name the event only where visible and never claim MKA organised a
+FIAS/ESF championship.
+
+| File | Size | Used on |
+| --- | --- | --- |
+| sambo-action-throw.webp | 753×621 | Home hero (LCP) and default share image |
+| sambo-action-grip.webp | 797×616 | Home services panel 03, home final CTA background |
+| sambo-action-esf-2025.webp | 822×625 | Home services panel 02 (European Sambo Championship, Cyprus 2025) |
 
 Not used: a photo from the Sambo Cyprus International Tournament 2023 press wall. It
 carries a PJAPRESS.COM watermark (photographer's rights) and sponsor logos; MKA's role in
