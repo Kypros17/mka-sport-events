@@ -17,6 +17,24 @@ by MKA sport Events. Used freely across the site.
 | camp-banner-2.jpeg | 1600×1066 | Home proof section, about story, camps gallery |
 | camp-team-1.jpeg | 1600×1066 | About hero, camps gallery |
 
+### Sambo camp (Georgia national sambo team)
+
+Client-supplied photographs from the sambo camp MKA sport Events organised for the
+Georgia national sambo team, added October 2026. Owned by the client; people are
+identifiable, so the client confirms they may be shown. Date, venue and hotel name
+not supplied, so captions stay general.
+
+| File | Size | Used on |
+| --- | --- | --- |
+| camp-sambo-team.jpg | 1600×1200 | Home "Real experiences" strip, camps sambo gallery |
+| camp-sambo-pool-sea.jpg | 1600×901 | Home strip, camps sambo gallery |
+| camp-sambo-pool.jpg | 1600×901 | Camps sambo gallery |
+| camp-sambo-basketball.jpg | 1600×901 | Home strip, camps sambo gallery |
+
+Not used: a photo from the Sambo Cyprus International Tournament 2023 press wall. It
+carries a PJAPRESS.COM watermark (photographer's rights) and sponsor logos; MKA's role in
+that tournament needs confirming before any event credit is published.
+
 Note: the roll-up banner in these photographs reads "Sports events Cyprus
 training camp" and shows an older phone number and a mail.ru address. The site
 copy does not repeat that branding. If the client wants full consistency, new

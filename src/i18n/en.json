@@ -265,9 +265,14 @@
       "stripLabel": "Photographs from MKA sport Events training camps",
       "items": [
         {
-          "alt": "The MKA sport Events training camp banner beside the goalposts, with football players warming up on the pitch behind it",
-          "title": "Banner on the touchline",
-          "caption": "Players warming up on a full-size grass pitch."
+          "alt": "The Georgia national sambo team and coaches gathered on a yellow and blue sambo mat in their training hall during an MKA sport Events camp in Cyprus",
+          "title": "Georgia national sambo team",
+          "caption": "The squad and coaches on the mat during their camp in Cyprus."
+        },
+        {
+          "alt": "Athletes from the sambo camp walking past the pool at their seafront hotel in Cyprus, with pine trees and the sea behind",
+          "title": "Hotel by the sea",
+          "caption": "Pool and sea a few steps from the rooms, between sessions."
         },
         {
           "alt": "A footballer in an orange shirt shielding the ball from a defender in white during a camp friendly in Cyprus",
@@ -275,19 +280,14 @@
           "caption": "Arranged against local opposition as part of the camp programme."
         },
         {
+          "alt": "Sambo athletes playing a game of basketball on an outdoor court in Cyprus on a sunny day",
+          "title": "Off the mat",
+          "caption": "A game of basketball as active recovery between mat sessions."
+        },
+        {
           "alt": "View through the goal net of a footballer in orange on the ball as opposing players and the goalkeeper close in, during a camp friendly in Cyprus",
           "title": "Full match conditions",
           "caption": "A grass pitch with stand seating, not a training ground."
-        },
-        {
-          "alt": "A visiting women's football team and their coaches gathered at the bench during a break in a camp match in Cyprus",
-          "title": "The visiting squad",
-          "caption": "Coaches and players at the bench during a break in play."
-        },
-        {
-          "alt": "The MKA sport Events training camp banner set up beside the goal on a grass pitch, with a member of the camp team alongside it",
-          "title": "On site throughout",
-          "caption": "Our banner pitchside, with the camp team on site for the length of the camp."
         }
       ]
     },
@@ -456,6 +456,33 @@
         {
           "title": "Friendly matches",
           "text": "Friendly fixtures against local football opposition, played in full match conditions, and local sparring partners for combat-sports squads."
+        }
+      ]
+    },
+    "samboGallery": {
+      "kicker": "From our camps",
+      "title": "A sambo camp in Cyprus",
+      "text": "The Georgia national sambo team on a training camp in Cyprus organised by MKA sport Events: mat sessions, a seafront hotel base and time to recover between sessions.",
+      "items": [
+        {
+          "alt": "The Georgia national sambo team and coaches gathered on a yellow and blue sambo mat in their training hall during an MKA sport Events camp in Cyprus",
+          "title": "Georgia national sambo team",
+          "caption": "The squad and coaches on the mat in their training hall."
+        },
+        {
+          "alt": "Athletes from the sambo camp walking past the pool at their seafront hotel in Cyprus, with pine trees and the sea behind",
+          "title": "Seafront hotel base",
+          "caption": "Pool, pine trees and the sea, a few steps from the rooms."
+        },
+        {
+          "alt": "Sambo athletes relaxing on sun loungers beside the hotel pool in Cyprus on a sunny day",
+          "title": "Recovery days",
+          "caption": "Rest between sessions is part of the programme."
+        },
+        {
+          "alt": "Sambo athletes playing a game of basketball on an outdoor court in Cyprus on a sunny day",
+          "title": "Off the mat",
+          "caption": "A game of basketball as active recovery."
         }
       ]
     },

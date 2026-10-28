@@ -10,9 +10,10 @@ repository is its business website — a marketing and enquiry site, not an e-co
 Three services:
 
 1. **Sports training camps** (`/training-camps/`) — training camps hosted in Cyprus for a
-   variety of sports, not only combat sports. The camp that has actually been run and
-   photographed is a football camp; combat-sports camps (sambo, judo, wrestling, jiu-jitsu)
-   are offered on the strength of the founder's sambo background.
+   variety of sports, not only combat sports. Camps actually run and photographed: a football
+   camp, and a sambo camp for the **Georgia national sambo team** (client-confirmed, October
+   2026; date and venue not yet supplied, so the copy does not state them). Judo, wrestling
+   and jiu-jitsu camps are offered but none has been run yet.
 2. **International sports events** (`/events/`) — supporting international competitions in
    Cyprus, mostly **sambo**.
 3. **Sports event organisation** (also `/events/`) — organising and delivering sports

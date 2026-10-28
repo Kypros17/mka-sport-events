@@ -14,6 +14,10 @@ import g1 from "@/assets/images/camp-banner-2.jpeg";
 import g2 from "@/assets/images/camp-football-2.jpeg";
 import g3 from "@/assets/images/camp-football-3.jpeg";
 import g4 from "@/assets/images/camp-team-1.jpeg";
+import s1 from "@/assets/images/camp-sambo-team.jpg";
+import s2 from "@/assets/images/camp-sambo-pool-sea.jpg";
+import s3 from "@/assets/images/camp-sambo-pool.jpg";
+import s4 from "@/assets/images/camp-sambo-basketball.jpg";
 
 interface Props {
   locale: Locale;
@@ -24,6 +28,7 @@ const t = getDictionary(locale);
 const c = t.camps;
 
 const gallery = [g1, g2, g3, g4].map((image, i) => ({ image, ...c.gallery.items[i] }));
+const samboGallery = [s1, s2, s3, s4].map((image, i) => ({ image, ...c.samboGallery.items[i] }));
 
 const serviceSchema = {
   "@type": "Service",
@@ -114,8 +119,15 @@ const faqSchema = {
     </div>
   </section>
 
-  <!-- Gallery -->
+  <!-- Galleries: sambo camp, then football camp -->
   <section class="section section--surface">
+    <div class="container container--wide">
+      <SectionHead kicker={c.samboGallery.kicker} title={c.samboGallery.title} text={c.samboGallery.text} />
+      <PhotoGallery items={samboGallery} columns={2} />
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container container--wide">
       <SectionHead kicker={c.gallery.kicker} title={c.gallery.title} text={c.gallery.text} />
       <PhotoGallery items={gallery} columns={2} />
