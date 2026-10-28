@@ -26,7 +26,7 @@ not supplied, so captions stay general.
 
 | File | Size | Used on |
 | --- | --- | --- |
-| camp-sambo-team.jpg | 1600×1200 | Home "Who we are" and final CTA side image, home strip, camps sambo gallery |
+| camp-sambo-team.jpg | 1600×1200 | About page hero and share image, home "Who we are" and final CTA side image, home strip, camps sambo gallery |
 | camp-sambo-pool-sea.jpg | 1600×901 | Home strip, camps sambo gallery |
 | camp-sambo-pool.jpg | 1600×901 | Camps sambo gallery |
 | camp-sambo-basketball.jpg | 1600×901 | Home strip, camps sambo gallery |
