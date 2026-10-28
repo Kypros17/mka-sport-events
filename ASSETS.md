@@ -13,7 +13,7 @@ by MKA sport Events. Used freely across the site.
 | camp-football-1.jpeg | 1600×1066 | Not currently used (former home hero and default share image) |
 | camp-football-2.jpeg | 1600×1066 | Services panel, Cyprus page hero, camps gallery |
 | camp-football-3.jpeg | 1600×1066 | Home strip, camps gallery |
-| camp-banner-1.jpeg | 1600×1066 | Founder sections (home, about) |
+| camp-banner-1.jpeg | 1600×1066 | Not currently used (former About founder photo) |
 | camp-banner-2.jpeg | 1600×1066 | Home proof section, about story, camps gallery |
 | camp-team-1.jpeg | 1600×1066 | About hero, camps gallery |
 
@@ -44,6 +44,16 @@ FIAS/ESF championship.
 | sambo-action-throw.webp | 753×621 | Home hero left (LCP; the only hero photo on phones), default share image |
 | sambo-action-grip.webp | 797×616 | Home services panel 03, final CTA background |
 | sambo-action-esf-2025.webp | 822×625 | Home hero right, services panel 02 (European Sambo Championship, Cyprus 2025) |
+
+### Founder portrait
+
+| File | Size | Used on |
+| --- | --- | --- |
+| founder-marios-andreou.jpg | 1600×1066 | About page, "Founded and led by Marios Andreou" section |
+
+Client-supplied (October 2026): Marios Andreou at a panel table during an international
+sports forum (2026 event badge visible). It looks like a professional event photograph;
+the client should confirm the photographer or organiser allows its use on the website.
 
 ### Cyprus scenery
 
