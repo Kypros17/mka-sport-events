@@ -1597,3 +1597,66 @@ html.motion-off [data-reveal] picture {
     width: 70px;
   }
 }
+
+
+/* ==========================================================================
+   Logo theme for the inner pages (About, Training Camps, Events, Cyprus,
+   Contact): the light grounds become the logo's colours — a turquoise glow
+   fading through navy to black — with white text. Applied by BaseLayout as
+   body.theme-logo on every page except home; the tokens below remap the
+   light palette so components follow without their own dark variants.
+   ========================================================================== */
+body.theme-logo {
+  --c-bg: #07101c;
+  --c-paper: rgba(255, 255, 255, 0.06);
+  --c-surface: rgba(255, 255, 255, 0.04);
+  --c-sand: rgba(255, 255, 255, 0.04);
+  --c-panel-light: rgba(255, 255, 255, 0.05);
+  --c-ink: #ffffff;
+  --c-text: rgba(255, 255, 255, 0.9);
+  --c-muted: rgba(255, 255, 255, 0.7);
+  --c-line: rgba(255, 255, 255, 0.14);
+  --c-line-strong: rgba(255, 255, 255, 0.28);
+  --c-turq-700: #62d0e8; /* small turquoise text on the dark ground: >= 7:1 */
+  --c-turq-100: rgba(31, 177, 210, 0.18);
+  --c-red-100: rgba(212, 43, 58, 0.2);
+  --c-field-focus: rgba(255, 255, 255, 0.1);
+  color: var(--c-text);
+  background-color: #050b14;
+  background-image:
+    radial-gradient(120% 55% at 0% 0%, rgba(31, 177, 210, 0.42) 0%, rgba(31, 177, 210, 0) 62%),
+    radial-gradient(70% 40% at 100% 38%, rgba(31, 177, 210, 0.14) 0%, rgba(31, 177, 210, 0) 70%),
+    linear-gradient(180deg, #0b2438 0%, #07101c 42%, #050b14 100%);
+}
+
+body.theme-logo ::selection {
+  background: var(--c-turq);
+  color: #050b14;
+}
+
+/* Navy text and fills that are meant for light grounds */
+body.theme-logo p a:hover,
+body.theme-logo li a:hover,
+body.theme-logo .link:hover,
+body.theme-logo .form__whatsapp {
+  color: var(--c-turq-700);
+}
+
+body.theme-logo .form__whatsapp:hover {
+  color: #fff;
+}
+
+body.theme-logo .tag {
+  color: var(--c-text);
+}
+
+body.theme-logo .btn--secondary {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+body.theme-logo .btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #fff;
+}

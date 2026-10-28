@@ -168,7 +168,7 @@ const jsonLd = {
     </script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
-  <body class:list={{ "has-mobile-bar": !hideMobileBar }}>
+  <body class:list={{ "has-mobile-bar": !hideMobileBar, "theme-logo": current !== "home" }}>
     <a class="skip-link" href="#main-content">{t.common.skipToContent}</a>
     <Header locale={locale} current={current} variant={headerVariant} />
     <main id="main-content" tabindex="-1">

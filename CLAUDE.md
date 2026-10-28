@@ -81,6 +81,13 @@ links or copy for them unless the client asks.
 - **Visual direction:** premium, athletic, editorial, image-led. Restrained radii (3–6px),
   thin rules instead of card boxes, asymmetric splits, full-bleed sections, subtle motion.
   Avoid rounded-card grids, heavy gradients, glassmorphism and repeated centred sections.
+- **Inner pages use the logo theme** (client request, October 2026): About, Training Camps,
+  Events, Cyprus and Contact (EN and RU) sit on a dark ground — a turquoise glow fading
+  through navy to black, as in the logo — with white text. `BaseLayout` adds
+  `body.theme-logo` on every page except home; the block at the end of `global.css` remaps
+  the light tokens (`--c-bg`, `--c-paper`, `--c-ink`, `--c-text`, `--c-line`…). New
+  components must use those tokens, not hard-coded `#fff` or navy text, so they work on both.
+  The home page keeps its own light/dark band rhythm.
 - **Fonts are self-hosted** via `@fontsource-variable/sofia-sans-condensed` (display) and
   `@fontsource-variable/manrope` (body), both with Cyrillic subsets. Do not load Google Fonts
   or any other third-party origin.
