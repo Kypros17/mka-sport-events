@@ -34,14 +34,14 @@ not supplied, so captions stay general.
 ### Sambo competition action (client-owned)
 
 Supplied October 2026; the client confirmed these are MKA sport Events' own photographs.
-Small source files, so the home hero shows all three side by side (each about a third of the
-screen, so none is enlarged); phones show only the throw. Captions name the event only where visible and never claim MKA organised a
+Small source files, so the home hero shows two side by side (each half the screen, so
+neither is enlarged); phones show only the throw. Captions name the event only where visible and never claim MKA organised a
 FIAS/ESF championship.
 
 | File | Size | Used on |
 | --- | --- | --- |
-| sambo-action-throw.webp | 753×621 | Home hero centre (LCP; the only hero photo on phones), default share image |
-| sambo-action-grip.webp | 797×616 | Home hero left, services panel 03, final CTA background |
+| sambo-action-throw.webp | 753×621 | Home hero left (LCP; the only hero photo on phones), default share image |
+| sambo-action-grip.webp | 797×616 | Home services panel 03, final CTA background |
 | sambo-action-esf-2025.webp | 822×625 | Home hero right, services panel 02 (European Sambo Championship, Cyprus 2025) |
 
 Not used: a photo from the Sambo Cyprus International Tournament 2023 press wall. It

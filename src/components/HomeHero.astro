@@ -12,7 +12,6 @@ import Icon from "./Icon.astro";
 import Streaks from "./Streaks.astro";
 import { getDictionary, localePath, type Locale } from "@/i18n";
 import heroImg from "@/assets/images/sambo-action-throw.webp";
-import heroLeft from "@/assets/images/sambo-action-grip.webp";
 import heroRight from "@/assets/images/sambo-action-esf-2025.webp";
 
 interface Props {
@@ -26,26 +25,15 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
 ---
 
 <section class="hero" id="hero">
-  <!-- Three source photos side by side: each is ~800px wide, sharp at a third of
-       the screen. Phones show only the centre photo. -->
+  <!-- Two source photos side by side: each is ~800px wide, sharp at half the
+       screen. Phones show only the throw. -->
   <div class="hero__media" aria-hidden="true">
-    <Picture
-      pictureAttributes={{ class: "hero__shot hero__shot--side" }}
-      src={heroLeft}
-      alt=""
-      widths={[480, 640].filter((w) => w <= heroLeft.width)}
-      sizes="34vw"
-      formats={["avif", "webp"]}
-      fallbackFormat="jpg"
-      loading="eager"
-      decoding="async"
-    />
     <Picture
       pictureAttributes={{ class: "hero__shot hero__shot--main" }}
       src={heroImg}
       alt=""
       widths={[480, 640, 753].filter((w) => w <= heroImg.width)}
-      sizes="(min-width: 768px) 34vw, 100vw"
+      sizes="(min-width: 768px) 50vw, 100vw"
       formats={["avif", "webp"]}
       fallbackFormat="jpg"
       loading="eager"
@@ -56,8 +44,8 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
       pictureAttributes={{ class: "hero__shot hero__shot--side hero__shot--right" }}
       src={heroRight}
       alt=""
-      widths={[480, 640].filter((w) => w <= heroRight.width)}
-      sizes="34vw"
+      widths={[480, 640, 822].filter((w) => w <= heroRight.width)}
+      sizes="50vw"
       formats={["avif", "webp"]}
       fallbackFormat="jpg"
       loading="eager"
@@ -129,7 +117,7 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
     inset: 0;
     z-index: -1;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 3px;
     background: var(--c-ink-950);
   }
