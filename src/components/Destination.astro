@@ -312,7 +312,7 @@ if (missing.length > 0) {
 
   @media (max-width: 860px) {
     .destination {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       min-height: 0;
     }
 
@@ -331,7 +331,7 @@ if (missing.length > 0) {
     }
 
     .destination__panel-inner {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .destination__map {

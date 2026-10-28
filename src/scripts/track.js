@@ -6,7 +6,9 @@
  *   whatsapp  WhatsApp click-to-chat links
  *   phone     tel: links
  *   email     mailto: links
- * plus the contact form fires "form_submit" from main.js.
+ * plus the contact form fires "form_email_handoff" from main.js when it opens
+ * the visitor's email app. That is not a sent enquiry: the visitor may still
+ * close the email without sending, so do not count it as a completed lead.
  *
  * When a provider is chosen, define `window.mkaTrack(eventName, detail)` in
  * the provider's snippet (loaded from BaseLayout) and every click below is

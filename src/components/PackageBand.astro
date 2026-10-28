@@ -225,11 +225,11 @@ const { locale, index, label, from, price, indicative, meta, cta, includedTitle,
 
   @media (max-width: 640px) {
     .package__grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .package__side {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .package__tagline {

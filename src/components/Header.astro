@@ -82,7 +82,7 @@ const navItems: { key: RouteKey; label: string }[] = [
       >
         <Icon name="whatsapp" />
       </a>
-      <a class="tool tool--lang" href={localePath(other, current)} hreflang={other} lang={other} aria-label={t.common.switchTo} title={t.common.switchTo}>
+      <a class="tool tool--lang" href={localePath(other, current)} hreflang={other} lang={other} aria-label={`${t.common.switchToShort} — ${t.common.switchTo}`} title={t.common.switchTo}>
         {t.common.switchToShort}
       </a>
       <div class="header-cta">

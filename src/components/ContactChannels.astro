@@ -83,7 +83,7 @@ const t = getDictionary(locale).contact.channels;
 
   .channel {
     display: grid;
-    grid-template-columns: 2.75rem 1fr;
+    grid-template-columns: 2.75rem minmax(0, 1fr);
     gap: var(--s-4);
     padding: var(--s-5) 0;
     border-bottom: 1px solid var(--c-line);

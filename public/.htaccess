@@ -13,6 +13,13 @@ AddDefaultCharset UTF-8
   # needs for SSL certificate issuing and renewal (ACME challenges).
   RewriteRule (^|/)\.(?!well-known/) - [F]
 
+  # HTTPS: once the domain and its SSL certificate are live, uncomment these
+  # two lines to send every http:// request to https:// (and pick one host,
+  # with or without www, in site.config.mjs). Left off until the certificate
+  # is confirmed, so the site cannot be locked into a redirect loop.
+  # RewriteCond %{HTTPS} !=on
+  # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
   # Redirect the old file-based URLs to the new directory URLs (301)
   RewriteRule ^index\.html$ / [R=301,L]
   RewriteRule ^about\.html$ /about/ [R=301,L]
@@ -27,6 +34,17 @@ AddDefaultCharset UTF-8
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+  # Content Security Policy: everything the site loads comes from its own
+  # origin. 'unsafe-inline' is needed for the small inline script in the page
+  # head and for inline style attributes; there is no user-generated content.
+  # If a third-party service is ever added (analytics, maps, embeds), its
+  # origin must be added here or the browser will block it.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'self'"
+
+  # HSTS: uncomment only after HTTPS works on the live domain. Browsers then
+  # refuse plain http for a year, so it must not be enabled before that.
+  # Header always set Strict-Transport-Security "max-age=31536000"
 
   # Pages: always revalidate, so content changes show up immediately.
   <FilesMatch "\.html$">

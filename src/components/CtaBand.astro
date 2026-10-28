@@ -254,7 +254,7 @@ const parts = accent && heading.includes(accent) ? heading.split(accent) : null;
   .cta-band__contacts a {
     display: inline-flex;
     align-items: center;
-    min-height: 32px;
+    min-height: 44px;
     color: #fff;
     text-decoration: underline;
     text-decoration-color: var(--c-line-on-dark);
@@ -301,7 +301,7 @@ const parts = accent && heading.includes(accent) ? heading.split(accent) : null;
   @media (max-width: 960px) {
     .cta-band__inner,
     .cta-band__inner--three {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .cta-band__inner--three .cta-band__actions {

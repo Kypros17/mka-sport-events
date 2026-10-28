@@ -86,7 +86,7 @@ const { kicker, title, text, image, alt = "", credit } = Astro.props;
 
   @media (max-width: 860px) {
     .page-hero--with-image .page-hero__inner {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>

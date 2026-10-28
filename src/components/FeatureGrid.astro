@@ -77,7 +77,7 @@ const { items, columns = 3, numbered = true, tone = "light" } = Astro.props;
     .feature-grid--2,
     .feature-grid--3,
     .feature-grid--4 {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .feature-grid__item {

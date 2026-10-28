@@ -12,7 +12,7 @@ import Footer from "@/components/Footer.astro";
 import MobileBar from "@/components/MobileBar.astro";
 import { brandName, contact, siteUrl } from "../../site.config.mjs";
 import { getDictionary, localePath, localeTags, locales, type Locale, type RouteKey } from "@/i18n";
-import ogDefault from "@/assets/images/camp-football-1.jpeg";
+import ogDefault from "@/assets/images/camp-sambo-team.jpg";
 
 interface Props {
   locale: Locale;
@@ -50,9 +50,15 @@ const tags = localeTags[locale];
 const abs = (path: string) => new URL(path, siteUrl).href;
 const canonical = abs(localePath(locale, current));
 
-const share = await getImage({ src: ogImage ?? ogDefault, width: 1200, height: 630, fit: "cover", format: "jpg", quality: 82 });
+// Share image cropped to the 1.91:1 social-card shape. Never upscaled: a
+// smaller source gives a smaller card, and the og:image size tags below
+// report the real output size.
+const shareSrc = ogImage ?? ogDefault;
+const shareWidth = Math.min(1200, shareSrc.width, Math.floor(shareSrc.height * 1.905));
+const shareHeight = Math.round(shareWidth / 1.905);
+const share = await getImage({ src: shareSrc, width: shareWidth, height: shareHeight, fit: "cover", format: "jpg", quality: 82 });
 const shareUrl = abs(share.src);
-const shareAlt = ogImageAlt ?? t.home.hero.imageAlt;
+const shareAlt = ogImageAlt ?? t.about.hero.imageAlt;
 
 const organisation = {
   "@type": ["SportsOrganization", "LocalBusiness"],
@@ -140,8 +146,8 @@ const jsonLd = {
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={shareUrl} />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content={String(shareWidth)} />
+    <meta property="og:image:height" content={String(shareHeight)} />
     <meta property="og:image:alt" content={shareAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />

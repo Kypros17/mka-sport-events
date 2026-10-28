@@ -8,7 +8,7 @@
 import Button from "./Button.astro";
 import Icon from "./Icon.astro";
 import { contact } from "../../site.config.mjs";
-import { getDictionary, type Locale } from "@/i18n";
+import { getDictionary, localePath, type Locale } from "@/i18n";
 import { whatsappLink } from "@/lib/links";
 
 interface Props {
@@ -108,6 +108,7 @@ const config = {
 
   <p class="form__note">
     {f.note} <a href={`mailto:${contact.email}`} data-track="email">{contact.email}</a>.
+    {f.privacyNote} <a href={localePath(locale, "privacy")}>{dict.footer.privacy}</a>.
   </p>
 </form>
 
@@ -260,7 +261,7 @@ const config = {
 
   @media (max-width: 640px) {
     .form__grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .form__actions :global(.btn) {

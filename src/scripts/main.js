@@ -400,7 +400,7 @@ function initContactForm() {
     const href =
       "mailto:" + cfg.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(summary());
 
-    if (typeof window.mkaTrack === "function") window.mkaTrack("form_submit", { service: value("service") });
+    if (typeof window.mkaTrack === "function") window.mkaTrack("form_email_handoff", { service: value("service") });
     window.location.href = href;
 
     if (success) {

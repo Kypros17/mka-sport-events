@@ -172,7 +172,7 @@ const { cards } = Astro.props;
 
   @media (max-width: 960px) {
     .panels {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--s-5);
     }
 
@@ -198,7 +198,7 @@ const { cards } = Astro.props;
 
   @media (max-width: 560px) {
     .panel {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .panel__media {

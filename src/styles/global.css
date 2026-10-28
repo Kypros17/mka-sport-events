@@ -197,6 +197,10 @@ h4 {
   line-height: var(--lh-snug);
   color: var(--c-ink);
   letter-spacing: -0.01em;
+  /* Long single words (Russian especially) break with a hyphen, or at
+     worst mid-word, instead of overflowing a narrow phone screen. */
+  overflow-wrap: break-word;
+  hyphens: auto;
   text-wrap: balance;
 }
 
@@ -534,6 +538,7 @@ hr {
   border: 1.5px solid transparent;
   border-radius: var(--radius-sm);
   white-space: nowrap;
+  max-width: 100%;
   cursor: pointer;
   transition:
     background-color var(--dur) var(--ease),
@@ -541,6 +546,16 @@ hr {
     border-color var(--dur) var(--ease),
     transform var(--dur) var(--ease),
     box-shadow var(--dur) var(--ease);
+}
+
+/* Narrow phones: long labels (Russian especially) wrap inside the button
+   instead of pushing the page wider than the screen. */
+@media (max-width: 479px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.15;
+  }
 }
 
 .btn svg {
@@ -950,7 +965,9 @@ html.js .reveal[data-delay="3"] { transition-delay: 240ms; }
 .slate__num {
   font-size: 1.1rem;
   letter-spacing: 0.06em;
-  color: var(--c-cyan);
+  /* Same colour as the label: bright cyan on dark grounds, the darker
+     turquoise on light ones (cyan on white fails WCAG AA). */
+  color: inherit;
 }
 
 .slate::after {
@@ -962,13 +979,15 @@ html.js .reveal[data-delay="3"] { transition-delay: 240ms; }
 
 .section--ink .slate,
 .section--dark .slate,
-.on-dark .slate {
+.on-dark .slate,
+.slate.on-dark {
   color: var(--c-cyan);
 }
 
 .section--ink .slate::after,
 .section--dark .slate::after,
-.on-dark .slate::after {
+.on-dark .slate::after,
+.slate.on-dark::after {
   background: var(--c-line-on-dark);
 }
 
@@ -1607,6 +1626,7 @@ html.motion-off [data-reveal] picture {
    light palette so components follow without their own dark variants.
    ========================================================================== */
 body.theme-logo {
+  color-scheme: dark;
   --c-bg: #07101c;
   --c-paper: rgba(255, 255, 255, 0.06);
   --c-surface: rgba(255, 255, 255, 0.04);

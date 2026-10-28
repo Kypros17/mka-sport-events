@@ -90,7 +90,7 @@ const sizes = columns === 3 ? "(min-width: 1024px) 380px, (min-width: 640px) 50v
   @media (max-width: 600px) {
     .gallery--3,
     .gallery--2 {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>

@@ -106,7 +106,7 @@ const services = [
 
   @media (max-width: 960px) {
     .services {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--s-7);
     }
 
@@ -124,7 +124,7 @@ const services = [
 
   @media (max-width: 600px) {
     .service {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .service__body {

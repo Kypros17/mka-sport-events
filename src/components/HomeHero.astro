@@ -267,7 +267,7 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
 
   @media (max-width: 960px) {
     .hero__inner {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .hero__side {
@@ -281,7 +281,7 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
     }
 
     .hero__media {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 0;
     }
 

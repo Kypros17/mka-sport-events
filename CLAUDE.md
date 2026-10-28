@@ -63,7 +63,8 @@ links or copy for them unless the client asks.
   `src/scripts/track.js` (CTA tracking hook). Behaviour is feature-detected so one bundle
   serves every page. Do not add client JavaScript without a genuine need.
 - **Clean directory URLs, no `.html`:** `/`, `/about/`, `/training-camps/`, `/events/`,
-  `/facilities/`, `/contact/`, and the Russian mirror under `/ru/`. Trailing slashes always.
+  `/facilities/`, `/contact/`, `/privacy/`, and the Russian mirror under `/ru/`. Trailing slashes
+  always.
   Old `.html` addresses are 301-redirected by `public/.htaccess`.
 - **One site URL, configured once** in `site.config.mjs` (`siteUrl`). Canonical links,
   hreflang alternates, Open Graph URLs, JSON-LD ids, `sitemap-index.xml` and `robots.txt` are
@@ -103,7 +104,9 @@ links or copy for them unless the client asks.
   errors tied to fields with `aria-describedby`/`aria-invalid`. Colour pairs in
   `global.css` meet WCAG AA; check any new pair.
 - **Analytics:** none loaded. Conversion elements carry `data-track` (`offer`, `whatsapp`,
-  `phone`, `email`, `form`); `track.js` forwards to `window.mkaTrack` if a provider defines
+  `phone`, `email`); the contact form fires `form_email_handoff` when it opens the visitor's
+  email app (not a sent enquiry, so never count it as a completed lead); `track.js` forwards
+  to `window.mkaTrack` if a provider defines
   it. Do not add tracking scripts or invent credentials.
 
 ## Repository layout
@@ -169,6 +172,15 @@ These are confirmed — use them everywhere, never invent alternatives. They are
 ## Known gaps / open items
 
 Treat these as unfinished, not as facts to preserve:
+
+- **Privacy notice** (`/privacy/`, added October 2026) states only what the site really does:
+  no cookies, no analytics, no storage, form hands off to the visitor's email app. The client
+  must confirm the legal entity name, the retention period and the GDPR wording (ideally with
+  a lawyer). If analytics or any third-party embed is ever added, update the notice, add a
+  consent banner where required, and add the origin to the CSP in `public/.htaccess`.
+- **Security headers:** `public/.htaccess` sends a Content-Security-Policy that allows only
+  the site's own origin. HTTPS redirect and HSTS are present but commented out until the live
+  domain's certificate is confirmed.
 
 - **The production domain is unconfirmed.** `siteUrl` in `site.config.mjs` is a reserved
   `.invalid` host. Set the real domain there once and rebuild; nothing else needs to change.

@@ -90,7 +90,7 @@ const { image, alt, imageSide = "left", ratio = "4x3", credit, eager = false, po
   @media (max-width: 860px) {
     .split,
     .split--right {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .split--right .split__media {

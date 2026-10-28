@@ -75,7 +75,10 @@ const navItems: { key: RouteKey; label: string }[] = [
         ))
       }
     </ul>
-    <p class="footer-copy">© {year} {brandName}. {t.footer.rights}</p>
+    <p class="footer-copy">
+      © {year} {brandName}. {t.footer.rights}
+      <a href={localePath(locale, "privacy")} class="footer-privacy" aria-current={current === "privacy" ? "page" : undefined}>{t.footer.privacy}</a>
+    </p>
   </div>
 </footer>
 
@@ -214,8 +217,22 @@ const navItems: { key: RouteKey; label: string }[] = [
   .footer-langs a {
     display: inline-flex;
     align-items: center;
-    min-height: 32px;
+    min-height: 44px;
     color: rgba(255, 255, 255, 0.75);
+  }
+
+  .footer-privacy {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-left: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .footer-privacy:hover {
+    color: #fff;
   }
 
   .footer-contact a:hover,

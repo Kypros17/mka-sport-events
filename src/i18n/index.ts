@@ -36,6 +36,7 @@ export const routes = {
   events: "/events/",
   facilities: "/facilities/",
   contact: "/contact/",
+  privacy: "/privacy/",
 } as const;
 
 export type RouteKey = keyof typeof routes;

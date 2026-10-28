@@ -48,7 +48,8 @@
     "address": "Chilis 28, Nicosia, Cyprus",
     "rights": "All rights reserved.",
     "basedLine": "Based in Nicosia · Working across Cyprus",
-    "descriptor": "Sports camps. Sports events. Cyprus."
+    "descriptor": "Sports camps. Sports events. Cyprus.",
+    "privacy": "Privacy notice"
   },
   "mobileBar": {
     "whatsapp": "WhatsApp",
@@ -141,7 +142,7 @@
       "brand": "MKA sport Events",
       "title": "A Cyprus-based sports company.",
       "text": "We host training camps for visiting squads and plan, support and deliver sports events across the island.",
-      "cta": "Learn more",
+      "cta": "More about us",
       "script": "Cyprus",
       "imageAlt": "The Georgia national sambo team and coaches on the mat during their MKA sport Events training camp in Cyprus",
       "workLabel": "We work with",
@@ -998,7 +999,70 @@
         "duration": "Duration",
         "message": "Message"
       },
-      "whatsappPrefix": "Hello MKA sport Events, I would like to request an offer."
+      "whatsappPrefix": "Hello MKA sport Events, I would like to request an offer.",
+      "privacyNote": "How we handle your details: see our"
     }
+  },
+  "privacy": {
+    "seo": {
+      "title": "Privacy Notice | MKA sport Events",
+      "description": "How MKA sport Events handles the details you send us through this website, by email or on WhatsApp. This website sets no cookies and runs no analytics or tracking."
+    },
+    "hero": {
+      "kicker": "Privacy",
+      "title": "Privacy notice",
+      "text": "This website is a simple information site. It does not store what you type into it, sets no cookies and runs no analytics. This notice explains what happens to the details you choose to send us."
+    },
+    "updatedLabel": "Last updated",
+    "updated": "28 October 2026",
+    "sections": [
+      {
+        "title": "Who we are",
+        "paragraphs": [
+          "MKA sport Events, Chilis 28, Nicosia, Cyprus, is responsible for the personal data you send us. For any question about this notice or your data, email us at the address below."
+        ]
+      },
+      {
+        "title": "What this website collects",
+        "paragraphs": [
+          "Nothing is stored by the website itself. It sets no cookies, uses no analytics, advertising or tracking tools, and keeps nothing in your browser's storage. Fonts and images are served from this website, not from third parties.",
+          "The enquiry form runs entirely in your browser. When you press the button, it opens your own email app with your enquiry written out; nothing is sent until you press Send there. The WhatsApp link works the same way: it opens WhatsApp with a prepared message that you choose whether to send.",
+          "Like any website, our hosting provider may record standard technical logs (such as IP address, pages requested, date and time, and browser type) to operate and secure the service."
+        ]
+      },
+      {
+        "title": "What we receive when you contact us",
+        "paragraphs": [
+          "When you email, call or message us, we receive what you send: typically your name, organisation, email address, phone number and the details of the camp or event you are planning.",
+          "We use these details only to answer your enquiry, prepare an offer and, if you go ahead, organise the camp or event. Our legal bases are taking steps at your request before entering into a contract (Article 6(1)(b) GDPR) and our legitimate interest in replying to people who contact us (Article 6(1)(f) GDPR). We do not sell your details or use them for advertising."
+        ]
+      },
+      {
+        "title": "Services that handle your messages",
+        "paragraphs": [
+          "Email to our address is handled by Google (Gmail). Messages sent on WhatsApp are handled by WhatsApp (Meta). These providers process data under their own privacy policies and may store it outside the European Union. Links to Instagram and TikTok take you to those platforms, where their own policies apply."
+        ]
+      },
+      {
+        "title": "How long we keep your details",
+        "paragraphs": [
+          "We keep enquiry correspondence only for as long as we need it to deal with your enquiry and any booking that follows, and for any longer period the law requires (for example, for accounting records)."
+        ]
+      },
+      {
+        "title": "Your rights",
+        "paragraphs": [
+          "Under the GDPR you can ask to see the personal data we hold about you, have it corrected or deleted, restrict or object to its use, and receive a copy in a portable format. To do so, email us; we will reply as required by law.",
+          "If you are unhappy with how we handle your data, you can complain to the Office of the Commissioner for Personal Data Protection in Cyprus (dataprotection.gov.cy)."
+        ]
+      },
+      {
+        "title": "Changes to this notice",
+        "paragraphs": [
+          "If what the website does changes, for example if analytics are added, we will update this notice and the date above first."
+        ]
+      }
+    ],
+    "contactLabel": "Privacy questions"
   }
 }

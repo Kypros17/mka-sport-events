@@ -16,7 +16,7 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 ---
 
-<div class="mobile-bar" aria-label={t.nav.contact}>
+<nav class="mobile-bar" aria-label={t.nav.contact}>
   <a class="mobile-bar__btn mobile-bar__btn--whatsapp" href={whatsappLink(locale)} target="_blank" rel="noopener" data-track="whatsapp">
     <Icon name="whatsapp" />
     <span>{t.mobileBar.whatsapp}</span>
@@ -25,7 +25,7 @@ const t = getDictionary(locale);
     <span>{t.mobileBar.offer}</span>
     <Icon name="arrow" />
   </a>
-</div>
+</nav>
 
 <style>
   .mobile-bar {

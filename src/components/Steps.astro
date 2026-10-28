@@ -148,7 +148,7 @@ const { steps, variant = "default" } = Astro.props;
 
   @media (max-width: 520px) {
     .steps {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .steps--line .steps__item {

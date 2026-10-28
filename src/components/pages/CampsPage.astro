@@ -143,7 +143,7 @@ const faqSchema = {
           [c.sample.football, c.sample.combat].map((day, d) => (
             <div class="day reveal" data-delay={String(d)}>
               <h3 class="day__title">{day.title}</h3>
-              <div class="day__table">
+              <div class="day__table" tabindex="0" role="region" aria-label={day.title}>
                 <table>
                   <thead>
                     <tr>{c.sample.cols.map((col) => <th scope="col">{col}</th>)}</tr>
@@ -336,13 +336,13 @@ const faqSchema = {
   @media (max-width: 960px) {
     .included,
     .days {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
   @media (max-width: 860px) {
     .faq-layout {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .faq-layout :global(.faq-layout__head) {
@@ -350,7 +350,7 @@ const faqSchema = {
     }
 
     .price-note {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>
