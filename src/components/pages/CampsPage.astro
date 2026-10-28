@@ -10,7 +10,6 @@ import Button from "@/components/Button.astro";
 import { getDictionary, localePath, type Locale } from "@/i18n";
 import { siteUrl } from "../../../site.config.mjs";
 import heroImg from "@/assets/images/camp-squad-pitch.jpg";
-import g1 from "@/assets/images/camp-banner-2.jpeg";
 import g2 from "@/assets/images/camp-football-2.jpeg";
 import g3 from "@/assets/images/camp-football-3.jpeg";
 import g4 from "@/assets/images/camp-team-1.jpeg";
@@ -27,7 +26,7 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 const c = t.camps;
 
-const gallery = [g1, g2, g3, g4].map((image, i) => ({ image, ...c.gallery.items[i] }));
+const gallery = [g2, g3, g4].map((image, i) => ({ image, ...c.gallery.items[i] }));
 const samboGallery = [s1, s2, s3, s4].map((image, i) => ({ image, ...c.samboGallery.items[i] }));
 
 const serviceSchema = {
@@ -130,7 +129,7 @@ const faqSchema = {
   <section class="section">
     <div class="container container--wide">
       <SectionHead kicker={c.gallery.kicker} title={c.gallery.title} text={c.gallery.text} />
-      <PhotoGallery items={gallery} columns={2} />
+      <PhotoGallery items={gallery} columns={3} />
     </div>
   </section>
 

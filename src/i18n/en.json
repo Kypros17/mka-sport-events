@@ -492,13 +492,8 @@
     "gallery": {
       "kicker": "From our camps",
       "title": "A football camp in Cyprus",
-      "text": "Our banner on the pitch and match action from a friendly played during the camp against local opposition.",
+      "text": "Match action and the visiting team from a friendly played during the camp against local opposition.",
       "items": [
-        {
-          "alt": "The MKA sport Events training camp banner beside the goalposts, with football players warming up on the pitch behind it",
-          "title": "Our banner on the touchline",
-          "caption": "The camp banner stayed pitchside for the length of the camp."
-        },
         {
           "alt": "A footballer in an orange shirt shielding the ball from a defender in white during a camp friendly in Cyprus",
           "title": "Match action",

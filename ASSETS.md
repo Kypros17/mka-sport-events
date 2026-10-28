@@ -13,8 +13,8 @@ by MKA sport Events. Used freely across the site.
 | camp-football-1.jpeg | 1600×1066 | Not currently used (former home hero and default share image) |
 | camp-football-2.jpeg | 1600×1066 | Services panel, Cyprus page hero, camps gallery |
 | camp-football-3.jpeg | 1600×1066 | Home strip, camps gallery |
-| camp-banner-1.jpeg | 1600×1066 | Not currently used (former About founder photo) |
-| camp-banner-2.jpeg | 1600×1066 | Home proof section, about story, camps gallery |
+| camp-banner-1.jpeg | 1600×1066 | Not used (removed October 2026: banner shows an outdated phone number and mail.ru address) |
+| camp-banner-2.jpeg | 1600×1066 | Not used (removed October 2026: banner shows an outdated phone number and mail.ru address) |
 | camp-team-1.jpeg | 1600×1066 | About hero, camps gallery |
 
 ### Sambo camp (Georgia national sambo team)
