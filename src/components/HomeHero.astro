@@ -12,6 +12,8 @@ import Icon from "./Icon.astro";
 import Streaks from "./Streaks.astro";
 import { getDictionary, localePath, type Locale } from "@/i18n";
 import heroImg from "@/assets/images/sambo-action-throw.webp";
+import heroLeft from "@/assets/images/sambo-action-grip.webp";
+import heroRight from "@/assets/images/sambo-action-esf-2025.webp";
 
 interface Props {
   locale: Locale;
@@ -24,16 +26,41 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
 ---
 
 <section class="hero" id="hero">
+  <!-- Three source photos side by side: each is ~800px wide, sharp at a third of
+       the screen. Phones show only the centre photo. -->
   <div class="hero__media" aria-hidden="true">
     <Picture
+      pictureAttributes={{ class: "hero__shot hero__shot--side" }}
+      src={heroLeft}
+      alt=""
+      widths={[480, 640].filter((w) => w <= heroLeft.width)}
+      sizes="34vw"
+      formats={["avif", "webp"]}
+      fallbackFormat="jpg"
+      loading="eager"
+      decoding="async"
+    />
+    <Picture
+      pictureAttributes={{ class: "hero__shot hero__shot--main" }}
       src={heroImg}
       alt=""
-      widths={[640, 960, 1280, 1600].filter((w) => w <= heroImg.width)}
-      sizes="100vw"
+      widths={[480, 640, 753].filter((w) => w <= heroImg.width)}
+      sizes="(min-width: 768px) 34vw, 100vw"
       formats={["avif", "webp"]}
       fallbackFormat="jpg"
       loading="eager"
       fetchpriority="high"
+      decoding="async"
+    />
+    <Picture
+      pictureAttributes={{ class: "hero__shot hero__shot--side hero__shot--right" }}
+      src={heroRight}
+      alt=""
+      widths={[480, 640].filter((w) => w <= heroRight.width)}
+      sizes="34vw"
+      formats={["avif", "webp"]}
+      fallbackFormat="jpg"
+      loading="eager"
       decoding="async"
     />
   </div>
@@ -101,6 +128,19 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
     position: absolute;
     inset: 0;
     z-index: -1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3px;
+    background: var(--c-ink-950);
+  }
+
+  .hero__media :global(.hero__shot) {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .hero__media :global(.hero__shot--right img) {
+    object-position: 45% 50%;
   }
 
   .hero__media :global(picture),
@@ -111,7 +151,7 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
 
   .hero__media :global(img) {
     object-fit: cover;
-    object-position: 55% 46%;
+    object-position: 50% 45%;
     filter: contrast(1.05) saturate(1.12);
     animation: hero-settle 12s var(--ease) both;
   }
@@ -252,7 +292,16 @@ const icons = ["plane", "sun", "stadium", "trophy"] as const;
       min-height: 0;
     }
 
-    .hero__media :global(img) {
+    .hero__media {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .hero__media :global(.hero__shot--side) {
+      display: none;
+    }
+
+    .hero__media :global(.hero__shot--main img) {
       object-position: 52% 60%;
     }
 
