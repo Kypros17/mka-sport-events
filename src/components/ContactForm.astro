@@ -197,6 +197,14 @@ const config = {
     transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background var(--dur) var(--ease);
   }
 
+  /* The open option list is drawn by the operating system: on Windows it
+     ignores the field's see-through background and paints white, so the
+     inherited white text vanished. Options get their own solid colours. */
+  .field select option {
+    color: var(--c-on-dark);
+    background-color: var(--c-navy-900);
+  }
+
   .field textarea {
     resize: vertical;
     min-height: 9rem;
