@@ -44,6 +44,12 @@ FIAS/ESF championship.
 | sambo-action-grip.webp | 797×616 | Home services panel 03, final CTA background |
 | sambo-action-esf-2025.webp | 822×625 | Home hero right, services panel 02 (European Sambo Championship, Cyprus 2025) |
 
+### Cyprus scenery
+
+| File | Size | Source | Used on |
+| --- | --- | --- | --- |
+| cyprus-coast-sunset.jpg | 1200×880 | Client-supplied, October 2026. Photographer/licence not stated — confirm before launch (aerial coastal shots are often stock photos). | Cyprus page hero and share image |
+
 Not used: a photo from the Sambo Cyprus International Tournament 2023 press wall. It
 carries a PJAPRESS.COM watermark (photographer's rights) and sponsor logos; MKA's role in
 that tournament needs confirming before any event credit is published.
