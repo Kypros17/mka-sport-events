@@ -12,7 +12,7 @@ by MKA sport Events. Used freely across the site.
 | --- | --- | --- |
 | camp-football-1.jpeg | 1600×1066 | Home hero (LCP image), default share image |
 | camp-football-2.jpeg | 1600×1066 | Services panel, Cyprus page hero, camps gallery |
-| camp-football-3.jpeg | 1600×1066 | Camps page hero, home camp package, camps gallery |
+| camp-football-3.jpeg | 1600×1066 | Home strip, camps gallery |
 | camp-banner-1.jpeg | 1600×1066 | Founder sections (home, about) |
 | camp-banner-2.jpeg | 1600×1066 | Home proof section, about story, camps gallery |
 | camp-team-1.jpeg | 1600×1066 | About hero, camps gallery |
@@ -30,6 +30,7 @@ not supplied, so captions stay general.
 | camp-sambo-pool-sea.jpg | 1600×901 | Home strip, camps sambo gallery |
 | camp-sambo-pool.jpg | 1600×901 | Camps sambo gallery |
 | camp-sambo-basketball.jpg | 1600×901 | Home strip, camps sambo gallery |
+| camp-squad-pitch.jpg | 768×576 | Training Camps page hero and share image (cropped from a 768×1024 portrait; group photo on an outdoor pitch, client-supplied October 2026) |
 
 ### Sambo competition action (client-owned)
 
