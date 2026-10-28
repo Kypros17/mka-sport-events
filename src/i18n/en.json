@@ -956,8 +956,8 @@
           "label": "Sports event or tournament organisation"
         },
         {
-          "value": "competition",
-          "label": "Support for an international competition"
+          "value": "rental",
+          "label": "Mat / equipment rental"
         },
         {
           "value": "other",

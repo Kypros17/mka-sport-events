@@ -23,6 +23,9 @@ Three services:
 rental and a sports equipment showcase (Mizuno/mkasport.com). Both were removed in August
 2026 when the client refocused on the three services above. Do not re-add pages, nav items,
 links or copy for them unless the client asks.
+Exception (client request, October 2026): the contact form's "What do you need?" list offers
+"Mat / equipment rental" (value `rental`) in place of "Support for an international
+competition". Only the form option — no rental page, nav item or service copy.
 
 ## Tone and content rules
 
