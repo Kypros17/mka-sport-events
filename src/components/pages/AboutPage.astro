@@ -10,7 +10,7 @@ import CtaBand from "@/components/CtaBand.astro";
 import Button from "@/components/Button.astro";
 import { getDictionary, localePath, type Locale } from "@/i18n";
 import heroImg from "@/assets/images/camp-sambo-team.jpg";
-import storyImg from "@/assets/images/camp-banner-2.jpeg";
+import storyImg from "@/assets/images/founder-esf-acknowledgment.jpg";
 import founderImg from "@/assets/images/founder-marios-andreou.jpg";
 import hostingImg from "@/assets/images/event-larnaca-2024-team.jpg";
 
@@ -33,7 +33,7 @@ const a = t.about;
   <!-- Story -->
   <section class="section">
     <div class="container container--wide">
-      <FeatureSplit image={storyImg} alt={t.camps.gallery.items[0].alt} imageSide="left" ratio="4x3">
+      <FeatureSplit image={storyImg} alt={a.story.imageAlt} imageSide="left" ratio="4x3" position="68% 40%" credit={a.story.imageCredit}>
         <p class="kicker">{a.story.kicker}</p>
         <h2>{a.story.title}</h2>
         <p>{a.story.p1}</p>

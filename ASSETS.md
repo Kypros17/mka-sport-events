@@ -50,10 +50,15 @@ FIAS/ESF championship.
 | File | Size | Used on |
 | --- | --- | --- |
 | founder-marios-andreou.jpg | 1600×1066 | About page, "Founded and led by Marios Andreou" section |
+| founder-esf-acknowledgment.jpg | 1560×876 | About page, "Who we are" section (credited "Photo: @alinagrifina") |
 
 Client-supplied (October 2026): Marios Andreou at a panel table during an international
 sports forum (2026 event badge visible). It looks like a professional event photograph;
 the client should confirm the photographer or organiser allows its use on the website.
+
+The ESF acknowledgment photo carries the photographer's watermark "@alinagrifina" and is
+shown with a visible credit; the photographer's permission should be confirmed. The plaque
+is addressed to the Cyprus Sambo Federation, not to MKA sport Events; the alt text says so.
 
 ### Cyprus scenery
 
